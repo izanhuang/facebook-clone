@@ -13,8 +13,12 @@ export const Button = styled.button`
   cursor: pointer;
   border: 1px solid transparent;
 
+  :hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
+  }
+
   ${(props) =>
-    props.signup &&
+    props.create &&
     css`
       width: auto;
       background-color: #36a420;
@@ -22,9 +26,14 @@ export const Button = styled.button`
       text-align: center;
       font-size: 17px;
     `}
-`
-export const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
+
+  ${(props) =>
+    props.signup &&
+    css`
+      background-color: #36a420;
+      padding: 0 50px;
+      width: auto;
+      line-height: 32.5px;
+      font-size: 18px;
+    `}
 `

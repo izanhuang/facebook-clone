@@ -11,3 +11,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+html {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0px;
+  min-height: 100%;
+  width: 100%;
+}
+a {
+  color: #1877f2;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.logo {
+  margin: -44px 0 -4px 0;
+  width: 240px;
+}
+
+.fb {
+  color: #777;
+  font-size: 11px;
+  line-height: 1.34;
+}

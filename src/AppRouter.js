@@ -5,6 +5,7 @@ import Login from './components/Auth/Login'
 import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
 import Signup from './components/Auth/Signup'
+import { Footer } from './components/Footer'
 
 export default function AppRouter() {
   const [loggedIn, setLoggedIn] = useState(false)
