@@ -26,6 +26,11 @@ export const Input = styled.input`
     box-shadow: none !important;
   }
 
+  @media (max-width: 415px) {
+    width: 18.5rem;
+  
+  }
+
   ${(props) =>
     props.signup &&
     css`
@@ -34,22 +39,27 @@ export const Input = styled.input`
       padding: 11px;
       border-color: #ccd0d5;
       max-width: 375px;
-      width: 21.3rem;
+      width: 25rem;
     `}
 
+ ${(props) =>
+   props.radio &&
+   css`
+     width: auto !important;
+     height: 100%;
+     margin: 0 !important;
+   `}
+
   ${(props) =>
-    props.name &&
+    props.user_name &&
     css`
-      max-width: 170px;
-      width: 9.5rem;
+      width: 170px;
+
+      @media (max-width: 415px) {
+        width: 8rem;
+      }
     `}
    
 
-  ${(props) =>
-    props.radio &&
-    css`
-      width: auto;
-      height: 100%;
-      margin: 0 !important;
-    `}
+ 
 `

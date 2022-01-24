@@ -26,4 +26,8 @@ export const Select = styled.select`
     height: 36px;
     line-height: 20px;
   }
+
+  @media (max-width: 415px) {
+    width: 100px;
+  }
 `

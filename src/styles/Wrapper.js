@@ -1,12 +1,18 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+export const Wrapper = styled.div`
+  min-height: 100vh;
+  height: 100%;
+  position: relative;
+`
+
 export const BlockWrapper = styled.div`
   display: block;
   width: 100%;
 `
 
-export const Wrapper = styled.div`
+export const AuthWrapper = styled.div`
   height: auto;
   width: 100%;
   position: relative;
@@ -15,6 +21,10 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 415px) {
+    padding: 40px 0;
+  }
 `
 
 export const ContentWrapper = styled.div`
@@ -66,6 +76,10 @@ export const RadioWrapper = styled.div`
     position: absolute;
     top: 0;
     right: 9px;
+  }
+
+  @media (max-width: 415px) {
+    width: 100px;
   }
 `
 
