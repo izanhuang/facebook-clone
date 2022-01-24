@@ -5,6 +5,12 @@ export const Wrapper = styled.div`
   min-height: 100vh;
   height: 100%;
   position: relative;
+
+  ${(props) =>
+    props.auth &&
+    css`
+      background-color: #f0f2f5;
+    `}
 `
 
 export const BlockWrapper = styled.div`

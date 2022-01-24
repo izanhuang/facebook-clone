@@ -16,7 +16,7 @@ import { Footer } from '../Footer'
 
 export default function Login() {
   return (
-    <Wrapper>
+    <Wrapper auth>
       <AuthWrapper>
         <ContentWrapper>
           <img
