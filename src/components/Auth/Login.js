@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { Button } from '../../styles/Button'
 import { Form, FormHeader } from '../../styles/Form'
 import { Input } from '../../styles/Input'
@@ -9,12 +9,38 @@ import {
   CenterElement,
   BlockWrapper,
 } from '../../styles/Wrapper'
-import { Link } from 'react-router-dom'
 import { LineBreak } from '../LineBreak'
 import { Card } from '../../styles/Card'
 import { Footer } from '../Footer'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext'
+import { Alert } from '../../styles/Alert'
+import useMounted from '../../hooks/useMounted'
 
 export default function Login() {
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const { login } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+
+  const mounted = useMounted()
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    try {
+      setError('')
+      setLoading(true)
+      await login(emailRef.current.value, passwordRef.current.value)
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+      setError('Failed to log in')
+    }
+    mounted.current && setLoading(false)
+  }
   return (
     <Wrapper auth>
       <AuthWrapper>
@@ -27,14 +53,23 @@ export default function Login() {
             <FormHeader padding>
               <h4>Log Into Facebook</h4>
             </FormHeader>
-            <Form login>
+            <Form login onSubmit={handleSubmit}>
+              {error && <Alert variant="danger">{error}</Alert>}
               <Input
+                ref={emailRef}
                 type="email"
                 placeholder="Email or phone number"
                 required
               />
-              <Input type="password" placeholder="Password" required />
-              <Button type="submit">Login</Button>
+              <Input
+                ref={passwordRef}
+                type="password"
+                placeholder="Password"
+                required
+              />
+              <Button disabled={loading} type="submit">
+                Login
+              </Button>
               <CenterElement padding>
                 <Link to="#">Forgot account?</Link>
               </CenterElement>
