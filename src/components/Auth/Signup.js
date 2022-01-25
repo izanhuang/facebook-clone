@@ -13,7 +13,7 @@ import {
 } from '../../styles/Wrapper'
 import { Card } from '../../styles/Card'
 import { Label } from '../../styles/Label'
-import { Footer } from '../Footer'
+import { Footer } from '../../styles/Footer'
 import SelectBirthdayMonth from '../SelectBirthdayMonth'
 import SelectBirthdayDay from '../SelectBirthdayDay'
 import SelectBirthdayYear from '../SelectBirthdayYear'

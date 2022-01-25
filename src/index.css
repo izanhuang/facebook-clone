@@ -1,3 +1,8 @@
+:root {
+  /* --dark-color:
+  --dark-bg-color: */
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -49,4 +54,29 @@ a:hover {
 
 .fb-12 {
   font-size: 12px;
+}
+
+.fb-icon {
+  /* fill: #1877f2; */
+  fill: #e4e6eb;
+  width: 2.5em;
+  height: 2.5em;
+  position: absolute;
+  top: 10px;
+}
+
+/* light #dfe1e6 */
+/* dark #94979b */
+.center-icon,
+.gaming {
+  fill: #94979b;
+}
+.center-icon {
+  width: 2.25em;
+  height: 2.25em;
+}
+
+.gaming-icon {
+  width: 1.75em;
+  height: 1.75em;
 }

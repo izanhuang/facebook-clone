@@ -9,9 +9,9 @@ import {
   CenterElement,
   BlockWrapper,
 } from '../../styles/Wrapper'
-import { LineBreak } from '../LineBreak'
+import { LineBreak } from '../../styles/LineBreak'
 import { Card } from '../../styles/Card'
-import { Footer } from '../Footer'
+import { Footer } from '../../styles/Footer'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { Alert } from '../../styles/Alert'

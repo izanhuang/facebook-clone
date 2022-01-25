@@ -37,7 +37,6 @@ export const ContentWrapper = styled.div`
   margin: 0 auto;
   padding: 20px 0;
   max-width: 980px;
-  width: 100px;
   height: auto;
   display: flex;
   flex-direction: column;

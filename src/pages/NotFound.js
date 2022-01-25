@@ -1,10 +1,10 @@
 import React from 'react'
-import Header from '../components/Header'
+import Nav from '../components/Nav'
 
 const NotFound = () => {
   return (
     <div>
-      <Header />
+      <Nav />
       Under construction or page not found
     </div>
   )
