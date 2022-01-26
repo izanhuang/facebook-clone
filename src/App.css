@@ -1,0 +1,65 @@
+a {
+  color: #1877f2;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.logo {
+  margin: -44px 0 -4px 0;
+  width: 240px;
+}
+
+.fb,
+.fb-12 {
+  color: #777;
+  line-height: 1.34;
+}
+
+.fb {
+  font-size: 11px;
+}
+
+.fb-12 {
+  font-size: 12px;
+}
+
+.fb-icon {
+  /* fill: #1877f2; */
+  fill: #e4e6eb;
+  width: 2.5em;
+  height: 2.5em;
+  position: absolute;
+  top: 10px;
+}
+
+/* light #dfe1e6 */
+/* dark #94979b */
+.center-icon,
+.gaming {
+  fill: #94979b;
+}
+.center-icon {
+  width: 2.25em;
+  height: 2.25em;
+}
+
+.gaming-icon {
+  width: 1.75em;
+  height: 1.75em;
+}
+
+.activeClass {
+  border-bottom: 3px solid #1877f2 !important;
+}
+
+.activeClass a button svg {
+  fill: #1877f2;
+}
+
+.activeClass a button:hover {
+  background-image: none;
+}

@@ -1,13 +1,7 @@
 import React from 'react'
-import Nav from '../components/Nav'
 
 const NotFound = () => {
-  return (
-    <div>
-      <Nav />
-      Under construction or page not found
-    </div>
-  )
+  return <div>Page does not exist</div>
 }
 
 export default NotFound

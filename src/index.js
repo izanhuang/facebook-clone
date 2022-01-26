@@ -1,14 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import AppRouter from './AppRouter'
-import { AuthProvider } from './contexts/AuthContext'
+import App from './App'
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <AppRouter />
-    </AuthProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root'),
 )

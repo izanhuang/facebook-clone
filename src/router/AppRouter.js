@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Nav from './components/Nav'
-import Login from './components/Auth/Login'
-import Profile from './pages/Profile'
-import NotFound from './pages/NotFound'
-import Signup from './components/Auth/Signup'
-import { useAuth } from './contexts/AuthContext'
-import Home from './pages/Home'
-import UpdateProfile from './pages/UpdateProfile'
+import Nav from '../components/Nav'
+import Login from '../components/Auth/Login'
+import Profile from '../pages/Profile'
+import NotFound from '../pages/NotFound'
+import Signup from '../components/Auth/Signup'
+import { useAuth } from '../contexts/AuthContext'
+import Home from '../pages/Home'
+import UpdateProfile from '../pages/UpdateProfile'
 
 export default function AppRouter() {
-  const [loggedIn, setLoggedIn] = useState(false)
   const { currentUser } = useAuth()
 
   return (
     <Router>
+      {currentUser != null && <Nav />}
       <Routes>
         <Route
           path="/"

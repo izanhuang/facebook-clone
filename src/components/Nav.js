@@ -7,8 +7,12 @@ import { SiFacebook, SiFacebookgaming, SiMessenger } from 'react-icons/si'
 import { TiHome, TiArrowSortedDown } from 'react-icons/ti'
 import { BiStore } from 'react-icons/bi'
 import { RiGroup2Line } from 'react-icons/ri'
-import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/Dropdown'
+import {
+  DropDownContainer,
+  DropDownListContainer,
+  DropDownList,
+  ListItem,
+} from '../styles/Dropdown'
 
 const Navbar = styled.nav`
   display: flex;
@@ -38,9 +42,9 @@ const List = styled.ul`
         margin: 3px 3px 0 3px;
         border-bottom: 3px solid transparent;
       }
-      li:active {
-        border-bottom: 3px solid #1877f2;
-      }
+      // li:active {
+      //   border-bottom: 3px solid #1877f2;
+      // }
     `}
 
   ${(props) =>
@@ -54,7 +58,10 @@ const List = styled.ul`
 
 const Nav = () => {
   const [error, setError] = useState('')
-  const { currentUser, logout } = useAuth()
+  const { logout } = useAuth()
+  const [isOpen, setIsOpen] = useState(false)
+  const [activeNavLink, setActiveNavLink] = useState('')
+  const toggling = () => setIsOpen(!isOpen)
 
   const navigate = useNavigate()
 
@@ -68,6 +75,10 @@ const Nav = () => {
     }
   }
 
+  const handleClick = (name) => {
+    setActiveNavLink(name)
+  }
+
   return (
     <Navbar>
       <Link to="/">
@@ -75,29 +86,49 @@ const Nav = () => {
       </Link>
 
       <List center>
-        <li>
+        <li
+          className={activeNavLink === 'home' ? 'activeClass' : ''}
+          onClick={() => {
+            handleClick('home')
+          }}
+        >
           <Link to="/">
             <NavButton>
               <TiHome />
             </NavButton>
           </Link>
         </li>
-        <li>
-          <Link to="#">
+        <li
+          className={activeNavLink === 'store' ? 'activeClass' : ''}
+          onClick={() => {
+            handleClick('store')
+          }}
+        >
+          <Link to="/notfound">
             <NavButton>
               <BiStore />
             </NavButton>
           </Link>
         </li>
-        <li>
-          <Link to="#">
+        <li
+          className={activeNavLink === 'group' ? 'activeClass' : ''}
+          onClick={() => {
+            handleClick('group')
+          }}
+        >
+          <Link to="/notfound">
             <NavButton>
               <RiGroup2Line />
             </NavButton>
           </Link>
         </li>
-        <li>
-          <Link to="#">
+        <li
+          className={activeNavLink === 'gaming' ? 'activeClass' : ''}
+          onClick={() => {
+            handleClick('gaming')
+          }}
+        >
+          <Link to="/notfound">
             <NavButton gaming>
               <SiFacebookgaming />
             </NavButton>
@@ -114,9 +145,27 @@ const Nav = () => {
           </Link>
         </li>
         <li>
-          <IconButton>
-            <TiArrowSortedDown className="smaller-icon" />
-          </IconButton>
+          <DropDownContainer>
+            <IconButton onClick={toggling}>
+              <TiArrowSortedDown className="smaller-icon" />
+            </IconButton>
+            {isOpen && (
+              <DropDownListContainer>
+                <DropDownList>
+                  <Link to="/update-profile">
+                    <ListItem>Update Profile</ListItem>
+                  </Link>
+                  <ListItem
+                    onClick={() => {
+                      handleLogout()
+                    }}
+                  >
+                    Log out
+                  </ListItem>
+                </DropDownList>
+              </DropDownListContainer>
+            )}
+          </DropDownContainer>
           {/* <div>
             <IconButton
               data-toggle="dropdown"
