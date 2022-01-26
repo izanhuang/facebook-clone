@@ -53,7 +53,6 @@ const UpdateProfile = () => {
 
   return (
     <Wrapper>
-      <Nav />
       <AuthWrapper>
         <ContentWrapper>
           <Card>

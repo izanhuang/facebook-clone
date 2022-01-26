@@ -7,7 +7,6 @@ import {
   AuthWrapper,
   ContentWrapper,
   CenterElement,
-  BlockWrapper,
 } from '../../styles/Wrapper'
 import { LineBreak } from '../../styles/LineBreak'
 import { Card } from '../../styles/Card'

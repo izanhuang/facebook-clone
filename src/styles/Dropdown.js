@@ -4,6 +4,7 @@ export const DropDownContainer = styled.div`
   width: auto;
   margin: 0 auto;
   position: relative;
+  z-index: 2;
 `
 
 // export const DropDownHeader = styled.div`
@@ -25,9 +26,11 @@ export const DropDownListContainer = styled.div`
 export const DropDownList = styled.ul`
   padding: 8px;
   margin: 0;
-  width: 360px;
+  // width: 360px;
   //width: 350px on mobile
-  height: 430px;
+  // height: 430px;
+  width: 225px;
+  height: 220px;
   background: #242526;
   border: 1px solid var(--divider);
   border-radius: 5px;
@@ -50,11 +53,14 @@ export const DropDownList = styled.ul`
 
 export const ListItem = styled.li`
   list-style: none;
-  padding: 6px;
+  padding: 6px 18px !important;
   min-height: 44px;
   margin-bottom: 0.8em;
   cursor: pointer;
   border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   :hover {
     background-image: var(--light-hover);

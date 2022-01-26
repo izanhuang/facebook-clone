@@ -5,10 +5,12 @@ export const Wrapper = styled.div`
   min-height: 100vh;
   height: 100%;
   position: relative;
+  padding-top: 56px;
 
   ${(props) =>
     props.auth &&
     css`
+      padding-top: 0;
       background-color: #f0f2f5;
     `}
 `

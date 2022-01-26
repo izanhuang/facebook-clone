@@ -1,18 +1,12 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { NavButton, IconButton } from '../styles/Button'
-import { useAuth } from '../contexts/AuthContext'
 import { SiFacebook, SiFacebookgaming, SiMessenger } from 'react-icons/si'
-import { TiHome, TiArrowSortedDown } from 'react-icons/ti'
+import { TiHome } from 'react-icons/ti'
 import { BiStore } from 'react-icons/bi'
 import { RiGroup2Line } from 'react-icons/ri'
-import {
-  DropDownContainer,
-  DropDownListContainer,
-  DropDownList,
-  ListItem,
-} from '../styles/Dropdown'
+import Dropdown from './Dropdown'
 
 const Navbar = styled.nav`
   display: flex;
@@ -20,8 +14,12 @@ const Navbar = styled.nav`
   background-color: #242526;
   justify-content: space-between;
   padding: 0 15px;
-  position: relative;
   height: 56px;
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  left: 0;
 `
 
 const List = styled.ul`
@@ -57,23 +55,7 @@ const List = styled.ul`
 `
 
 const Nav = () => {
-  const [error, setError] = useState('')
-  const { logout } = useAuth()
-  const [isOpen, setIsOpen] = useState(false)
   const [activeNavLink, setActiveNavLink] = useState('')
-  const toggling = () => setIsOpen(!isOpen)
-
-  const navigate = useNavigate()
-
-  async function handleLogout() {
-    setError('')
-    try {
-      await logout()
-      navigate('/')
-    } catch (error) {
-      setError('Failed to log out')
-    }
-  }
 
   const handleClick = (name) => {
     setActiveNavLink(name)
@@ -145,52 +127,7 @@ const Nav = () => {
           </Link>
         </li>
         <li>
-          <DropDownContainer>
-            <IconButton onClick={toggling}>
-              <TiArrowSortedDown className="smaller-icon" />
-            </IconButton>
-            {isOpen && (
-              <DropDownListContainer>
-                <DropDownList>
-                  <Link to="/update-profile">
-                    <ListItem>Update Profile</ListItem>
-                  </Link>
-                  <ListItem
-                    onClick={() => {
-                      handleLogout()
-                    }}
-                  >
-                    Log out
-                  </ListItem>
-                </DropDownList>
-              </DropDownListContainer>
-            )}
-          </DropDownContainer>
-          {/* <div>
-            <IconButton
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <TiArrowSortedDown className="smaller-icon" />
-            </IconButton>
-            <div class="dropdown-menu dropdown-menu-right">
-              <Link to="/update-profile">
-                <button class="dropdown-item" type="button">
-                  Update Profile
-                </button>
-              </Link>
-              <button
-                class="dropdown-item"
-                type="button"
-                onClick={() => {
-                  handleLogout()
-                }}
-              >
-                Log out
-              </button>
-            </div>
-          </div> */}
+          <Dropdown />
         </li>
       </List>
     </Navbar>

@@ -8,6 +8,7 @@ import Signup from '../components/Auth/Signup'
 import { useAuth } from '../contexts/AuthContext'
 import Home from '../pages/Home'
 import UpdateProfile from '../pages/UpdateProfile'
+import { MainWrapper } from '../styles/Wrapper'
 
 export default function AppRouter() {
   const { currentUser } = useAuth()
@@ -21,7 +22,7 @@ export default function AppRouter() {
           element={currentUser != null ? <Home /> : <Login />}
         ></Route>
         <Route path="/signup" element={<Signup />}></Route>
-        <Route path="/update-profile" element={<UpdateProfile />}></Route>
+        <Route path="/settings" element={<UpdateProfile />}></Route>
         <Route path="/{username}" element={<Profile />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

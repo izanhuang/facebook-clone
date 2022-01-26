@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Button = styled.button`
-  background-color: #1877f2;
+  background-color: var(--fb-blue);
   border-radius: 6px;
   font-size: 20px;
   line-height: 40px;
@@ -13,15 +13,15 @@ export const Button = styled.button`
   border: 1px solid transparent;
 
   :hover {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
+    background-image: var(--dark-hover);
   }
 
   ${(props) =>
     props.create &&
     css`
       width: auto;
-      background-color: #36a420;
-      border-color: #36a420;
+      background-color: var(--green);
+      border-color: var(--green);
       text-align: center;
       font-size: 17px;
     `}
@@ -29,7 +29,7 @@ export const Button = styled.button`
   ${(props) =>
     props.signup &&
     css`
-      background-color: #36a420;
+      background-color: var(--green);
       padding: 0 50px;
       width: auto;
       line-height: 32.5px;
@@ -50,11 +50,11 @@ export const NavButton = styled.button`
   text-decoration: none;
 
   :hover {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.1) 0 0);
+    background-image: var(--light-hover);
   }
 
   svg {
-    fill: #e4e6eb;
+    fill: var(--primary-text);
     width: 2.25em;
     height: 2.25em;
     vertical-align: -0.3em;
@@ -71,7 +71,7 @@ export const NavButton = styled.button`
 
 export const IconButton = styled.button`
   // background-color: #e4e6eb;
-  background-color: #3a3b3c;
+  background-color: var(--button-bg-color);
   border-radius: 50%;
   border: none;
   color: #050505;
@@ -90,12 +90,12 @@ export const IconButton = styled.button`
   }
 
   :hover {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.1) 0 0);
+    background-image: var(--light-hover);
   }
 
   svg {
     // fill: #050505;
-    fill: #e4e6eb;
+    fill: var(--primary-text);
     width: 1.25em;
     height: 1.25em;
     display: inline-block;
