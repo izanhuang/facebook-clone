@@ -20,12 +20,14 @@ export const FormHeader = styled.div`
     margin-top: 0;
     margin-bottom: 0;
     text-align: center;
+    color: #000;
   }
 
   h4 {
     font-size: 18px;
     line-height: 22px;
     font-weight: 400;
+    color: #000;
   }
 
   ${(props) =>

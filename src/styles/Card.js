@@ -21,4 +21,10 @@ export const Card = styled.div`
     css`
       width: 432px;
     `}
+
+  ${(props) =>
+    props.toggle &&
+    css`
+      background-color: ${({ theme }) => theme.bgSecondary};
+    `}
 `

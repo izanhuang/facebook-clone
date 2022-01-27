@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
   min-height: 100vh;
   height: 100%;
   position: relative;
-  padding-top: 56px;
 
   ${(props) =>
     props.auth &&
@@ -13,6 +12,9 @@ export const Wrapper = styled.div`
       padding-top: 0;
       background-color: #f0f2f5;
     `}
+`
+export const PagePadding = styled.div`
+  padding-top: 56px;
 `
 
 export const BlockWrapper = styled.div`

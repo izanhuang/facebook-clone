@@ -1,8 +1,12 @@
 import React from 'react'
-import { Wrapper } from '../styles/Wrapper'
+import { Wrapper, PagePadding } from '../styles/Wrapper'
 
 const Home = () => {
-  return <Wrapper>Home</Wrapper>
+  return (
+    <Wrapper>
+      <PagePadding>Home</PagePadding>
+    </Wrapper>
+  )
 }
 
 export default Home

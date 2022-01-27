@@ -32,11 +32,13 @@ const Dropdown = () => {
   }
 
   function handleClickOutside(event) {
+    console.log('handleClick')
     if (
       isOpen &&
       wrapperRef.current &&
       !wrapperRef.current.contains(event.target)
     ) {
+      console.log('close dropdown')
       setIsOpen(false)
     }
     document.removeEventListener('mousedown', handleClickOutside)

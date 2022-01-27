@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
+import { useTheme } from '../contexts/ThemeContext'
 
 const Label = styled.label`
   display: flex;
@@ -38,7 +39,7 @@ const Input = styled.input`
   position: absolute;
 
   &:checked + ${Switch} {
-    background: green;
+    background: var(--fb-blue);
 
     &:before {
       transform: translate(32px, -50%);
@@ -47,10 +48,12 @@ const Input = styled.input`
 `
 
 export const ToggleSwitch = () => {
-  const [checked, setChecked] = useState(false)
+  const { theme, toggleTheme } = useTheme()
+  const [checked, setChecked] = useState(theme == 'light' ? false : true)
 
   const handleChange = (e) => {
     setChecked(e.target.checked)
+    toggleTheme()
   }
 
   return (

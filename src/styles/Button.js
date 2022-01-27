@@ -50,11 +50,11 @@ export const NavButton = styled.button`
   text-decoration: none;
 
   :hover {
-    background-image: var(--light-hover);
+    background-image: ${({ theme }) => theme.buttonHover};
   }
 
   svg {
-    fill: var(--primary-text);
+    fill: ${({ theme }) => theme.secondaryColor};
     width: 2.25em;
     height: 2.25em;
     vertical-align: -0.3em;
@@ -70,8 +70,7 @@ export const NavButton = styled.button`
 `
 
 export const IconButton = styled.button`
-  // background-color: #e4e6eb;
-  background-color: var(--button-bg-color);
+  background-color: ${({ theme }) => theme.iconBg};
   border-radius: 50%;
   border: none;
   color: #050505;
@@ -90,14 +89,13 @@ export const IconButton = styled.button`
   }
 
   :hover {
-    background-image: var(--light-hover);
+    background-image: ${({ theme }) => theme.buttonHover};
   }
 
   svg {
-    // fill: #050505;
-    fill: var(--primary-text);
-    width: 1.25em;
-    height: 1.25em;
+    fill: ${({ theme }) => theme.text};
+    width: 1.4em;
+    height: 1.4em;
     display: inline-block;
     vertical-align: -0.25em;
   }

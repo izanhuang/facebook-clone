@@ -1,5 +1,10 @@
 import React, { useState, useRef } from 'react'
-import { AuthWrapper, ContentWrapper, Wrapper } from '../styles/Wrapper'
+import {
+  AuthWrapper,
+  ContentWrapper,
+  Wrapper,
+  PagePadding,
+} from '../styles/Wrapper'
 import { Card } from '../styles/Card'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
@@ -53,30 +58,33 @@ const UpdateProfile = () => {
 
   return (
     <Wrapper>
-      <AuthWrapper>
-        <ContentWrapper>
-          <Card>
-            <Form onSubmit={handleSubmit}>
-              <Label>Email</Label>
-              <Input
-                ref={emailRef}
-                type="email"
-                defaultValue={currentUser.email}
-                autoComplete="new-password"
-                required
-              />
-              {/* <Label>Current</Label> */}
-              <Label>New</Label>
-              <Input ref={passwordRef} type="password" />
-              <Label>Re-type new</Label>
-              <Input ref={passwordConfirmRef} type="password" />
-              <Button disabled={loading} type="submit">
-                Update
-              </Button>
-            </Form>
-          </Card>
-        </ContentWrapper>
-      </AuthWrapper>
+      <PagePadding>
+        <AuthWrapper>
+          <ContentWrapper>
+            <Card toggle>
+              <Form onSubmit={handleSubmit}>
+                <Label>Email</Label>
+                <Input
+                  toggle
+                  ref={emailRef}
+                  type="email"
+                  defaultValue={currentUser.email}
+                  autoComplete="new-password"
+                  required
+                />
+                {/* <Label>Current</Label> */}
+                <Label>New</Label>
+                <Input toggle ref={passwordRef} type="password" />
+                <Label>Re-type new</Label>
+                <Input toggle ref={passwordConfirmRef} type="password" />
+                <Button disabled={loading} type="submit">
+                  Update
+                </Button>
+              </Form>
+            </Card>
+          </ContentWrapper>
+        </AuthWrapper>
+      </PagePadding>
     </Wrapper>
   )
 }

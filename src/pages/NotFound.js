@@ -1,7 +1,12 @@
 import React from 'react'
+import { Wrapper, PagePadding } from '../styles/Wrapper'
 
 const NotFound = () => {
-  return <div>Page does not exist</div>
+  return (
+    <Wrapper>
+      <PagePadding>Page does not exist</PagePadding>
+    </Wrapper>
+  )
 }
 
 export default NotFound

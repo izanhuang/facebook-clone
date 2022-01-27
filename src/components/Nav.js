@@ -11,7 +11,7 @@ import Dropdown from './Dropdown'
 const Navbar = styled.nav`
   display: flex;
   flex-direction: row;
-  background-color: #242526;
+  background-color: ${({ theme }) => theme.bgSecondary};
   justify-content: space-between;
   padding: 0 15px;
   height: 56px;
@@ -54,6 +54,16 @@ const List = styled.ul`
     `}
 `
 
+const Logo = styled.div`
+  svg {
+    fill: ${({ theme }) => theme.logo};
+    width: 2.5em;
+    height: 2.5em;
+    position: absolute;
+    top: 10px;
+  }
+`
+
 const Nav = () => {
   const [activeNavLink, setActiveNavLink] = useState('')
 
@@ -64,7 +74,9 @@ const Nav = () => {
   return (
     <Navbar>
       <Link to="/">
-        <SiFacebook className="fb-icon" />
+        <Logo>
+          <SiFacebook />
+        </Logo>
       </Link>
 
       <List center>

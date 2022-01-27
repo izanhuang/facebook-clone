@@ -59,7 +59,14 @@ export const Input = styled.input`
         width: 8rem;
       }
     `}
-   
+
+    ${(props) =>
+      props.toggle &&
+      css`
+        background-color: ${({ theme }) => theme.background};
+        color: ${({ theme }) => theme.text};
+        border: 1px solid ${({ theme }) => theme.bgSecondary};
+      `}
 
  
 `

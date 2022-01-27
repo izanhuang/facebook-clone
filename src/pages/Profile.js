@@ -2,12 +2,7 @@ import React from 'react'
 import Nav from '../components/Nav'
 
 const Profile = () => {
-  return (
-    <div>
-      <Nav />
-      Profile
-    </div>
-  )
+  return <div>Profile</div>
 }
 
 export default Profile

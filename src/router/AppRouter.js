@@ -8,7 +8,6 @@ import Signup from '../components/Auth/Signup'
 import { useAuth } from '../contexts/AuthContext'
 import Home from '../pages/Home'
 import UpdateProfile from '../pages/UpdateProfile'
-import { MainWrapper } from '../styles/Wrapper'
 
 export default function AppRouter() {
   const { currentUser } = useAuth()
