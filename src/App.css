@@ -13,20 +13,6 @@ a:hover {
   width: 240px;
 }
 
-.fb,
-.fb-12 {
-  color: #777;
-  line-height: 1.34;
-}
-
-.fb {
-  font-size: 11px;
-}
-
-.fb-12 {
-  font-size: 12px;
-}
-
 .activeClass {
   border-bottom: 3px solid #1877f2 !important;
 }

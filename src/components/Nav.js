@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { NavButton, IconButton } from '../styles/Button'
 import { SiFacebook, SiFacebookgaming, SiMessenger } from 'react-icons/si'
 import { TiHome } from 'react-icons/ti'
@@ -65,11 +65,7 @@ const Logo = styled.div`
 `
 
 const Nav = () => {
-  const [activeNavLink, setActiveNavLink] = useState('')
-
-  const handleClick = (name) => {
-    setActiveNavLink(name)
-  }
+  const location = useLocation()
 
   return (
     <Navbar>
@@ -80,49 +76,29 @@ const Nav = () => {
       </Link>
 
       <List center>
-        <li
-          className={activeNavLink === 'home' ? 'activeClass' : ''}
-          onClick={() => {
-            handleClick('home')
-          }}
-        >
+        <li className={location.pathname === '/' ? 'activeClass' : ''}>
           <Link to="/">
             <NavButton>
               <TiHome />
             </NavButton>
           </Link>
         </li>
-        <li
-          className={activeNavLink === 'store' ? 'activeClass' : ''}
-          onClick={() => {
-            handleClick('store')
-          }}
-        >
-          <Link to="/notfound">
+        <li className={location.pathname === '/store' ? 'activeClass' : ''}>
+          <Link to="/store">
             <NavButton>
               <BiStore />
             </NavButton>
           </Link>
         </li>
-        <li
-          className={activeNavLink === 'group' ? 'activeClass' : ''}
-          onClick={() => {
-            handleClick('group')
-          }}
-        >
-          <Link to="/notfound">
+        <li className={location.pathname === '/group' ? 'activeClass' : ''}>
+          <Link to="/group">
             <NavButton>
               <RiGroup2Line />
             </NavButton>
           </Link>
         </li>
-        <li
-          className={activeNavLink === 'gaming' ? 'activeClass' : ''}
-          onClick={() => {
-            handleClick('gaming')
-          }}
-        >
-          <Link to="/notfound">
+        <li className={location.pathname === '/gaming' ? 'activeClass' : ''}>
+          <Link to="/gaming">
             <NavButton gaming>
               <SiFacebookgaming />
             </NavButton>
@@ -134,7 +110,7 @@ const Nav = () => {
         <li>
           <Link to="/">
             <IconButton>
-              <SiMessenger className="smaller-icon" />
+              <SiMessenger />
             </IconButton>
           </Link>
         </li>

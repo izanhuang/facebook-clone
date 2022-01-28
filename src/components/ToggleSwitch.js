@@ -1,13 +1,24 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useState } from 'react'
 import { useTheme } from '../contexts/ThemeContext'
+import { IoMoon } from 'react-icons/io5'
+import { IconButtonSpan } from '../styles/Button'
 
 const Label = styled.label`
   display: flex;
   align-items: center;
   width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  cursor: pointer;
+`
+
+const SwitchLabel = styled.label`
+  display: flex;
+  align-items: center;
+  width: 190px;
+  height: 100%;
   justify-content: space-between;
-  gap: 10px;
   cursor: pointer;
 `
 
@@ -37,6 +48,7 @@ const Switch = styled.div`
 const Input = styled.input`
   opacity: 0;
   position: absolute;
+  cursor: pointer;
 
   &:checked + ${Switch} {
     background: var(--fb-blue);
@@ -58,15 +70,20 @@ export const ToggleSwitch = () => {
 
   return (
     <Label>
-      <div>Dark mode</div>
-      <Input
-        checked={checked}
-        type="checkbox"
-        onChange={(e) => {
-          handleChange(e)
-        }}
-      />
-      <Switch />
+      <IconButtonSpan small spacing>
+        <IoMoon />
+      </IconButtonSpan>
+      <SwitchLabel>
+        <div>Dark mode</div>
+        <Input
+          checked={checked}
+          type="checkbox"
+          onChange={(e) => {
+            handleChange(e)
+          }}
+        />
+        <Switch />
+      </SwitchLabel>
     </Label>
   )
 }

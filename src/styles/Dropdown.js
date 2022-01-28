@@ -29,16 +29,14 @@ export const DropDownList = styled.ul`
   // width: 360px;
   //width: 350px on mobile
   // height: 430px;
-  width: 225px;
+  width: 275px;
   // height: 220px;
-  height: 200px;
+  height: auto;
   background: ${({ theme }) => theme.bgSecondary};
   box-shadow: ${({ theme }) => theme.shadow};
   border: none;
   border-radius: 5px;
   box-sizing: border-box;
-  font-size: 16;
-  font-weight: 500;
 
   // &:first-child {
   //   padding-top: 0.8em;
@@ -55,7 +53,7 @@ export const DropDownList = styled.ul`
 
 export const ListItem = styled.li`
   list-style: none;
-  padding: 6px 18px !important;
+  padding: 4px 8px !important;
   min-height: 44px;
   margin-bottom: 0.5em;
   // margin-bottom: 0.8em;
@@ -63,9 +61,50 @@ export const ListItem = styled.li`
   border-radius: 6px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  font-size: 16px;
+  font-weight: 500;
 
   :hover {
     background-image: ${({ theme }) => theme.buttonHover};
+  }
+
+  ${(props) =>
+    props.profile &&
+    css`
+      height: 60px;
+    `}
+
+  ${(props) =>
+    props.noMarginBottom &&
+    css`
+      margin-bottom: 0;
+    `}
+
+    ${(props) =>
+      props.flexRow &&
+      css`
+        display: flex;
+        flex-direction: row;
+      `}
+`
+
+export const ActiveIconButton = styled.div`
+  button {
+    background-color: ${({ theme }) => theme.deemphasizedButton};
+  }
+  svg {
+    fill: #4688fe !important;
+  }
+`
+
+export const ViewProfile = styled.div`
+  display: flex;
+  flex-direction: column;
+  // padding: 12px 0;
+
+  > h4,
+  p {
+    margin: 0;
   }
 `

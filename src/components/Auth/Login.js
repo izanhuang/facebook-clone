@@ -15,6 +15,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { Alert } from '../../styles/Alert'
 import useMounted from '../../hooks/useMounted'
+import { SecondaryText } from '../../styles/Text'
 
 export default function Login() {
   const emailRef = useRef()
@@ -84,8 +85,10 @@ export default function Login() {
           </Card>
         </ContentWrapper>
       </AuthWrapper>
-      <Footer className="fb-12">
-        Facebook Clone 2022. Built by Izan Huang. Inspired by Facebook.
+      <Footer>
+        <SecondaryText size12 noMargin>
+          Facebook Clone 2022. Built by Izan Huang. Inspired by Facebook.
+        </SecondaryText>
       </Footer>
     </Wrapper>
   )

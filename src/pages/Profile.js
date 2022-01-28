@@ -1,8 +1,12 @@
 import React from 'react'
-import Nav from '../components/Nav'
+import { Wrapper, PagePadding } from '../styles/Wrapper'
 
 const Profile = () => {
-  return <div>Profile</div>
+  return (
+    <Wrapper>
+      <PagePadding>Profile</PagePadding>
+    </Wrapper>
+  )
 }
 
 export default Profile

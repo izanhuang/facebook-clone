@@ -82,7 +82,7 @@ export const IconButton = styled.button`
   text-decoration: none;
 
   :focus {
-    background-color: #2b3951;
+    background-color: ${({ theme }) => theme.deemphasizedButton};
     svg {
       fill: #4688fe;
     }
@@ -94,9 +94,105 @@ export const IconButton = styled.button`
 
   svg {
     fill: ${({ theme }) => theme.text};
-    width: 1.4em;
-    height: 1.4em;
+    width: 20px;
+    height: 20px;
     display: inline-block;
     vertical-align: -0.25em;
   }
+
+  ${(props) =>
+    props.small &&
+    css`
+      width: 36px;
+      height: 36px;
+      :hover {
+        background-image: none;
+      }
+      :focus {
+        background-color: ${({ theme }) => theme.iconBg};
+        svg {
+          fill: ${({ theme }) => theme.text};
+        }
+      }
+    `}
+
+  ${(props) =>
+    props.offset &&
+    css`
+      svg {
+        padding-left: 4px;
+        vertical-align: -0.8em !important;
+      }
+    `}
+
+  ${(props) =>
+    props.spacing &&
+    css`
+      margin: 8px 12px 8px 0;
+    `}
+   
+`
+
+export const IconButtonSpan = styled.span`
+  background-color: ${({ theme }) => theme.iconBg};
+  border-radius: 50%;
+  border: none;
+  color: #050505;
+  width: 40px;
+  height: 40px;
+  
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+
+  :focus {
+    background-color: ${({ theme }) => theme.deemphasizedButton};
+    svg {
+      fill: #4688fe;
+    }
+  }
+
+  :hover {
+    background-image: ${({ theme }) => theme.buttonHover};
+  }
+
+  svg {
+    fill: ${({ theme }) => theme.text};
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: -.7em;
+  }
+
+  ${(props) =>
+    props.small &&
+    css`
+      width: 36px;
+      height: 36px;
+      :hover {
+        background-image: none;
+      }
+      :focus {
+        background-color: ${({ theme }) => theme.iconBg};
+        svg {
+          fill: ${({ theme }) => theme.text};
+        }
+      }
+    `}
+
+  ${(props) =>
+    props.offset &&
+    css`
+      svg {
+        padding-left: 4px;
+        vertical-align: -0.8em !important;
+      }
+    `}
+
+  ${(props) =>
+    props.spacing &&
+    css`
+      margin: 8px 12px 8px 0;
+    `}
+   
 `

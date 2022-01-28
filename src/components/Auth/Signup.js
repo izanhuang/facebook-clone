@@ -21,6 +21,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { Alert } from '../../styles/Alert'
 import useMounted from '../../hooks/useMounted'
+import { SecondaryText } from '../../styles/Text'
 
 export default function Signup() {
   const emailRef = useRef()
@@ -136,7 +137,9 @@ export default function Signup() {
                 </RadioWrapper>
               </SelectWrapper>
 
-              <p className="fb">You may receive SMS Notifications from us.</p>
+              <SecondaryText size11>
+                You may receive SMS Notifications from us.
+              </SecondaryText>
 
               <CenterElement>
                 <Button signup disabled={loading} type="submit">
@@ -150,8 +153,10 @@ export default function Signup() {
           </Card>
         </ContentWrapper>
       </AuthWrapper>
-      <Footer className="fb-12">
-        Facebook Clone 2022. Built by Izan Huang. Inspired by Facebook.
+      <Footer>
+        <SecondaryText size12 noMargin>
+          Facebook Clone 2022. Built by Izan Huang. Inspired by Facebook.
+        </SecondaryText>
       </Footer>
     </Wrapper>
   )

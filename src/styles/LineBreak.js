@@ -1,5 +1,4 @@
-import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const LineBreak = styled.div`
   display: block;
@@ -38,6 +37,12 @@ export const LineBreak = styled.div`
 export const Divider = styled.div`
   height: 1px;
   width: 100%;
-  background-color: #dadde1;
+  background-color: ${({ theme }) => theme.divider};
   margin: 20px 0px;
+
+  ${(props) =>
+    props.margin8 &&
+    css`
+      margin: 8px 0;
+    `}
 `
