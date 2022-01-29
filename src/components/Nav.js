@@ -6,6 +6,8 @@ import { SiFacebook, SiFacebookgaming, SiMessenger } from 'react-icons/si'
 import { TiHome } from 'react-icons/ti'
 import { BiStore } from 'react-icons/bi'
 import { RiGroup2Line } from 'react-icons/ri'
+import { GrAdd } from 'react-icons/gr'
+import { IoApps } from 'react-icons/io5'
 import Dropdown from './Dropdown'
 import Search from './Search'
 
@@ -13,8 +15,8 @@ const Navbar = styled.nav`
   display: flex;
   flex-direction: row;
   background-color: ${({ theme }) => theme.bgSecondary};
-  justify-content: space-between;
-  padding: 0 15px;
+  justify-content: center;
+  padding: 0 0 !important;
   height: 56px;
   position: fixed;
   z-index: 5;
@@ -36,6 +38,9 @@ const List = styled.ul`
   ${(props) =>
     props.center &&
     css`
+      @media (max-width: 700px) {
+        opacity: 0;
+      }
       li {
         box-sizing: border-box;
         margin: 3px 3px 0 3px;
@@ -49,6 +54,9 @@ const List = styled.ul`
   ${(props) =>
     props.settings &&
     css`
+      position: absolute;
+      top: 0;
+      right: 15px;
       li {
         padding: 5px;
       }
@@ -56,12 +64,13 @@ const List = styled.ul`
 `
 
 const Logo = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 15px;
   svg {
     fill: ${({ theme }) => theme.logo};
     width: 2.5em;
     height: 2.5em;
-    position: absolute;
-    top: 10px;
   }
 `
 
@@ -110,6 +119,20 @@ const Nav = () => {
       </List>
 
       <List settings>
+        <li>
+          <Link to="/">
+            <IconButton addIcon>
+              <GrAdd />
+            </IconButton>
+          </Link>
+        </li>
+        <li>
+          <Link to="/">
+            <IconButton appsIcon>
+              <IoApps />
+            </IconButton>
+          </Link>
+        </li>
         <li>
           <Link to="/">
             <IconButton>

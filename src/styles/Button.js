@@ -86,6 +86,9 @@ export const IconButton = styled.button`
     svg {
       fill: #4688fe;
     }
+    svg path {
+      stroke: #4688fe;
+    }
   }
 
   :hover {
@@ -94,8 +97,8 @@ export const IconButton = styled.button`
 
   svg {
     fill: ${({ theme }) => theme.text};
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     display: inline-block;
     vertical-align: -0.25em;
   }
@@ -129,6 +132,31 @@ export const IconButton = styled.button`
     props.spacing &&
     css`
       margin: 8px 12px 8px 0;
+    `}
+
+  ${(props) =>
+    props.addIcon &&
+    css`
+      @media (min-width: 700px) {
+        opacity: 0;
+      }
+
+      svg path {
+        stroke: ${({ theme }) => theme.text};
+      }
+    `}
+
+  ${(props) =>
+    props.appsIcon &&
+    css`
+      @media (min-width: 700px) {
+        opacity: 0;
+      }
+
+      svg {
+        width: 23px;
+        height: 23px;
+      }
     `}
    
 `
