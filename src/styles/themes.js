@@ -10,6 +10,7 @@ export const lightTheme = {
     ' 0 12px 28px 0 rgba(0,0,0,0.2),0 2px 4px 0 rgba(0,0,0,0.1),inset 0 0 0 1px rgba(255,255,255,0.5)',
   logo: '#1877f2',
   divider: '#CED0D4',
+  commentBg: '#F0F2F5',
 }
 
 export const darkTheme = {
@@ -24,6 +25,7 @@ export const darkTheme = {
     ' 0 12px 28px 0 rgba(0,0,0,0.2),0 2px 4px 0 rgba(0,0,0,0.1),inset 0 0 0 1px rgba(255,255,255,0.05)',
   logo: '#e4e6eb',
   divider: '#3E4042',
+  commentBg: '#3A3B3C',
   // background: "#FFF",
   // bgHover: "#F5F8FA",
   // primaryColor: "#17141A",

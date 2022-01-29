@@ -7,6 +7,7 @@ import { TiHome } from 'react-icons/ti'
 import { BiStore } from 'react-icons/bi'
 import { RiGroup2Line } from 'react-icons/ri'
 import Dropdown from './Dropdown'
+import Search from './Search'
 
 const Navbar = styled.nav`
   display: flex;
@@ -74,6 +75,8 @@ const Nav = () => {
           <SiFacebook />
         </Logo>
       </Link>
+
+      <Search />
 
       <List center>
         <li className={location.pathname === '/' ? 'activeClass' : ''}>

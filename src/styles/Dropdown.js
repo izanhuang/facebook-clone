@@ -21,6 +21,14 @@ export const DropDownListContainer = styled.div`
   position: absolute;
   top: 45px;
   right: 0;
+
+  ${(props) =>
+    props.search &&
+    css`
+      top: -10px;
+      // right: -5px;
+      left: -60px;
+    `}
 `
 
 export const DropDownList = styled.ul`
@@ -49,6 +57,12 @@ export const DropDownList = styled.ul`
   > a:hover {
     text-decoration: none;
   }
+
+  ${(props) =>
+    props.search &&
+    css`
+      width: 300px;
+    `}
 `
 
 export const ListItem = styled.li`
@@ -81,12 +95,23 @@ export const ListItem = styled.li`
       margin-bottom: 0;
     `}
 
-    ${(props) =>
-      props.flexRow &&
-      css`
-        display: flex;
-        flex-direction: row;
-      `}
+  ${(props) =>
+    props.flexRow &&
+    css`
+      display: flex;
+      flex-direction: row;
+    `}
+
+  ${(props) =>
+    props.search &&
+    css`
+      padding: 0px !important;
+      margin: 0;
+      cursor: default;
+      :hover {
+        background-image: none;
+      }
+    `}
 `
 
 export const ActiveIconButton = styled.div`
