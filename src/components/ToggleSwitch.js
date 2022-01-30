@@ -24,8 +24,10 @@ const SwitchLabel = styled.label`
 
 const Switch = styled.div`
   position: relative;
-  width: 60px;
-  height: 28px;
+  // width: 60px;
+  // height: 28px;
+  width: 52px;
+  height: 22px;
   background: #b3b3b3;
   border-radius: 30px;
   padding: 4px;
@@ -35,8 +37,10 @@ const Switch = styled.div`
     transition: 300ms all;
     content: '';
     position: absolute;
-    width: 28px;
-    height: 28px;
+    // width: 28px;
+    // height: 28px;
+    width: 22px;
+    height: 22px;
     border-radius: 32px;
     top: 50%;
     left: 4px;
@@ -54,7 +58,7 @@ const Input = styled.input`
     background: var(--fb-blue);
 
     &:before {
-      transform: translate(32px, -50%);
+      transform: translate(30px, -50%);
     }
   }
 `

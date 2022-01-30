@@ -12,13 +12,13 @@ export const Users = [
   },
   {
     uid: 2, //Auto generated
-    firstName: 'user2first',
-    lastName: 'user2last',
+    firstName: 'firstName',
+    lastName: 'lastName',
     birthDate: '01/24/1999', //Must be 18+
     genderCode: 'M',
     userName: 'user2', //Unique
     friendsListIds: [1, 3],
-    profileImg: '',
+    profileImg: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     createdDate: '1/24/2022',
   },
   {

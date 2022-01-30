@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 import { Link, useLocation } from 'react-router-dom'
-import { NavButton, IconButton } from '../styles/Button'
-import { SiFacebook, SiFacebookgaming, SiMessenger } from 'react-icons/si'
+import { NavButton } from '../styles/Button'
+import { SiFacebook, SiFacebookgaming } from 'react-icons/si'
 import { TiHome } from 'react-icons/ti'
 import { BiStore } from 'react-icons/bi'
 import { RiGroup2Line } from 'react-icons/ri'
-import { GrAdd } from 'react-icons/gr'
-import { IoApps } from 'react-icons/io5'
-import Dropdown from './Dropdown'
+import Dropdown from './Dropdown/OptionsDropdown'
 import Search from './Search'
+import CreateDropdown from './Dropdown/CreateDropdown'
+import AppsDropdown from './Dropdown/AppsDropdown'
+import MessagesDropdown from './Dropdown/MessagesDropdown'
 
 const Navbar = styled.nav`
   display: flex;
@@ -19,7 +20,7 @@ const Navbar = styled.nav`
   padding: 0 0 !important;
   height: 56px;
   position: fixed;
-  z-index: 5;
+  z-index: 1;
   top: 0;
   right: 0;
   left: 0;
@@ -57,6 +58,7 @@ const List = styled.ul`
       position: absolute;
       top: 0;
       right: 15px;
+      z-index: 2;
       li {
         padding: 5px;
       }
@@ -120,25 +122,13 @@ const Nav = () => {
 
       <List settings>
         <li>
-          <Link to="/">
-            <IconButton addIcon>
-              <GrAdd />
-            </IconButton>
-          </Link>
+          <CreateDropdown />
         </li>
         <li>
-          <Link to="/">
-            <IconButton appsIcon>
-              <IoApps />
-            </IconButton>
-          </Link>
+          <AppsDropdown />
         </li>
         <li>
-          <Link to="/">
-            <IconButton>
-              <SiMessenger />
-            </IconButton>
-          </Link>
+          <MessagesDropdown />
         </li>
         <li>
           <Dropdown />

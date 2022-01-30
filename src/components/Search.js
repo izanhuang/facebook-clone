@@ -14,9 +14,9 @@ const Search = () => {
   const toggling = () => setIsOpen(!isOpen)
   const responsiveToggle = () => setIsOpen(true)
 
-  useEffect(() => {
-    console.log('open ', isOpen)
-  }, [isOpen])
+  // useEffect(() => {
+  //   console.log('open ', isOpen)
+  // }, [isOpen])
 
   return (
     <Wrapper>

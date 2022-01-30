@@ -7,15 +7,13 @@ export const DropDownContainer = styled.div`
   z-index: 2;
 `
 
-// export const DropDownHeader = styled.div`
-//   margin-bottom: 0.8em;
-//   padding: 0.1em;
-//   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
-//   font-weight: 500;
-//   font-size: 1.3rem;
-//   color: #3faffa;
-//   background: transparent;
-// `
+export const DropDownHeader = styled.div`
+  // margin-bottom: 0.8em;
+  padding: 4px 8px 8px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: ${({ theme }) => theme.text};
+`
 
 export const DropDownListContainer = styled.div`
   position: absolute;
@@ -28,6 +26,24 @@ export const DropDownListContainer = styled.div`
       top: -10px;
       // right: -5px;
       left: -60px;
+    `}
+
+  ${(props) =>
+    props.create &&
+    css`
+      right: -150px;
+    `}
+
+  ${(props) =>
+    props.apps &&
+    css`
+      right: -100px;
+    `}
+
+  ${(props) =>
+    props.messages &&
+    css`
+      right: -50px;
     `}
 `
 
@@ -67,7 +83,7 @@ export const DropDownList = styled.ul`
 
 export const ListItem = styled.li`
   list-style: none;
-  padding: 4px 8px !important;
+  padding: 0px 8px !important;
   min-height: 44px;
   margin-bottom: 0.5em;
   // margin-bottom: 0.8em;
@@ -86,7 +102,7 @@ export const ListItem = styled.li`
   ${(props) =>
     props.profile &&
     css`
-      height: 60px;
+      height: 65px;
     `}
 
   ${(props) =>
@@ -120,6 +136,9 @@ export const ActiveIconButton = styled.div`
   }
   svg {
     fill: #4688fe !important;
+  }
+  svg path {
+    stroke: #4688fe !important;
   }
 `
 

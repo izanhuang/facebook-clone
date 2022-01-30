@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   position: absolute;
   top: 10px;
   left: 60px;
+  z-index: 3;
 `
 
 export const Label = styled.label`

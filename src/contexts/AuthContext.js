@@ -10,6 +10,7 @@ import {
   updatePassword,
   updateProfile,
 } from 'firebase/auth'
+import { Users } from '../utils/data'
 
 const AuthContext = React.createContext()
 
@@ -20,6 +21,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(Users[1])
 
   function signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
@@ -71,6 +73,8 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateUserEmail,
     updateUserPassword,
+    user,
+    setUser,
   }
 
   return (
