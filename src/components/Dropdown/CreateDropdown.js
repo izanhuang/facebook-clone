@@ -6,10 +6,13 @@ import {
   ListItem,
   ActiveIconButton,
   DropDownHeader,
+  ColumnContainer,
 } from '../../styles/DropDown'
 import { IconButton } from '../../styles/Button'
 import { GrAdd } from 'react-icons/gr'
 import handleClickOutside from '../../utils/ClickOutsideUtil'
+import { SecondaryText } from '../../styles/Text'
+import { BsPencilSquare } from 'react-icons/bs'
 
 const CreateDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -25,7 +28,6 @@ const CreateDropdown = () => {
   }, [isOpen])
 
   return (
-    // <Wrapper>
     <DropDownContainer ref={wrapperRef}>
       {isOpen ? (
         <ActiveIconButton>
@@ -43,12 +45,21 @@ const CreateDropdown = () => {
         <DropDownListContainer create>
           <DropDownList>
             <DropDownHeader>Create</DropDownHeader>
-            <ListItem noMarginBottom>Item</ListItem>
+            <ListItem onClick={toggling} noMarginBottom flexRow>
+              <IconButton small margin>
+                <BsPencilSquare />
+              </IconButton>
+              <ColumnContainer>
+                <span>Post</span>
+                <SecondaryText noMargin>
+                  Share a post on News Feed.
+                </SecondaryText>
+              </ColumnContainer>
+            </ListItem>
           </DropDownList>
         </DropDownListContainer>
       )}
     </DropDownContainer>
-    // </Wrapper>
   )
 }
 

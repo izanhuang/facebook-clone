@@ -1,4 +1,3 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.div`
@@ -46,6 +45,12 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  ${(props) =>
+    props.noPadding &&
+    css`
+      padding: 0;
+    `}
 `
 export const CenterElement = styled.div`
   display: flex;

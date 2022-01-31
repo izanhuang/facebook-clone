@@ -11,6 +11,7 @@ export const lightTheme = {
   logo: '#1877f2',
   divider: '#CED0D4',
   commentBg: '#F0F2F5',
+  hoverOverlay: 'rgba(0,0,0,0.05)',
 }
 
 export const darkTheme = {
@@ -18,7 +19,8 @@ export const darkTheme = {
   bgSecondary: '#242526',
   text: '#E4E6EB',
   secondaryColor: '#B0B3B8',
-  iconBg: '#3a3b3c',
+  // iconBg: '#3a3b3c',
+  iconBg: 'rgba(255,255,255,0.1)',
   buttonHover: 'linear-gradient(rgba(255, 255, 255, 0.1) 0 0)',
   deemphasizedButton: 'rgba(45,136,255,0.2)',
   shadow:
@@ -26,6 +28,7 @@ export const darkTheme = {
   logo: '#e4e6eb',
   divider: '#3E4042',
   commentBg: '#3A3B3C',
+  hoverOverlay: 'rgba(255,255,255,0.1)',
   // background: "#FFF",
   // bgHover: "#F5F8FA",
   // primaryColor: "#17141A",

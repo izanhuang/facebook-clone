@@ -1,4 +1,3 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Label = styled.label`
@@ -8,4 +7,17 @@ export const Label = styled.label`
   font-weight: normal;
   line-height: 20px;
   margin-top: 2px;
+  display: block;
+
+  ${(props) =>
+    props.bold &&
+    css`
+      font-weight: 600;
+    `}
+
+  ${(props) =>
+    props.marginTop &&
+    css`
+      margin-top: 10px;
+    `}
 `

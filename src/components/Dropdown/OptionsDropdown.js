@@ -63,27 +63,32 @@ const Dropdown = () => {
       {isOpen && (
         <DropDownListContainer>
           <DropDownList>
-            <Link to="/insertUsername">
-              <ListItem profile onClick={toggling}>
-                <Avatar
-                  src={
-                    user.profileImg != ''
-                      ? user.profileImg
-                      : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-                  }
-                />
-                <ViewProfile>
-                  <DisplayText>
-                    {user.firstName + ' ' + user.lastName}
-                  </DisplayText>
-                  <SecondaryText>See your profile</SecondaryText>
-                </ViewProfile>
-              </ListItem>
-            </Link>
+            <ListItem
+              viewProfile
+              onClick={() => {
+                toggling()
+                navigate(`/${user.userName}`)
+              }}
+            >
+              <Avatar
+                src={
+                  user.profileImg !== ''
+                    ? user.profileImg
+                    : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+                }
+              />
+              <ViewProfile>
+                <DisplayText>
+                  {user.firstName + ' ' + user.lastName}
+                </DisplayText>
+                <SecondaryText>See your profile</SecondaryText>
+              </ViewProfile>
+            </ListItem>
+
             <Divider margin8 />
             <Link to="/settings">
-              <ListItem onClick={toggling} flexRow spacing>
-                <IconButton small spacing>
+              <ListItem onClick={toggling} flexRow>
+                <IconButton small margin>
                   <RiSettings5Fill />
                 </IconButton>
                 <div>Settings</div>
@@ -94,7 +99,7 @@ const Dropdown = () => {
             </ListItem>
             {error && <Alert variant="danger">{error}</Alert>}
             <ListItem noMarginBottom flexRow onClick={handleLogout}>
-              <IconButton small offset spacing>
+              <IconButton small logOutIcon margin>
                 <GoSignOut />
               </IconButton>
               Log out

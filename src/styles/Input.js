@@ -1,4 +1,3 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Input = styled.input`
@@ -14,12 +13,6 @@ export const Input = styled.input`
   border-radius: 6px;
   margin: 6px 0;
 
-  // :focus {
-  //   outline: none !important;
-  //   border: 1px solid #3676f1;
-  //   box-shadow: 0 0 3px #719ece;
-  // }
-
   :focus {
     outline: none !important;
     border: 1px solid #dddfe2;
@@ -27,8 +20,7 @@ export const Input = styled.input`
   }
 
   @media (max-width: 415px) {
-    width: 18.5rem;
-  
+    width: 18rem;
   }
 
   ${(props) =>
@@ -60,13 +52,23 @@ export const Input = styled.input`
       }
     `}
 
-    ${(props) =>
-      props.toggle &&
-      css`
-        background-color: ${({ theme }) => theme.background};
-        color: ${({ theme }) => theme.text};
+  ${(props) =>
+    props.toggle &&
+    css`
+      background-color: ${({ theme }) => theme.bgSecondary};
+      color: ${({ theme }) => theme.text};
+      border: 1px solid ${({ theme }) => theme.bgSecondary};
+
+      // :focus {
+      //   border: 2px solid #3676f1;
+      // }
+
+      :focus {
+        outline: none !important;
         border: 1px solid ${({ theme }) => theme.bgSecondary};
-      `}
+        box-shadow: none !important;
+      }
+    `}
 
  
 `

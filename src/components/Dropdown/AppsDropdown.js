@@ -10,6 +10,11 @@ import {
 import { IconButton } from '../../styles/Button'
 import { IoApps } from 'react-icons/io5'
 import handleClickOutside from '../../utils/ClickOutsideUtil'
+import { SiFacebookgaming } from 'react-icons/si'
+import { TiHome } from 'react-icons/ti'
+import { BiStore } from 'react-icons/bi'
+import { RiGroup2Line } from 'react-icons/ri'
+import { Link } from 'react-router-dom'
 
 const AppsDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -25,7 +30,6 @@ const AppsDropdown = () => {
   }, [isOpen])
 
   return (
-    // <Wrapper>
     <DropDownContainer ref={wrapperRef}>
       {isOpen ? (
         <ActiveIconButton>
@@ -41,14 +45,44 @@ const AppsDropdown = () => {
 
       {isOpen && (
         <DropDownListContainer apps>
-          <DropDownList>
+          <DropDownList apps>
             <DropDownHeader>Menu</DropDownHeader>
-            <ListItem noMarginBottom>Item</ListItem>
+            <Link to="/">
+              <ListItem onClick={toggling} flexRow>
+                <IconButton small margin appsIcon>
+                  <TiHome />
+                </IconButton>
+                <span>Home</span>
+              </ListItem>
+            </Link>
+            <Link to="/store">
+              <ListItem onClick={toggling} flexRow>
+                <IconButton small margin appsIcon>
+                  <BiStore />
+                </IconButton>
+                <span>Store</span>
+              </ListItem>
+            </Link>
+            <Link to="/group">
+              <ListItem onClick={toggling} flexRow>
+                <IconButton small margin appsIcon>
+                  <RiGroup2Line />
+                </IconButton>
+                <span>Group</span>
+              </ListItem>
+            </Link>
+            <Link to="/gaming">
+              <ListItem onClick={toggling} noMarginBottom flexRow>
+                <IconButton small margin>
+                  <SiFacebookgaming />
+                </IconButton>
+                <span>Gaming</span>
+              </ListItem>
+            </Link>
           </DropDownList>
         </DropDownListContainer>
       )}
     </DropDownContainer>
-    // </Wrapper>
   )
 }
 export default AppsDropdown

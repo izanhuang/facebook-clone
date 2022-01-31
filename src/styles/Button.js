@@ -35,6 +35,19 @@ export const Button = styled.button`
       line-height: 32.5px;
       font-size: 18px;
     `}
+
+  ${(props) =>
+    props.auto &&
+    css`
+      width: auto;
+      font-size: 16px;
+    `}
+
+  ${(props) =>
+    props.update &&
+    css`
+      background-color: #4267b2;
+    `}
 `
 
 export const NavButton = styled.button`
@@ -120,7 +133,7 @@ export const IconButton = styled.button`
     `}
 
   ${(props) =>
-    props.offset &&
+    props.logOutIcon &&
     css`
       svg {
         padding-left: 4px;
@@ -129,7 +142,7 @@ export const IconButton = styled.button`
     `}
 
   ${(props) =>
-    props.spacing &&
+    props.margin &&
     css`
       margin: 8px 12px 8px 0;
     `}
@@ -168,7 +181,7 @@ export const IconButtonSpan = styled.span`
   color: #050505;
   width: 40px;
   height: 40px;
-  
+
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -189,7 +202,7 @@ export const IconButtonSpan = styled.span`
     width: 20px;
     height: 20px;
     display: inline-block;
-    vertical-align: -.7em;
+    vertical-align: -0.85em;
   }
 
   ${(props) =>
@@ -209,18 +222,8 @@ export const IconButtonSpan = styled.span`
     `}
 
   ${(props) =>
-    props.offset &&
-    css`
-      svg {
-        padding-left: 4px;
-        vertical-align: -0.8em !important;
-      }
-    `}
-
-  ${(props) =>
-    props.spacing &&
+    props.margin &&
     css`
       margin: 8px 12px 8px 0;
     `}
-   
 `

@@ -1,9 +1,7 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Card = styled.div`
-  width: 396px;
-  width: 22rem;
+  width: auto;
   align-items: center;
   background-color: #fff;
   border: none;

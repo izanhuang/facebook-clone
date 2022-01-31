@@ -13,6 +13,12 @@ export const DropDownHeader = styled.div`
   font-weight: bold;
   font-size: 1.3rem;
   color: ${({ theme }) => theme.text};
+
+  ${(props) =>
+    props.noPaddingLeft &&
+    css`
+      padding-left: 0;
+    `}
 `
 
 export const DropDownListContainer = styled.div`
@@ -32,12 +38,19 @@ export const DropDownListContainer = styled.div`
     props.create &&
     css`
       right: -150px;
+
+      @media (min-width: 700px) {
+        opacity: 0;
     `}
 
   ${(props) =>
     props.apps &&
     css`
       right: -100px;
+
+      @media (min-width: 700px) {
+        opacity: 0;
+      }
     `}
 
   ${(props) =>
@@ -79,6 +92,18 @@ export const DropDownList = styled.ul`
     css`
       width: 300px;
     `}
+
+  ${(props) =>
+    props.apps &&
+    css`
+      // width: 225px;
+    `}
+
+  ${(props) =>
+    props.messages &&
+    css`
+      width: 360px;
+    `}
 `
 
 export const ListItem = styled.li`
@@ -92,15 +117,15 @@ export const ListItem = styled.li`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
 
   :hover {
-    background-image: ${({ theme }) => theme.buttonHover};
+    background-color: ${({ theme }) => theme.hoverOverlay};
   }
 
   ${(props) =>
-    props.profile &&
+    props.viewProfile &&
     css`
       height: 65px;
     `}
@@ -114,7 +139,6 @@ export const ListItem = styled.li`
   ${(props) =>
     props.flexRow &&
     css`
-      display: flex;
       flex-direction: row;
     `}
 
@@ -126,6 +150,7 @@ export const ListItem = styled.li`
       cursor: default;
       :hover {
         background-image: none;
+        background-color: transparent;
       }
     `}
 `
@@ -150,5 +175,15 @@ export const ViewProfile = styled.div`
   > h4,
   p {
     margin: 0;
+  }
+`
+export const ColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 0;
+
+  > span {
+    font-weight: 400;
   }
 `

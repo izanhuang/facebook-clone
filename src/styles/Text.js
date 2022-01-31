@@ -7,6 +7,7 @@ export const DisplayText = styled.span`
 export const SecondaryText = styled.p`
   font-size: 13px;
   color: ${({ theme }) => theme.secondaryColor};
+  font-weight: 400;
 
   ${(props) =>
     props.size12 &&

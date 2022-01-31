@@ -6,7 +6,7 @@ import { SiFacebook, SiFacebookgaming } from 'react-icons/si'
 import { TiHome } from 'react-icons/ti'
 import { BiStore } from 'react-icons/bi'
 import { RiGroup2Line } from 'react-icons/ri'
-import Dropdown from './Dropdown/OptionsDropdown'
+import OptionsDropdown from './Dropdown/OptionsDropdown'
 import Search from './Search'
 import CreateDropdown from './Dropdown/CreateDropdown'
 import AppsDropdown from './Dropdown/AppsDropdown'
@@ -24,6 +24,7 @@ const Navbar = styled.nav`
   top: 0;
   right: 0;
   left: 0;
+  box-shadow: 0 -2px 4px 0px ${({ theme }) => theme.text};
 `
 
 const List = styled.ul`
@@ -131,7 +132,7 @@ const Nav = () => {
           <MessagesDropdown />
         </li>
         <li>
-          <Dropdown />
+          <OptionsDropdown />
         </li>
       </List>
     </Navbar>

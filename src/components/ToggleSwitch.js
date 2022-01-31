@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { useState } from 'react'
 import { useTheme } from '../contexts/ThemeContext'
 import { IoMoon } from 'react-icons/io5'
@@ -65,7 +65,7 @@ const Input = styled.input`
 
 export const ToggleSwitch = () => {
   const { theme, toggleTheme } = useTheme()
-  const [checked, setChecked] = useState(theme == 'light' ? false : true)
+  const [checked, setChecked] = useState(theme === 'light' ? false : true)
 
   const handleChange = (e) => {
     setChecked(e.target.checked)
@@ -74,7 +74,7 @@ export const ToggleSwitch = () => {
 
   return (
     <Label>
-      <IconButtonSpan small spacing>
+      <IconButtonSpan small margin>
         <IoMoon />
       </IconButtonSpan>
       <SwitchLabel>
