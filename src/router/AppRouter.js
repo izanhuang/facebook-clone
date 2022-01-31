@@ -8,6 +8,7 @@ import Signup from '../components/Auth/Signup'
 import { useAuth } from '../contexts/AuthContext'
 import Home from '../pages/Home'
 import UpdateProfile from '../pages/UpdateProfile'
+import ForgotPassword from '../components/ForgotPassword'
 
 export default function AppRouter() {
   const { currentUser } = useAuth()
@@ -20,6 +21,7 @@ export default function AppRouter() {
           path="/"
           element={currentUser != null ? <Home /> : <Login />}
         ></Route>
+        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/settings" element={<UpdateProfile />}></Route>
         <Route path="/{username}" element={<Profile />}></Route>

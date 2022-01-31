@@ -57,7 +57,7 @@ const UpdateProfile = () => {
     <Wrapper>
       <PagePadding>
         <AuthWrapper>
-          <Card toggle>
+          <Card toggle widthAuto>
             <Form onSubmit={handleSubmit}>
               <DropDownHeader noPaddingLeft>Settings</DropDownHeader>
               <Tabs defaultActiveKey="2">

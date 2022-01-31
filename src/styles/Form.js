@@ -22,6 +22,11 @@ export const FormHeader = styled.div`
     color: #000;
   }
 
+  h3 {
+    margin-top: 0.35em;
+    margin-bottom: 0.35em;
+  }
+
   h4 {
     font-size: 18px;
     line-height: 22px;

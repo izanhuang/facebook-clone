@@ -47,6 +47,33 @@ export const Button = styled.button`
     props.update &&
     css`
       background-color: #4267b2;
+      line-height: 35px;
+    `}
+
+  ${(props) =>
+    props.standard &&
+    css`
+      line-height: 35px;
+      width: 90px;
+      padding: 0;
+      // padding: 0 20px;
+      height: 36px;
+    `}
+
+  ${(props) =>
+    props.bold &&
+    css`
+      font-weight: bold;
+    `}
+
+  ${(props) =>
+    props.gray &&
+    css`
+      background-color: #f0f2f5;
+      color: #65676b;
+      :hover {
+        background-image: none;
+      }
     `}
 `
 

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Card = styled.div`
-  width: auto;
+  width: 22rem;
   align-items: center;
   background-color: #fff;
   border: none;
@@ -24,5 +24,11 @@ export const Card = styled.div`
     props.toggle &&
     css`
       background-color: ${({ theme }) => theme.bgSecondary};
+    `}
+
+  ${(props) =>
+    props.widthAuto &&
+    css`
+      width: auto;
     `}
 `

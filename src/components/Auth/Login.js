@@ -71,7 +71,7 @@ export default function Login() {
                 Login
               </Button>
               <CenterElement padding>
-                <Link to="#">Forgot account?</Link>
+                <Link to="/forgot-password">Forgot password?</Link>
               </CenterElement>
               <LineBreak>
                 <span>or</span>

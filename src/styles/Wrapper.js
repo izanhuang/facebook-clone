@@ -66,6 +66,13 @@ export const CenterElement = styled.div`
     `}
 `
 
+export const FlexRightAlign = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+`
+
 export const RadioWrapper = styled.div`
   box-sizing: border-box;
   border-radius: 4px;
