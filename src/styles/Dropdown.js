@@ -19,6 +19,18 @@ export const DropDownHeader = styled.div`
     css`
       padding-left: 0;
     `}
+
+  ${(props) =>
+    props.fontSize17 &&
+    css`
+      font-size: 17px;
+    `}
+
+  ${(props) =>
+    props.padding &&
+    css`
+      padding: 16px 0 4px 8px;
+    `}
 `
 
 export const DropDownListContainer = styled.div`
@@ -91,6 +103,8 @@ export const DropDownList = styled.ul`
     props.search &&
     css`
       width: 300px;
+      max-height: 310px;
+      overflow-y: auto;
     `}
 
   ${(props) =>
@@ -153,6 +167,15 @@ export const ListItem = styled.li`
         background-color: transparent;
       }
     `}
+
+    ${(props) =>
+      props.filtered &&
+      css`
+        font-weight: 400;
+        margin-top: 0.5em;
+        margin-bottom: 0;
+        height: 55px;
+      `}
 `
 
 export const ActiveIconButton = styled.div`

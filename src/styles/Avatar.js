@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Avatar = styled.img`
   width: 50px;
@@ -6,4 +6,11 @@ export const Avatar = styled.img`
   object-fit: cover;
   border-radius: 50%;
   margin: 12px 12px 12px 0;
+
+  ${(props) =>
+    props.small &&
+    css`
+      width: 40px;
+      height: 40px;
+    `}
 `

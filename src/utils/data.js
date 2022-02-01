@@ -7,7 +7,8 @@ export const Users = [
     genderCode: 'F',
     userName: 'izancanfly',
     friendsListIds: [2, 4],
-    profileImg: '',
+    profileImg:
+      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
     createdDate: '1/24/2022',
   },
   {
@@ -18,7 +19,8 @@ export const Users = [
     genderCode: 'M',
     userName: 'user2', //Unique
     friendsListIds: [1, 3],
-    profileImg: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    profileImg:
+      'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     createdDate: '1/24/2022',
   },
   {
@@ -29,7 +31,8 @@ export const Users = [
     genderCode: 'M',
     userName: 'user3',
     friendsListIds: [1, 2],
-    profileImg: '',
+    profileImg:
+      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
     createdDate: '1/24/2022',
   },
   {
@@ -40,7 +43,8 @@ export const Users = [
     genderCode: 'F',
     userName: 'user4',
     friendsListIds: [1],
-    profileImg: '',
+    profileImg:
+      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
     createdDate: '1/24/2022',
   },
 ]

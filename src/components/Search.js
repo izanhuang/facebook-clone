@@ -1,25 +1,44 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { GoSearch } from 'react-icons/go'
 import {
   DropDownContainer,
   DropDownListContainer,
   DropDownList,
+  DropDownHeader,
   ListItem,
 } from '../styles/DropDown'
 import { BiArrowBack } from 'react-icons/bi'
 import { Wrapper, Label, Input, ArrowButton } from '../styles/SearchBar'
+import handleClickOutside from '../utils/ClickOutsideUtil'
+import { useAuth } from '../contexts/AuthContext'
+import { Avatar } from '../styles/Avatar'
+import { useNavigate } from 'react-router-dom'
 
 const Search = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [searchName, setSearchName] = useState('')
+  const { users } = useAuth()
+
+  const wrapperRef = useRef(null)
+
+  const navigate = useNavigate()
+
   const toggling = () => setIsOpen(!isOpen)
   const responsiveToggle = () => setIsOpen(true)
 
-  // useEffect(() => {
-  //   console.log('open ', isOpen)
-  // }, [isOpen])
+  useEffect(() => {
+    if (isOpen === true) {
+      document.addEventListener('mousedown', (event) => {
+        handleClickOutside(event, isOpen, setIsOpen, wrapperRef)
+      })
+    }
+    if (isOpen === false) {
+      setSearchName('')
+    }
+  }, [isOpen])
 
   return (
-    <Wrapper>
+    <Wrapper ref={wrapperRef}>
       <DropDownContainer>
         <Label searchBar onClick={responsiveToggle}>
           <GoSearch onClick={toggling} />
@@ -34,9 +53,32 @@ const Search = () => {
                   <BiArrowBack />
                 </ArrowButton>
                 <Label padding dropdownSearchBar>
-                  <Input placeholder="Search Facebook" />
+                  <Input
+                    placeholder="Search Facebook"
+                    onChange={(e) => setSearchName(e.target.value)}
+                  />
                 </Label>
               </ListItem>
+              {searchName !== '' &&
+                users
+                  .filter((user) =>
+                    user.firstName
+                      .concat('', user.lastName)
+                      .toLowerCase()
+                      .includes(searchName),
+                  )
+                  .map((filteredUser) => (
+                    <ListItem
+                      filtered
+                      onClick={() => {
+                        toggling()
+                        navigate(`/${filteredUser.userName}`)
+                      }}
+                    >
+                      <Avatar small src={filteredUser.profileImg} />
+                      {filteredUser.firstName + ' ' + filteredUser.lastName}
+                    </ListItem>
+                  ))}
             </DropDownList>
           </DropDownListContainer>
         )}

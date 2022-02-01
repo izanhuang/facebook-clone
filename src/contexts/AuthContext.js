@@ -22,6 +22,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(Users[1])
+  const [users, setUsers] = useState(Users)
 
   function signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
@@ -75,6 +76,8 @@ export function AuthProvider({ children }) {
     updateUserPassword,
     user,
     setUser,
+    users,
+    setUsers,
   }
 
   return (
