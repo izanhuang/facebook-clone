@@ -168,14 +168,14 @@ export const ListItem = styled.li`
       }
     `}
 
-    ${(props) =>
-      props.filtered &&
-      css`
-        font-weight: 400;
-        margin-top: 0.5em;
-        margin-bottom: 0;
-        height: 55px;
-      `}
+  ${(props) =>
+    props.filtered &&
+    css`
+      font-weight: 400;
+      margin-top: 0.5em;
+      margin-bottom: 0;
+      height: 55px;
+    `}
 `
 
 export const ActiveIconButton = styled.div`

@@ -1,10 +1,26 @@
 import React from 'react'
-import { Wrapper, PagePadding } from '../styles/Wrapper'
+import LeftNav from '../components/LeftNav'
+import Stories from '../components/Stories'
+import {
+  Wrapper,
+  PagePadding,
+  HomeCenterWrapper,
+  HomeWrapper,
+} from '../styles/Wrapper'
+import Contacts from '../components/Contacts'
 
 const Home = () => {
   return (
     <Wrapper>
-      <PagePadding>Home</PagePadding>
+      <PagePadding>
+        <HomeWrapper>
+          <LeftNav />
+          <HomeCenterWrapper>
+            <Stories />
+          </HomeCenterWrapper>
+          <Contacts />
+        </HomeWrapper>
+      </PagePadding>
     </Wrapper>
   )
 }

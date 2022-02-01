@@ -16,6 +16,26 @@ export const PagePadding = styled.div`
   padding-top: 56px;
 `
 
+export const HomeCenterWrapper = styled.div`
+  width: 64vw;
+  height: 100vh;
+  padding: 8px 32px 0;
+  display: flex;
+  flex-direction: column;
+  justifiy-content: space-between;
+  align-content: flex-start;
+`
+export const HomeWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  @media (max-width: 900px) {
+    justify-content: center;
+  }
+`
+
 export const BlockWrapper = styled.div`
   display: block;
   width: 100%;
