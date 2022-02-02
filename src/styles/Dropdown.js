@@ -11,7 +11,7 @@ export const DropDownHeader = styled.div`
   // margin-bottom: 0.8em;
   padding: 4px 8px 8px;
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 20px;
   color: ${({ theme }) => theme.text};
 
   ${(props) =>
@@ -161,6 +161,16 @@ export const ListItem = styled.li`
     css`
       padding: 0px !important;
       margin: 0;
+      cursor: default;
+      :hover {
+        background-image: none;
+        background-color: transparent;
+      }
+    `}
+
+  ${(props) =>
+    props.createPost &&
+    css`
       cursor: default;
       :hover {
         background-image: none;

@@ -54,13 +54,19 @@ a:hover {
 .rc-tabs-tab .rc-tabs-tab-btn {
   font-weight: normal;
 }
-.rc-tabs-tab.rc-tabs-tab-active {
-  background: linear-gradient(rgba(0, 0, 0, 0.18) 0 0);
+.rc-tabs-tab {
+  background: transparent;
   border-radius: 6px;
   width: 75px;
   margin-right: 10px;
   /* color: #00a6f8; */
 }
+
+.rc-tabs-tab.rc-tabs-tab-active,
+.rc-tabs-tab:hover {
+  background: var(--hoverOverlay);
+}
+
 .rc-tabs-ink-bar {
   background: #59c7fd !important;
 }
@@ -77,4 +83,34 @@ a:hover {
 .rc-tabs-nav-operations,
 .rc-tabs-nav-operations-hidden {
   display: none !important;
+}
+
+.Modal {
+  position: absolute;
+  background: var(--bgSecondary);
+  width: 500px;
+
+  height: 428px;
+  border-radius: 10px;
+}
+@media only screen and (max-width: 585px) {
+  .Modal {
+    width: 25rem;
+  }
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--overlayAlpha);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 56px 8px;
+  box-sizing: border-box;
 }

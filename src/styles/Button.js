@@ -254,3 +254,25 @@ export const IconButtonSpan = styled.span`
       margin: 8px 12px 8px 0;
     `}
 `
+
+export const CreatePostButton = styled.button`
+  background-color: ${({ theme }) => theme.iconBg};
+  color: ${({ theme }) => theme.secondaryColor};
+  border-radius: 100px;
+  border: none;
+  width: 511px;
+
+  height: 40px;
+  cursor: pointer;
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 17px;
+
+  :hover {
+    background-image: ${({ theme }) => theme.buttonHover};
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+`

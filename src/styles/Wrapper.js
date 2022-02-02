@@ -19,11 +19,17 @@ export const PagePadding = styled.div`
 export const HomeCenterWrapper = styled.div`
   width: 64vw;
   height: 100vh;
-  padding: 8px 32px 0;
+  padding: 0px 32px 0;
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
   justifiy-content: space-between;
   align-content: flex-start;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    padding: 0;
+  }
 `
 export const HomeWrapper = styled.div`
   display: flex;
@@ -83,6 +89,13 @@ export const CenterElement = styled.div`
       a {
         padding: 10px 0 2px;
       }
+    `}
+
+  ${(props) =>
+    props.createPostDivider &&
+    css`
+      height: 60px;
+      border-bottom: 1px solid ${({ theme }) => theme.divider};
     `}
 `
 

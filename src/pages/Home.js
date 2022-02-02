@@ -1,11 +1,12 @@
 import React from 'react'
 import LeftNav from '../components/LeftNav'
-import Stories from '../components/Stories'
+import CreateAPost from '../components/CreateAPost'
 import {
   Wrapper,
   PagePadding,
   HomeCenterWrapper,
   HomeWrapper,
+  CenterElement,
 } from '../styles/Wrapper'
 import Contacts from '../components/Contacts'
 
@@ -16,7 +17,9 @@ const Home = () => {
         <HomeWrapper>
           <LeftNav />
           <HomeCenterWrapper>
-            <Stories />
+            <CenterElement>
+              <CreateAPost />
+            </CenterElement>
           </HomeCenterWrapper>
           <Contacts />
         </HomeWrapper>

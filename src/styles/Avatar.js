@@ -13,4 +13,10 @@ export const Avatar = styled.img`
       width: 40px;
       height: 40px;
     `}
+
+  ${(props) =>
+    props.marginRight8 &&
+    css`
+      margin: 0 8px 0 0;
+    `}
 `

@@ -12,6 +12,7 @@ export const lightTheme = {
   divider: '#CED0D4',
   commentBg: '#F0F2F5',
   hoverOverlay: 'rgba(0,0,0,0.05)',
+  overlayAlpha: 'rgba(244, 244, 244, 0.8)',
 }
 
 export const darkTheme = {
@@ -29,12 +30,5 @@ export const darkTheme = {
   divider: '#3E4042',
   commentBg: '#3A3B3C',
   hoverOverlay: 'rgba(255,255,255,0.1)',
-  // background: "#FFF",
-  // bgHover: "#F5F8FA",
-  // primaryColor: "#17141A",
-  // secondaryColor: "#657786",
-  // accentColor: "#CA2055",
-  // tertiaryColor: "#CCD6DD",
-  // tertiaryColor2: "#F5F8FA",
-  // overlay: "rgba(147, 149, 150, 0.4)",
+  overlayAlpha: 'rgba(11,11,11,0.8)',
 }

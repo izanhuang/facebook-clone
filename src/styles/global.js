@@ -10,6 +10,9 @@ export const GlobalStyles = createGlobalStyle`
   --button-bg-color: #3a3b3c;
   --light-hover: linear-gradient(rgba(255, 255, 255, 0.1) 0 0);
   --dark-hover: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
+  --bgSecondary: ${({ theme }) => theme.bgSecondary};
+  --overlayAlpha: ${({ theme }) => theme.overlayAlpha};
+  --hoverOverlay: ${({ theme }) => theme.hoverOverlay};
 }
 
 html {
