@@ -6,7 +6,8 @@ import { CreatePostButton } from '../styles/Button'
 import CreatePostModal from './CreatePostModal'
 
 const CreateAPost = () => {
-  const { user } = useAuth()
+  const { user, newPost, setNewPost } = useAuth()
+
   const [showModal, setShowModal] = useState(false)
 
   function handleOpenModal() {
@@ -14,16 +15,20 @@ const CreateAPost = () => {
   }
 
   return (
-    <Post>
+    <Post id="create-post">
       <CreatePostContainer>
         <Avatar marginRight8 small src={user.profileImg} />
         <CreatePostButton onClick={handleOpenModal}>
-          What's on your mind, {user.firstName}?
+          {newPost.replace(/\s/g, '') === ''
+            ? `What's on your mind, ${user.firstName}?`
+            : newPost}
         </CreatePostButton>
         <CreatePostModal
           showModal={showModal}
           setShowModal={setShowModal}
           user={user}
+          newPost={newPost}
+          setNewPost={setNewPost}
         />
       </CreatePostContainer>
     </Post>

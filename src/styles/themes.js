@@ -13,6 +13,8 @@ export const lightTheme = {
   commentBg: '#F0F2F5',
   hoverOverlay: 'rgba(0,0,0,0.05)',
   overlayAlpha: 'rgba(244, 244, 244, 0.8)',
+  secondaryIcon: '#6b717a',
+  disabled: '-webkit-linear-gradient(rgba(0, 0, 0, 0.1) 0 0);',
 }
 
 export const darkTheme = {
@@ -31,4 +33,6 @@ export const darkTheme = {
   commentBg: '#3A3B3C',
   hoverOverlay: 'rgba(255,255,255,0.1)',
   overlayAlpha: 'rgba(11,11,11,0.8)',
+  secondaryIcon: '#a8abaf',
+  disabled: '-webkit-linear-gradient(rgba(255, 255, 255, 0.1) 0 0);',
 }

@@ -13,6 +13,7 @@ export const GlobalStyles = createGlobalStyle`
   --bgSecondary: ${({ theme }) => theme.bgSecondary};
   --overlayAlpha: ${({ theme }) => theme.overlayAlpha};
   --hoverOverlay: ${({ theme }) => theme.hoverOverlay};
+  --shadow: ${({ theme }) => theme.shadow};
 }
 
 html {

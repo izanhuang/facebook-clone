@@ -10,7 +10,7 @@ import {
 import { IconButton } from '../../styles/Button'
 import { IoApps } from 'react-icons/io5'
 import handleClickOutside from '../../utils/ClickOutsideUtil'
-import { SiFacebookgaming } from 'react-icons/si'
+import { IoNewspaper } from 'react-icons/io5'
 import { TiHome } from 'react-icons/ti'
 import { BiStore } from 'react-icons/bi'
 import { RiGroup2Line } from 'react-icons/ri'
@@ -71,12 +71,12 @@ const AppsDropdown = () => {
                 <span>Group</span>
               </ListItem>
             </Link>
-            <Link to="/gaming">
+            <Link to="/news">
               <ListItem onClick={toggling} noMarginBottom flexRow>
                 <IconButton small margin>
-                  <SiFacebookgaming />
+                  <IoNewspaper />
                 </IconButton>
-                <span>Gaming</span>
+                <span>News</span>
               </ListItem>
             </Link>
           </DropDownList>

@@ -60,6 +60,7 @@ export default function Signup() {
           <img
             className="logo"
             src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg"
+            alt="facebook logo"
           />
           <Card signup>
             <FormHeader divider>

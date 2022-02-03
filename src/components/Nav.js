@@ -2,10 +2,11 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { Link, useLocation } from 'react-router-dom'
 import { NavButton } from '../styles/Button'
-import { SiFacebook, SiFacebookgaming } from 'react-icons/si'
+import { SiFacebook } from 'react-icons/si'
 import { TiHome } from 'react-icons/ti'
 import { BiStore } from 'react-icons/bi'
 import { RiGroup2Line } from 'react-icons/ri'
+import { IoNewspaper } from 'react-icons/io5'
 import OptionsDropdown from './Dropdown/OptionsDropdown'
 import Search from './Search'
 import CreateDropdown from './Dropdown/CreateDropdown'
@@ -112,10 +113,10 @@ const Nav = () => {
             </NavButton>
           </Link>
         </li>
-        <li className={location.pathname === '/gaming' ? 'activeClass' : ''}>
-          <Link to="/gaming">
-            <NavButton gaming>
-              <SiFacebookgaming />
+        <li className={location.pathname === '/news' ? 'activeClass' : ''}>
+          <Link to="/news">
+            <NavButton news>
+              <IoNewspaper />
             </NavButton>
           </Link>
         </li>

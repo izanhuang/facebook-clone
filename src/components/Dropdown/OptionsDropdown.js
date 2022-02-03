@@ -70,7 +70,7 @@ const Dropdown = () => {
                 navigate(`/${user.userName}`)
               }}
             >
-              <Avatar src={user.profileImg} />
+              <Avatar src={user.profileImg} alt="current profile image" />
               <ViewProfile>
                 <DisplayText>
                   {user.firstName + ' ' + user.lastName}

@@ -29,4 +29,11 @@ export const SecondaryText = styled.p`
       css`
         margin: 0 !important;
       `}
+
+    ${(props) =>
+      props.paddingLeft &&
+      css`
+        padding-left: 16px;
+        text-align: left;
+      `}
 `

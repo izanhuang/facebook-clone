@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Footer } from '../styles/Footer'
 import { SecondaryText } from '../styles/Text'
 import { ListItem } from '../styles/DropDown'
@@ -21,7 +20,7 @@ const LeftNav = () => {
               navigate(`/${user.userName}`)
             }}
           >
-            <Avatar small src={user.profileImg} />
+            <Avatar small src={user.profileImg} alt="current profile image" />
             {user.firstName + ' ' + user.lastName}
           </ListItem>
           <ListItem
@@ -30,7 +29,10 @@ const LeftNav = () => {
             }}
           >
             <ImageWrapper>
-              <img src="https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/S0U5ECzYUSu.png" />
+              <img
+                src="https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/S0U5ECzYUSu.png"
+                alt="friends icon"
+              />
             </ImageWrapper>
             Friends
           </ListItem>
@@ -40,7 +42,10 @@ const LeftNav = () => {
             }}
           >
             <ImageWrapper>
-              <img src="https://static.xx.fbcdn.net/rsrc.php/v3/y5/r/PrjLkDYpYbH.png" />
+              <img
+                src="https://static.xx.fbcdn.net/rsrc.php/v3/y5/r/PrjLkDYpYbH.png"
+                alt="groups icon"
+              />
             </ImageWrapper>
             Groups
           </ListItem>
@@ -50,13 +55,16 @@ const LeftNav = () => {
             }}
           >
             <ImageWrapper>
-              <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yU/r/D2y-jJ2C_hO.png" />
+              <img
+                src="https://static.xx.fbcdn.net/rsrc.php/v3/yU/r/D2y-jJ2C_hO.png"
+                alt="marketplace icon"
+              />
             </ImageWrapper>
             Marketplace
           </ListItem>
         </List>
         <Footer>
-          <SecondaryText size12 noMargin>
+          <SecondaryText size12 noMargin paddingLeft>
             Facebook Clone 2022. Built by Izan Huang. Inspired by Facebook.
           </SecondaryText>
         </Footer>

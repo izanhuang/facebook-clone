@@ -143,3 +143,7 @@ export const SelectWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `
+
+export const CreatePostWrapper = styled.div`
+  padding: 16px;
+`

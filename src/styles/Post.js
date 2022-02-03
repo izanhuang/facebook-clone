@@ -23,4 +23,32 @@ export const CreatePostContainer = styled.div`
   align-items: center;
   width: 100%;
 `
-export const TextArea = styled.textarea``
+export const TextArea = styled.textarea`
+  width: 100%;
+  height: 154px;
+  box-sizing: border-box;
+  padding: 0 16px 40px 16px;
+  font-size: 1.5rem;
+  resize: none;
+  font-family: inherit;
+  border: none;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  background-color: transparent;
+  color: ${({ theme }) => theme.text};
+
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    color: ${({ theme }) => theme.secondaryIcon};
+  }
+
+  :focus {
+    border: none;
+    outline: none;
+  }
+
+  :focus::placeholder,
+  :focus ::-webkit-input-placeholder {
+    color: lightgray;
+  }
+`

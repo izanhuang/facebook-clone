@@ -17,6 +17,19 @@ export const Button = styled.button`
   }
 
   ${(props) =>
+    props.disabled &&
+    css`
+      background: ${({ theme }) => theme.iconBg};
+      color: ${({ theme }) => theme.secondaryIcon};
+      background: ${({ theme }) => theme.disabled};
+
+      :hover {
+        background: ${({ theme }) => theme.disabled};
+        cursor: not-allowed;
+      }
+    `}
+
+  ${(props) =>
     props.create &&
     css`
       width: auto;
@@ -75,6 +88,12 @@ export const Button = styled.button`
         background-image: none;
       }
     `}
+
+  ${(props) =>
+    props.post &&
+    css`
+      font-size: 15px;
+    `}
 `
 
 export const NavButton = styled.button`
@@ -100,7 +119,7 @@ export const NavButton = styled.button`
     vertical-align: -0.3em;
   }
   ${(props) =>
-    props.gaming &&
+    props.news &&
     css`
       svg {
         width: 1.75em;
@@ -179,6 +198,7 @@ export const IconButton = styled.button`
     css`
       @media (min-width: 700px) {
         opacity: 0;
+        cursor: default;
       }
 
       svg path {
@@ -191,11 +211,36 @@ export const IconButton = styled.button`
     css`
       @media (min-width: 700px) {
         opacity: 0;
+        cursor: default;
       }
 
       svg {
         width: 23px;
         height: 23px;
+      }
+    `}
+
+  ${(props) =>
+    props.close &&
+    css`
+      position: absolute;
+      top: 10px;
+      right: 15px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      svg path {
+        stroke: ${({ theme }) => theme.secondaryIcon};
+      }
+
+      :focus {
+        background-color: ${({ theme }) => theme.iconBg};
+        svg path {
+          stroke: ${({ theme }) => theme.text};
+        }
       }
     `}
    
@@ -261,12 +306,19 @@ export const CreatePostButton = styled.button`
   border-radius: 100px;
   border: none;
   width: 511px;
-
-  height: 40px;
+  height: auto;
+  min-height: 40px;
+  max-height: 50px;
   cursor: pointer;
   text-align: left;
   padding: 8px 12px;
   font-size: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 
   :hover {
     background-image: ${({ theme }) => theme.buttonHover};

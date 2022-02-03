@@ -13,11 +13,20 @@ import { GrAdd } from 'react-icons/gr'
 import handleClickOutside from '../../utils/ClickOutsideUtil'
 import { SecondaryText } from '../../styles/Text'
 import { BsPencilSquare } from 'react-icons/bs'
+import CreatePostModal from '../CreatePostModal'
+import { useAuth } from '../../contexts/AuthContext'
 
 const CreateDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
   const toggling = () => setIsOpen(!isOpen)
   const wrapperRef = useRef(null)
+
+  const { user, newPost, setNewPost } = useAuth()
+  const [showModal, setShowModal] = useState(false)
+
+  function handleOpenModal() {
+    setShowModal(true)
+  }
 
   useEffect(() => {
     if (isOpen === true) {
@@ -41,11 +50,26 @@ const CreateDropdown = () => {
         </IconButton>
       )}
 
+      <CreatePostModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        user={user}
+        newPost={newPost}
+        setNewPost={setNewPost}
+      />
+
       {isOpen && (
         <DropDownListContainer create>
           <DropDownList>
             <DropDownHeader>Create</DropDownHeader>
-            <ListItem onClick={toggling} noMarginBottom flexRow>
+            <ListItem
+              onClick={() => {
+                toggling()
+                handleOpenModal()
+              }}
+              noMarginBottom
+              flexRow
+            >
               <IconButton small margin>
                 <BsPencilSquare />
               </IconButton>
