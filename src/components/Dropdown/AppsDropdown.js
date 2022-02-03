@@ -55,12 +55,12 @@ const AppsDropdown = () => {
                 <span>Home</span>
               </ListItem>
             </Link>
-            <Link to="/store">
+            <Link to="/marketplace">
               <ListItem onClick={toggling} flexRow>
                 <IconButton small margin appsIcon>
                   <BiStore />
                 </IconButton>
-                <span>Store</span>
+                <span>Marketplace</span>
               </ListItem>
             </Link>
             <Link to="/group">

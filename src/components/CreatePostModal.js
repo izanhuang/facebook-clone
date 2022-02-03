@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import ReactModal from 'react-modal'
-import { DropDownHeader, ListItem } from '../styles/DropDown'
-import { CenterElement, CreatePostWrapper } from '../styles/Wrapper'
+import { DropDownHeader, DropDownList, ListItem } from '../styles/DropDown'
+import {
+  CenterElement,
+  CreatePostWrapper,
+  HomeWrapper,
+} from '../styles/Wrapper'
 import { IconButton } from '../styles/Button'
 import { Avatar } from '../styles/Avatar'
 import { TextArea } from '../styles/Post'
 import { GrClose } from 'react-icons/gr'
 import { Button } from '../styles/Button'
+import { BsFileEarmarkImage, BsEmojiLaughing } from 'react-icons/bs'
+import { AiOutlineFileGif } from 'react-icons/ai'
 
 const CreatePostModal = ({
   showModal,
@@ -46,7 +52,7 @@ const CreatePostModal = ({
         </ListItem>
         <TextArea
           onChange={(e) => {
-            setNewPost(e.target.value)
+            setNewPost({ text: e.target.value, content: newPost.content })
             if (e.target.value.replace(/\s/g, '') === '') {
               setDisabled(true)
             } else {
@@ -54,8 +60,22 @@ const CreatePostModal = ({
             }
           }}
           placeholder={`What's on your mind, ${user.firstName}?`}
-          value={newPost}
+          value={newPost.text}
         />
+        <HomeWrapper createPost>
+          <ListItem photo>
+            <BsFileEarmarkImage />
+            Photo
+          </ListItem>
+          <ListItem feeling>
+            <BsEmojiLaughing />
+            Feeling
+          </ListItem>
+          <ListItem gif>
+            <AiOutlineFileGif />
+            GIF
+          </ListItem>
+        </HomeWrapper>
         <CreatePostWrapper>
           <Button post bold disabled={disabled}>
             Post

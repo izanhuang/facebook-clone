@@ -40,6 +40,24 @@ export const HomeWrapper = styled.div`
   @media (max-width: 900px) {
     justify-content: center;
   }
+
+  ${(props) =>
+    props.createPost &&
+    css`
+      padding: 16px 16px 0;
+      > li {
+        width: 100%;
+        color: ${({ theme }) => theme.secondaryColor};
+        align-items: center;
+        justify-content: center;
+
+        > svg {
+          width: 23px;
+          height: 23px;
+          margin: 0 8px 0 0;
+        }
+      }
+    `}
 `
 
 export const BlockWrapper = styled.div`

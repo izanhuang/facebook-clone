@@ -93,6 +93,7 @@ export const Button = styled.button`
     props.post &&
     css`
       font-size: 15px;
+      margin: 0;
     `}
 `
 

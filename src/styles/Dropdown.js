@@ -172,6 +172,7 @@ export const ListItem = styled.li`
     props.createPost &&
     css`
       cursor: default;
+      padding: 0px 16px !important;
       :hover {
         background-image: none;
         background-color: transparent;
@@ -186,6 +187,32 @@ export const ListItem = styled.li`
       margin-bottom: 0;
       height: 55px;
     `}
+
+    ${(props) =>
+      props.photo &&
+      css`
+        > svg {
+          fill: var(--lime);
+        }
+      `}
+
+    ${(props) =>
+      props.feeling &&
+      css`
+        > svg {
+          fill: var(--lemon);
+        }
+      `}
+
+    ${(props) =>
+      props.gif &&
+      css`
+        > svg {
+          fill: var(--purple);
+          width: 25.5px !important;
+          height: 25.5px !important;
+        }
+      `}
 `
 
 export const ActiveIconButton = styled.div`

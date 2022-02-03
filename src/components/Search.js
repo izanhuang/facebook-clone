@@ -32,9 +32,6 @@ const Search = () => {
         handleClickOutside(event, isOpen, setIsOpen, wrapperRef)
       })
     }
-    if (isOpen === false) {
-      setSearchName('')
-    }
   }, [isOpen])
 
   return (
@@ -42,7 +39,7 @@ const Search = () => {
       <DropDownContainer>
         <Label searchBar onClick={responsiveToggle}>
           <GoSearch onClick={toggling} />
-          <Input placeholder="Search Facebook" />
+          <Input placeholder="Search Facebook" value={searchName} />
         </Label>
 
         {isOpen && (
@@ -55,6 +52,8 @@ const Search = () => {
                 <Label padding dropdownSearchBar>
                   <Input
                     placeholder="Search Facebook"
+                    value={searchName}
+                    autoFocus
                     onChange={(e) => setSearchName(e.target.value)}
                   />
                 </Label>
@@ -72,6 +71,7 @@ const Search = () => {
                       filtered
                       onClick={() => {
                         toggling()
+                        setSearchName('')
                         navigate(`/${filteredUser.userName}`)
                       }}
                     >

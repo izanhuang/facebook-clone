@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(Users[1])
   const [users, setUsers] = useState(Users)
-  const [newPost, setNewPost] = useState('')
+  const [newPost, setNewPost] = useState({ text: '', content: [] })
 
   function signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)

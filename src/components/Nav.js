@@ -99,8 +99,10 @@ const Nav = () => {
             </NavButton>
           </Link>
         </li>
-        <li className={location.pathname === '/store' ? 'activeClass' : ''}>
-          <Link to="/store">
+        <li
+          className={location.pathname === '/marketplace' ? 'activeClass' : ''}
+        >
+          <Link to="/marketplace">
             <NavButton>
               <BiStore />
             </NavButton>

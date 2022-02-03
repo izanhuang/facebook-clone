@@ -27,7 +27,7 @@ export const TextArea = styled.textarea`
   width: 100%;
   height: 154px;
   box-sizing: border-box;
-  padding: 0 16px 40px 16px;
+  padding: 0 16px 0 16px;
   font-size: 1.5rem;
   resize: none;
   font-family: inherit;

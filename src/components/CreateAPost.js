@@ -19,9 +19,9 @@ const CreateAPost = () => {
       <CreatePostContainer>
         <Avatar marginRight8 small src={user.profileImg} />
         <CreatePostButton onClick={handleOpenModal}>
-          {newPost.replace(/\s/g, '') === ''
+          {newPost.text.replace(/\s/g, '') === ''
             ? `What's on your mind, ${user.firstName}?`
-            : newPost}
+            : newPost.text}
         </CreatePostButton>
         <CreatePostModal
           showModal={showModal}

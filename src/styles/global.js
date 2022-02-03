@@ -14,6 +14,9 @@ export const GlobalStyles = createGlobalStyle`
   --overlayAlpha: ${({ theme }) => theme.overlayAlpha};
   --hoverOverlay: ${({ theme }) => theme.hoverOverlay};
   --shadow: ${({ theme }) => theme.shadow};
+  --lime: #45BD62;
+  --lemon: #F7B928;
+  --purple: #8564df
 }
 
 html {
