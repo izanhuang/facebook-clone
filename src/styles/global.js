@@ -16,9 +16,9 @@ export const GlobalStyles = createGlobalStyle`
   --shadow: ${({ theme }) => theme.shadow};
   --lime: #45BD62;
   --lemon: #F7B928;
-  --purple: #8564df
-}
-
+  --purple: #8564df;
+  color-scheme: ${({ theme }) => theme.colorScheme};;
+} 
 html {
   margin: 0px;
   height: 100%;

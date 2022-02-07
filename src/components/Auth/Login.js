@@ -56,12 +56,7 @@ export default function Login() {
             </FormHeader>
             <Form login onSubmit={handleSubmit}>
               {error && <Alert variant="danger">{error}</Alert>}
-              <Input
-                ref={emailRef}
-                type="email"
-                placeholder="Email or phone number"
-                required
-              />
+              <Input ref={emailRef} type="email" placeholder="Email" required />
               <Input
                 ref={passwordRef}
                 type="password"

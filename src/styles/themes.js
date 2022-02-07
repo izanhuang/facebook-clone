@@ -1,4 +1,5 @@
 export const lightTheme = {
+  colorScheme: 'light',
   background: '#f0f2f5',
   bgSecondary: '#ffffff',
   text: '#050505',
@@ -18,6 +19,7 @@ export const lightTheme = {
 }
 
 export const darkTheme = {
+  colorScheme: 'dark',
   background: '#18191a',
   bgSecondary: '#242526',
   text: '#E4E6EB',

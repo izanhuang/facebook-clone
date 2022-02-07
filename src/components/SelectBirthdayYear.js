@@ -1,9 +1,9 @@
 import React from 'react'
 import { Select } from '../styles/Select'
 
-const SelectBirthdayYear = () => {
+const SelectBirthdayYear = ({ birthYearRef }) => {
   return (
-    <Select name="birthday_year" id="year">
+    <Select name="birthday_year" id="year" ref={birthYearRef}>
       <option value="2022">2022</option>
       <option value="2021">2021</option>
       <option value="2020">2020</option>

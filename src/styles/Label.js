@@ -20,4 +20,10 @@ export const Label = styled.label`
     css`
       margin-top: 10px;
     `}
+
+  ${(props) =>
+    props.fontSize12 &&
+    css`
+      font-size: 12px;
+    `}
 `

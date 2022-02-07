@@ -19,7 +19,7 @@ export const PagePadding = styled.div`
 export const HomeCenterWrapper = styled.div`
   width: 64vw;
   height: 100vh;
-  padding: 0px 32px 0;
+  padding: 0px 20px 0;
   margin-top: 16px;
   display: flex;
   flex-direction: column;

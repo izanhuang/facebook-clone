@@ -24,9 +24,15 @@ import useMounted from '../../hooks/useMounted'
 import { SecondaryText } from '../../styles/Text'
 
 export default function Signup() {
+  const firstNameRef = useRef()
+  const lastNameRef = useRef()
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
+  const birthMonthRef = useRef()
+  const birthDayRef = useRef()
+  const birthYearRef = useRef()
+  const [genderCode, setGenderCode] = useState()
   const { signup, currentUser } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -34,24 +40,64 @@ export default function Signup() {
 
   const mounted = useMounted()
 
+  const convertToBirthDateString = (birthMonth, birthDay, birthYear) => {
+    let month = birthMonth
+    let day = birthDay
+    let year = birthYear
+
+    let birthDateString =
+      month.toString() + ' ' + day.toString() + ' ' + year.toString()
+    return birthDateString
+  }
+
+  const convertToUserNameString = (firstName, lastName) => {
+    let first_name = firstName
+    let last_name = lastName
+    let random_number = Math.floor(100000 + Math.random() * 900000)
+
+    let userName =
+      first_name.toString() + last_name.toString() + random_number.toString()
+    return userName
+  }
+
+  const genderOptionChange = (e) => {
+    setGenderCode(e.target.id)
+  }
+
+  const sendUserInfo = () => {}
+
   async function handleSubmit(e) {
     e.preventDefault()
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError('Passwords do not match')
-    }
+    // if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    //   return setError('Passwords do not match')
+    // }
 
-    try {
-      setError('')
-      setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
-      navigate('/')
-    } catch (error) {
-      console.log(error)
-      setError('Failed to create an account')
-    }
-    mounted.current && setLoading(false)
+    // try {
+    //   setError('')
+    //   setLoading(true)
+    //   await signup(emailRef.current.value, passwordRef.current.value)
+    //   navigate('/')
+    // } catch (error) {
+    //   console.log(error)
+    //   setError('Failed to create an account')
+    // }
+    // mounted.current && setLoading(false)
   }
+
+  // useEffect(() => {
+  //   if (currentUser != null) {
+  //     let birthDate = convertToBirthDateString(
+  //       birthMonthRef.current.value,
+  //       birthDayRef.current.value,
+  //       birthYearRef.current.value,
+  //     )
+  //     let userName = convertToUserNameString(firstNameRef.current.value, lastNameRef.current.value)
+  //     let profileImg = ''
+  //     let createdDate = new Date()
+  //     updateUser(currentUser.uid, firstNameRef.current.value, lastNameRef.current.value, birthDate, genderCode, userName, profileImg, createdDate)
+  //   }
+  // }, [currentUser])
 
   return (
     <Wrapper auth>
@@ -73,6 +119,7 @@ export default function Signup() {
                 <Input
                   signup
                   user_name
+                  ref={firstNameRef}
                   type="text"
                   placeholder="First name"
                   autoComplete="new-password"
@@ -81,6 +128,7 @@ export default function Signup() {
                 <Input
                   signup
                   user_name
+                  ref={lastNameRef}
                   type="text"
                   placeholder="Last name"
                   autoComplete="new-password"
@@ -91,7 +139,7 @@ export default function Signup() {
                 signup
                 ref={emailRef}
                 type="email"
-                placeholder="Email or phone number"
+                placeholder="Email"
                 autoComplete="new-password"
                 required
               />
@@ -111,30 +159,51 @@ export default function Signup() {
               />
 
               <BlockWrapper>
-                <Label>Birthday</Label>
+                <Label fontSize12>Birthday</Label>
               </BlockWrapper>
               <SelectWrapper>
-                <SelectBirthdayMonth />
-                <SelectBirthdayDay />
-                <SelectBirthdayYear />
+                <SelectBirthdayMonth birthMonthRef={birthMonthRef} />
+                <SelectBirthdayDay birthDayRef={birthDayRef} />
+                <SelectBirthdayYear birthYearRef={birthYearRef} />
               </SelectWrapper>
               <BlockWrapper>
-                <Label>Gender</Label>
+                <Label fontSize12 marginTop>
+                  Gender
+                </Label>
               </BlockWrapper>
 
               <SelectWrapper>
                 <RadioWrapper>
-                  <label htmlFor="female">Female</label>
-                  <Input radio type="radio" id="female" name="sex" />
+                  <label htmlFor="Female">Female</label>
+                  <Input
+                    radio
+                    type="radio"
+                    id="Female"
+                    name="sex"
+                    onChange={(e) => genderOptionChange(e)}
+                    required
+                  />
                 </RadioWrapper>
 
                 <RadioWrapper>
-                  <label htmlFor="male">Male</label>
-                  <Input radio type="radio" id="male" name="sex" />
+                  <label htmlFor="Male">Male</label>
+                  <Input
+                    radio
+                    type="radio"
+                    id="Male"
+                    name="sex"
+                    onChange={(e) => genderOptionChange(e)}
+                  />
                 </RadioWrapper>
                 <RadioWrapper>
-                  <label htmlFor="other">Other</label>
-                  <Input radio type="radio" id="other" name="sex" />
+                  <label htmlFor="Other">Other</label>
+                  <Input
+                    radio
+                    type="radio"
+                    id="Other"
+                    name="sex"
+                    onChange={(e) => genderOptionChange(e)}
+                  />
                 </RadioWrapper>
               </SelectWrapper>
 
