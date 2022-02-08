@@ -10,7 +10,6 @@ import {
   updatePassword,
   updateProfile,
 } from 'firebase/auth'
-import { Users } from '../utils/data'
 
 const AuthContext = React.createContext()
 
@@ -21,9 +20,6 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
-  const [user, setUser] = useState(Users[1])
-  const [users, setUsers] = useState(Users)
-  const [newPost, setNewPost] = useState({ text: '', content: [] })
 
   function signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
@@ -55,6 +51,11 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      //   if (user) {
+      //   loadUserDetails(user, setUserDetails)
+      // } else {
+      //   loadUserPlaceholder(setUserDetails)
+      // }
       setCurrentUser(user)
       setLoading(false)
     })
@@ -64,6 +65,11 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     console.log('The user is', currentUser)
+    // if (currentUser) {
+    //   loadUserDetails(currentUser, setUserDetails)
+    // } else {
+    //   loadUserPlaceholder(setUserDetails)
+    // }
   }, [currentUser])
 
   const value = {
@@ -75,12 +81,6 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateUserEmail,
     updateUserPassword,
-    user,
-    setUser,
-    users,
-    setUsers,
-    newPost,
-    setNewPost,
   }
 
   return (

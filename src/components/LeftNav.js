@@ -2,13 +2,13 @@ import React from 'react'
 import { Footer } from '../styles/Footer'
 import { SecondaryText } from '../styles/Text'
 import { ListItem } from '../styles/DropDown'
-import { useAuth } from '../contexts/AuthContext'
 import { Avatar } from '../styles/Avatar'
 import { useNavigate } from 'react-router-dom'
 import { Wrapper, Nav, List, ImageWrapper } from '../styles/LeftAndRightNav'
+import { useData } from '../contexts/DataContext'
 
 const LeftNav = () => {
-  const { user } = useAuth()
+  const { userDetails } = useData()
   const navigate = useNavigate()
 
   return (
@@ -17,11 +17,15 @@ const LeftNav = () => {
         <List>
           <ListItem
             onClick={() => {
-              navigate(`/${user.userName}`)
+              navigate(`/${userDetails.userName}`)
             }}
           >
-            <Avatar small src={user.profileImg} alt="current profile image" />
-            {user.firstName + ' ' + user.lastName}
+            <Avatar
+              small
+              src={userDetails.profileImg}
+              alt="current profile image"
+            />
+            {userDetails.firstName + ' ' + userDetails.lastName}
           </ListItem>
           <ListItem
             onClick={() => {

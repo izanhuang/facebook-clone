@@ -14,14 +14,14 @@ import handleClickOutside from '../../utils/ClickOutsideUtil'
 import { SecondaryText } from '../../styles/Text'
 import { BsPencilSquare } from 'react-icons/bs'
 import CreatePostModal from '../CreatePostModal'
-import { useAuth } from '../../contexts/AuthContext'
+import { useData } from '../../contexts/DataContext'
 
 const CreateDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
   const toggling = () => setIsOpen(!isOpen)
   const wrapperRef = useRef(null)
 
-  const { user, newPost, setNewPost } = useAuth()
+  const { userDetails, newPost, setNewPost } = useData()
   const [showModal, setShowModal] = useState(false)
 
   function handleOpenModal() {
@@ -53,7 +53,7 @@ const CreateDropdown = () => {
       <CreatePostModal
         showModal={showModal}
         setShowModal={setShowModal}
-        user={user}
+        userDetails={userDetails}
         newPost={newPost}
         setNewPost={setNewPost}
       />

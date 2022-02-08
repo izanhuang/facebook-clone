@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Nav from '../components/Nav'
 import Login from '../components/Auth/Login'
@@ -9,9 +9,29 @@ import { useAuth } from '../contexts/AuthContext'
 import Home from '../pages/Home'
 import UpdateProfile from '../pages/UpdateProfile'
 import ForgotPassword from '../components/ForgotPassword'
+import loadUserDetails from '../utils/loadUserDetails'
+import loadUserPlaceholder from '../utils/loadUserPlaceholder'
+import { useData } from '../contexts/DataContext'
 
 export default function AppRouter() {
   const { currentUser } = useAuth()
+  const { setUserDetails } = useData()
+
+  useEffect(() => {
+    console.log('AppRouter currentUser ', currentUser)
+    if (currentUser) {
+      loadUserDetails(currentUser, setUserDetails)
+    } else {
+      console.log('Reset to placeholder')
+      loadUserPlaceholder(setUserDetails)
+    }
+  }, [currentUser])
+
+  // useEffect(() => {
+  //   if (!currentUser) {
+  //     loadUserPlaceholder(setUserDetails)
+  //   }
+  // }, [])
 
   return (
     <Router>

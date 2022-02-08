@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { CreatePostContainer, Post } from '../styles/Post'
-import { useAuth } from '../contexts/AuthContext'
 import { Avatar } from '../styles/Avatar'
 import { CreatePostButton } from '../styles/Button'
 import CreatePostModal from './CreatePostModal'
+import { useData } from '../contexts/DataContext'
 
 const CreateAPost = () => {
-  const { user, newPost, setNewPost } = useAuth()
+  const { userDetails, newPost, setNewPost } = useData()
 
   const [showModal, setShowModal] = useState(false)
 
@@ -17,16 +17,16 @@ const CreateAPost = () => {
   return (
     <Post id="create-post">
       <CreatePostContainer>
-        <Avatar marginRight8 small src={user.profileImg} />
+        <Avatar marginRight8 small src={userDetails.profileImg} />
         <CreatePostButton onClick={handleOpenModal}>
           {newPost.text.replace(/\s/g, '') === ''
-            ? `What's on your mind, ${user.firstName}?`
+            ? `What's on your mind, ${userDetails.firstName}?`
             : newPost.text}
         </CreatePostButton>
         <CreatePostModal
           showModal={showModal}
           setShowModal={setShowModal}
-          user={user}
+          userDetails={userDetails}
           newPost={newPost}
           setNewPost={setNewPost}
         />

@@ -17,7 +17,7 @@ export const GlobalStyles = createGlobalStyle`
   --lime: #45BD62;
   --lemon: #F7B928;
   --purple: #8564df;
-  color-scheme: ${({ theme }) => theme.colorScheme};;
+  color-scheme: ${({ theme }) => theme.colorScheme};
 } 
 html {
   margin: 0px;

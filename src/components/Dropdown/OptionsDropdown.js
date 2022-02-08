@@ -19,10 +19,12 @@ import { Divider } from '../../styles/LineBreak'
 import { RiSettings5Fill } from 'react-icons/ri'
 import { GoSignOut } from 'react-icons/go'
 import handleClickOutside from '../../utils/ClickOutsideUtil'
+import { useData } from '../../contexts/DataContext'
 
 const Dropdown = () => {
   const [error, setError] = useState('')
-  const { logout, user } = useAuth()
+  const { logout } = useAuth()
+  const { userDetails } = useData()
   const [isOpen, setIsOpen] = useState(false)
   const toggling = () => setIsOpen(!isOpen)
   const wrapperRef = useRef(null)
@@ -67,13 +69,16 @@ const Dropdown = () => {
               viewProfile
               onClick={() => {
                 toggling()
-                navigate(`/${user.userName}`)
+                navigate(`/${userDetails.userName}`)
               }}
             >
-              <Avatar src={user.profileImg} alt="current profile image" />
+              <Avatar
+                src={userDetails.profileImg}
+                alt="current profile image"
+              />
               <ViewProfile>
                 <DisplayText>
-                  {user.firstName + ' ' + user.lastName}
+                  {userDetails.firstName + ' ' + userDetails.lastName}
                 </DisplayText>
                 <SecondaryText>See your profile</SecondaryText>
               </ViewProfile>

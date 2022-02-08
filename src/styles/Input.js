@@ -12,6 +12,7 @@ export const Input = styled.input`
   display: inline-block;
   border-radius: 6px;
   margin: 6px 0;
+  background-color: #fff;
 
   :focus {
     outline: none !important;

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Button } from '../../styles/Button'
 import { Form, FormHeader } from '../../styles/Form'
 import { Input } from '../../styles/Input'
@@ -22,6 +22,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import { Alert } from '../../styles/Alert'
 import useMounted from '../../hooks/useMounted'
 import { SecondaryText } from '../../styles/Text'
+import updateUser from '../../utils/updateUser'
 
 export default function Signup() {
   const firstNameRef = useRef()
@@ -46,7 +47,7 @@ export default function Signup() {
     let year = birthYear
 
     let birthDateString =
-      month.toString() + ' ' + day.toString() + ' ' + year.toString()
+      month.toString() + ' ' + day.toString() + ', ' + year.toString()
     return birthDateString
   }
 
@@ -64,40 +65,55 @@ export default function Signup() {
     setGenderCode(e.target.id)
   }
 
-  const sendUserInfo = () => {}
+  const sendUserInfo = () => {
+    let birthDate = convertToBirthDateString(
+      birthMonthRef.current.value,
+      birthDayRef.current.value,
+      birthYearRef.current.value,
+    )
+    let userName = convertToUserNameString(
+      firstNameRef.current.value,
+      lastNameRef.current.value,
+    )
+    let profileImg =
+      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+    let createdDate = new Date()
+    updateUser(
+      currentUser.uid,
+      firstNameRef.current.value,
+      lastNameRef.current.value,
+      birthDate,
+      genderCode,
+      userName,
+      profileImg,
+      createdDate,
+    )
+  }
 
   async function handleSubmit(e) {
     e.preventDefault()
 
-    // if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-    //   return setError('Passwords do not match')
-    // }
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError('Passwords do not match')
+    }
 
-    // try {
-    //   setError('')
-    //   setLoading(true)
-    //   await signup(emailRef.current.value, passwordRef.current.value)
-    //   navigate('/')
-    // } catch (error) {
-    //   console.log(error)
-    //   setError('Failed to create an account')
-    // }
-    // mounted.current && setLoading(false)
+    try {
+      setError('')
+      setLoading(true)
+      await signup(emailRef.current.value, passwordRef.current.value)
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+      setError('Failed to create an account')
+    }
+    mounted.current && setLoading(false)
   }
 
-  // useEffect(() => {
-  //   if (currentUser != null) {
-  //     let birthDate = convertToBirthDateString(
-  //       birthMonthRef.current.value,
-  //       birthDayRef.current.value,
-  //       birthYearRef.current.value,
-  //     )
-  //     let userName = convertToUserNameString(firstNameRef.current.value, lastNameRef.current.value)
-  //     let profileImg = ''
-  //     let createdDate = new Date()
-  //     updateUser(currentUser.uid, firstNameRef.current.value, lastNameRef.current.value, birthDate, genderCode, userName, profileImg, createdDate)
-  //   }
-  // }, [currentUser])
+  useEffect(() => {
+    if (currentUser != null) {
+      sendUserInfo()
+    }
+  }, [currentUser])
 
   return (
     <Wrapper auth>

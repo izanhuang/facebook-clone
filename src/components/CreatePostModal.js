@@ -17,7 +17,7 @@ import { AiOutlineFileGif } from 'react-icons/ai'
 const CreatePostModal = ({
   showModal,
   setShowModal,
-  user,
+  userDetails,
   newPost,
   setNewPost,
 }) => {
@@ -45,10 +45,13 @@ const CreatePostModal = ({
             <GrClose />
           </IconButton>
         </CenterElement>
-
         <ListItem createPost>
-          <Avatar small src={user.profileImg} alt="current profile image" />
-          {user.firstName + ' ' + user.lastName}
+          <Avatar
+            small
+            src={userDetails.profileImg}
+            alt="current profile image"
+          />
+          {userDetails.firstName + ' ' + userDetails.lastName}
         </ListItem>
         <TextArea
           onChange={(e) => {
@@ -59,7 +62,7 @@ const CreatePostModal = ({
               setDisabled(false)
             }
           }}
-          placeholder={`What's on your mind, ${user.firstName}?`}
+          placeholder={`What's on your mind, ${userDetails.firstName}?`}
           value={newPost.text}
         />
         <HomeWrapper createPost>
@@ -77,7 +80,7 @@ const CreatePostModal = ({
           </ListItem>
         </HomeWrapper>
         <CreatePostWrapper>
-          <Button post bold disabled={disabled}>
+          <Button post bold createButtonDisabled disabled={disabled}>
             Post
           </Button>
         </CreatePostWrapper>

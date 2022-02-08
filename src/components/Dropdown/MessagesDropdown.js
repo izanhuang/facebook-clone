@@ -11,7 +11,7 @@ import {
 import { IconButton } from '../../styles/Button'
 import { SiMessenger } from 'react-icons/si'
 import handleClickOutside from '../../utils/ClickOutsideUtil'
-import { useAuth } from '../../contexts/AuthContext'
+import { useData } from '../../contexts/DataContext'
 import { Avatar } from '../../styles/Avatar'
 import { SecondaryText } from '../../styles/Text'
 
@@ -19,7 +19,7 @@ const MessengerDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
   const toggling = () => setIsOpen(!isOpen)
   const wrapperRef = useRef(null)
-  const { user } = useAuth()
+  const { userDetails } = useData()
 
   useEffect(() => {
     if (isOpen === true) {
@@ -48,9 +48,11 @@ const MessengerDropdown = () => {
           <DropDownList messages>
             <DropDownHeader>Messages</DropDownHeader>
             <ListItem onClick={toggling} noMarginBottom flexRow>
-              <Avatar src={user.profileImg} />
+              <Avatar src={userDetails.profileImg} />
               <ColumnContainer>
-                <span>{user.firstName + ' ' + user.lastName}</span>
+                <span>
+                  {userDetails.firstName + ' ' + userDetails.lastName}
+                </span>
                 <SecondaryText noMargin>
                   Most recent message &middot; {'1h'}
                 </SecondaryText>

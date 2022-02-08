@@ -10,13 +10,15 @@ import { Button } from '../styles/Button'
 import { Label } from '../styles/Label'
 import { DropDownHeader } from '../styles/DropDown'
 import Tabs, { TabPane } from 'rc-tabs'
+import { useData } from '../contexts/DataContext'
 
 const UpdateProfile = () => {
   const userNameRef = useRef()
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const { currentUser, updateUserEmail, updateUserPassword, user } = useAuth()
+  const { currentUser, updateUserEmail, updateUserPassword } = useAuth()
+  const { userDetails } = useData()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -60,7 +62,7 @@ const UpdateProfile = () => {
           <Card toggle widthAuto>
             <Form onSubmit={handleSubmit}>
               <DropDownHeader noPaddingLeft>Settings</DropDownHeader>
-              <Tabs defaultActiveKey="2">
+              <Tabs defaultActiveKey="1">
                 <TabPane tab="General" key="1">
                   <Label bold marginTop>
                     Username
@@ -69,7 +71,7 @@ const UpdateProfile = () => {
                     toggle
                     ref={userNameRef}
                     type="text"
-                    defaultValue={user.userName}
+                    defaultValue={userDetails.userName}
                     autoComplete="new-password"
                     required
                   />
@@ -85,7 +87,7 @@ const UpdateProfile = () => {
                     toggle
                     ref={emailRef}
                     type="email"
-                    defaultValue={currentUser.email}
+                    defaultValue={currentUser ? currentUser.email : ''}
                     autoComplete="new-password"
                     required
                   />

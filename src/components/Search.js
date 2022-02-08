@@ -4,7 +4,6 @@ import {
   DropDownContainer,
   DropDownListContainer,
   DropDownList,
-  DropDownHeader,
   ListItem,
 } from '../styles/DropDown'
 import { BiArrowBack } from 'react-icons/bi'
@@ -60,9 +59,9 @@ const Search = () => {
               </ListItem>
               {searchName !== '' &&
                 users
-                  .filter((user) =>
-                    user.firstName
-                      .concat('', user.lastName)
+                  .filter((userDetails) =>
+                    userDetails.firstName
+                      .concat('', userDetails.lastName)
                       .toLowerCase()
                       .includes(searchName),
                   )

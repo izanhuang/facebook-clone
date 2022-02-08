@@ -17,7 +17,7 @@ export const Button = styled.button`
   }
 
   ${(props) =>
-    props.disabled &&
+    props.createButtonDisabled &&
     css`
       background: ${({ theme }) => theme.iconBg};
       color: ${({ theme }) => theme.secondaryIcon};

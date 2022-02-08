@@ -6,6 +6,7 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from './styles/themes'
 import { GlobalStyles } from './styles/global'
 import { useTheme } from './contexts/ThemeContext'
+import { DataProvider } from './contexts/DataContext'
 
 function App() {
   const { theme, toggleTheme } = useTheme()
@@ -14,7 +15,9 @@ function App() {
     <StyledThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyles />
       <AuthProvider>
-        <AppRouter />
+        <DataProvider>
+          <AppRouter />
+        </DataProvider>
       </AuthProvider>
     </StyledThemeProvider>
   )
