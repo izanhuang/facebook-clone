@@ -12,26 +12,31 @@ import ForgotPassword from '../components/ForgotPassword'
 import loadUserDetails from '../utils/loadUserDetails'
 import loadUserPlaceholder from '../utils/loadUserPlaceholder'
 import { useData } from '../contexts/DataContext'
+import { useTheme } from '../contexts/ThemeContext'
+import updateUserDetails from '../utils/updateUserDetails'
 
 export default function AppRouter() {
   const { currentUser } = useAuth()
-  const { setUserDetails } = useData()
+  const { userDetails, setUserDetails } = useData()
+  const { theme } = useTheme()
 
   useEffect(() => {
-    console.log('AppRouter currentUser ', currentUser)
+    // console.log('The user is', currentUser)
     if (currentUser) {
       loadUserDetails(currentUser, setUserDetails)
     } else {
-      console.log('Reset to placeholder')
       loadUserPlaceholder(setUserDetails)
     }
   }, [currentUser])
 
   // useEffect(() => {
-  //   if (!currentUser) {
-  //     loadUserPlaceholder(setUserDetails)
-  //   }
-  // }, [])
+  //   console.log('User Details ', userDetails)
+  // }, [userDetails])
+
+  useEffect(() => {
+    console.log('Current theme ', theme)
+    updateUserDetails({ ...userDetails, theme: theme })
+  }, [theme])
 
   return (
     <Router>

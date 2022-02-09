@@ -22,7 +22,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import { Alert } from '../../styles/Alert'
 import useMounted from '../../hooks/useMounted'
 import { SecondaryText } from '../../styles/Text'
-import updateUser from '../../utils/updateUser'
+import updateUserDetails from '../../utils/updateUserDetails'
 
 export default function Signup() {
   const firstNameRef = useRef()
@@ -78,16 +78,19 @@ export default function Signup() {
     let profileImg =
       'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
     let createdDate = new Date()
-    updateUser(
-      currentUser.uid,
-      firstNameRef.current.value,
-      lastNameRef.current.value,
+    let theme = 'light'
+    let userDetails = {
+      uid: currentUser.uid,
+      firstName: firstNameRef.current.value,
+      lastName: lastNameRef.current.value,
       birthDate,
       genderCode,
       userName,
       profileImg,
       createdDate,
-    )
+      theme,
+    }
+    updateUserDetails(userDetails)
   }
 
   async function handleSubmit(e) {

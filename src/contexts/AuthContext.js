@@ -51,11 +51,6 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      //   if (user) {
-      //   loadUserDetails(user, setUserDetails)
-      // } else {
-      //   loadUserPlaceholder(setUserDetails)
-      // }
       setCurrentUser(user)
       setLoading(false)
     })
@@ -63,14 +58,9 @@ export function AuthProvider({ children }) {
     return unsubscribe
   }, [])
 
-  useEffect(() => {
-    console.log('The user is', currentUser)
-    // if (currentUser) {
-    //   loadUserDetails(currentUser, setUserDetails)
-    // } else {
-    //   loadUserPlaceholder(setUserDetails)
-    // }
-  }, [currentUser])
+  // useEffect(() => {
+  //   console.log('The user is', currentUser)
+  // }, [currentUser])
 
   const value = {
     currentUser,

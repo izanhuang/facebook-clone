@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useTheme } from '../contexts/ThemeContext'
 import { IoMoon } from 'react-icons/io5'
 import { IconButtonSpan } from '../styles/Button'
+import { useData } from '../contexts/DataContext'
 
 const Label = styled.label`
   display: flex;

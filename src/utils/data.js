@@ -13,21 +13,9 @@ export const Users = [
   },
   {
     uid: 1,
-    firstName: 'Izan',
-    lastName: 'Huang',
-    birthDate: '12/02/1999',
-    genderCode: 'F',
-    userName: 'izancanfly',
-    friendsListIds: [2, 4],
-    profileImg:
-      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
-    createdDate: '1/24/2022',
-  },
-  {
-    uid: 2, //Auto generated
     firstName: 'firstName',
     lastName: 'lastName',
-    birthDate: '01/24/1999', //Must be 18+
+    birthDate: '01/24/2019',
     genderCode: 'M',
     userName: 'user2', //Unique
     friendsListIds: [1, 3],
@@ -36,10 +24,10 @@ export const Users = [
     createdDate: '1/24/2022',
   },
   {
-    uid: 3,
+    uid: 2,
     firstName: 'user3first',
     lastName: 'user3last',
-    birthDate: '01/24/1999',
+    birthDate: '01/24/2019',
     genderCode: 'M',
     userName: 'user3',
     friendsListIds: [1, 2],
@@ -48,10 +36,10 @@ export const Users = [
     createdDate: '1/24/2022',
   },
   {
-    uid: 4,
+    uid: 3,
     firstName: 'user4first',
     lastName: 'user42last',
-    birthDate: '01/24/1999',
+    birthDate: '01/24/2019',
     genderCode: 'F',
     userName: 'user4',
     friendsListIds: [1],

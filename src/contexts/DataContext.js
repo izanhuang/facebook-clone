@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Users } from '../utils/data'
 
 const DataContext = React.createContext()
