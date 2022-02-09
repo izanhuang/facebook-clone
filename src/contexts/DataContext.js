@@ -10,7 +10,7 @@ export function useData() {
 export function DataProvider({ children }) {
   const [userDetails, setUserDetails] = useState({})
   const [users, setUsers] = useState([])
-  const [newPost, setNewPost] = useState({ text: '', content: [] })
+  const [newPost, setNewPost] = useState({ text: '', image: '#', content: [] })
 
   const value = {
     userDetails,

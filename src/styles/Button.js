@@ -16,8 +16,8 @@ export const Button = styled.button`
     background-image: var(--dark-hover);
   }
 
-  ${(props) =>
-    props.createButtonDisabled &&
+  ${({ disabled }) =>
+    disabled &&
     css`
       background: ${({ theme }) => theme.iconBg};
       color: ${({ theme }) => theme.secondaryIcon};

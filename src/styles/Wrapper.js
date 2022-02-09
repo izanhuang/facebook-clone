@@ -45,6 +45,9 @@ export const HomeWrapper = styled.div`
     props.createPost &&
     css`
       padding: 16px 16px 0;
+      #imgInput {
+        display: none;
+      }
       > li {
         width: 100%;
         color: ${({ theme }) => theme.secondaryColor};

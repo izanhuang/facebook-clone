@@ -92,11 +92,7 @@ a:hover {
   height: auto;
   border-radius: 10px;
   box-shadow: var(--shadow);
-}
-@media only screen and (max-width: 585px) {
-  .Modal {
-    width: 25rem;
-  }
+  z-index: 2;
 }
 
 .Overlay {
@@ -113,4 +109,15 @@ a:hover {
   align-items: center;
   padding: 56px 8px;
   box-sizing: border-box;
+  z-index: 2;
+}
+
+@media only screen and (max-width: 585px) {
+  .Modal {
+    width: 23rem;
+  }
+  .Overlay {
+    top: 25px;
+    z-index: 0;
+  }
 }

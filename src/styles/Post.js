@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Post = styled.div`
   width: 591px;
@@ -25,10 +25,13 @@ export const CreatePostContainer = styled.div`
 `
 export const TextArea = styled.textarea`
   width: 100%;
-  height: 154px;
+  height: auto;
+  // min-height: 159px;
+  // min-height: auto;
+  // max-height: 159px;
   box-sizing: border-box;
   padding: 0 16px 0 16px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   resize: none;
   font-family: inherit;
   border: none;
@@ -36,6 +39,10 @@ export const TextArea = styled.textarea`
   overflow-wrap: break-word;
   background-color: transparent;
   color: ${({ theme }) => theme.text};
+
+  @media (max-width: 585px) {
+    height: 6rem;
+  }
 
   ::placeholder,
   ::-webkit-input-placeholder {
@@ -51,4 +58,26 @@ export const TextArea = styled.textarea`
   :focus ::-webkit-input-placeholder {
     color: lightgray;
   }
+`
+export const PostImageContainer = styled.div`
+  margin: 16px 16px 0;
+  width: auto;
+  height: 300px;
+
+  @media (max-width: 585px) {
+    width: auto;
+    height: 200px;
+  }
+`
+
+export const PostImage = styled.img`
+  // width: 100%;
+  // height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
+  // @media (max-width: 585px) {
+  //   width: 50%;
+  //   height: 50%;
+  // }
 `

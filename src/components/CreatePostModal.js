@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import ReactModal from 'react-modal'
 import { DropDownHeader, DropDownList, ListItem } from '../styles/DropDown'
 import {
@@ -8,11 +8,12 @@ import {
 } from '../styles/Wrapper'
 import { IconButton } from '../styles/Button'
 import { Avatar } from '../styles/Avatar'
-import { TextArea } from '../styles/Post'
+import { PostImage, PostImageContainer, TextArea } from '../styles/Post'
 import { GrClose } from 'react-icons/gr'
 import { Button } from '../styles/Button'
 import { BsFileEarmarkImage, BsEmojiLaughing } from 'react-icons/bs'
 import { AiOutlineFileGif } from 'react-icons/ai'
+import { Label } from '../styles/Label'
 
 const CreatePostModal = ({
   showModal,
@@ -21,7 +22,8 @@ const CreatePostModal = ({
   newPost,
   setNewPost,
 }) => {
-  const [disabled, setDisabled] = useState(true)
+  const [btnDisabled, setBtnDisabled] = useState(true)
+  const inputFile = useRef(null)
   function handleCloseModal() {
     setShowModal(false)
   }
@@ -29,6 +31,27 @@ const CreatePostModal = ({
   useEffect(() => {
     ReactModal.setAppElement('body')
   }, [])
+
+  const onImageUploadButtonClick = () => {
+    inputFile.current.click()
+  }
+
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setNewPost({
+        ...newPost,
+        image: URL.createObjectURL(event.target.files[0]),
+      })
+    }
+  }
+
+  useEffect(() => {
+    if (newPost.text.replace(/\s/g, '') === '' && newPost.image === '#') {
+      setBtnDisabled(true)
+    } else {
+      setBtnDisabled(false)
+    }
+  }, [newPost])
 
   return (
     <div>
@@ -55,20 +78,45 @@ const CreatePostModal = ({
         </ListItem>
         <TextArea
           onChange={(e) => {
-            setNewPost({ text: e.target.value, content: newPost.content })
-            if (e.target.value.replace(/\s/g, '') === '') {
-              setDisabled(true)
-            } else {
-              setDisabled(false)
-            }
+            setNewPost({ ...newPost, text: e.target.value })
           }}
           placeholder={`What's on your mind, ${userDetails.firstName}?`}
           value={newPost.text}
+          style={
+            newPost.image !== '#'
+              ? { fontSize: '0.937rem' }
+              : { fontSize: '1.5rem' }
+          }
         />
+        <PostImageContainer
+          style={
+            newPost.image !== '#'
+              ? {
+                  display: 'block',
+                }
+              : { display: 'none' }
+          }
+        >
+          <PostImage
+            id="post-image"
+            src={newPost.image}
+            alt="new post image"
+            style={
+              newPost.image !== '#' ? { display: 'block' } : { display: 'none' }
+            }
+          />
+        </PostImageContainer>
         <HomeWrapper createPost>
-          <ListItem photo>
+          <ListItem photo onClick={onImageUploadButtonClick}>
             <BsFileEarmarkImage />
             Photo
+            <input
+              accept="image/*"
+              type="file"
+              id="imgInput"
+              ref={inputFile}
+              onChange={onImageChange}
+            />
           </ListItem>
           <ListItem feeling>
             <BsEmojiLaughing />
@@ -80,7 +128,7 @@ const CreatePostModal = ({
           </ListItem>
         </HomeWrapper>
         <CreatePostWrapper>
-          <Button post bold createButtonDisabled disabled={disabled}>
+          <Button post bold disabled={btnDisabled}>
             Post
           </Button>
         </CreatePostWrapper>
