@@ -202,6 +202,7 @@ export const ListItem = styled.li`
         > svg {
           fill: var(--lemon);
         }
+        position: relative;
       `}
 
     ${(props) =>

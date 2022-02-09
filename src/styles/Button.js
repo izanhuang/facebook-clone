@@ -244,6 +244,31 @@ export const IconButton = styled.button`
         }
       }
     `}
+
+  ${(props) =>
+    props.remove &&
+    css`
+      position: absolute;
+      top: 7px;
+      left: 7px;
+      width: 30px;
+      height: 30px;
+      background-color: ${({ theme }) => theme.background};
+
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      svg path {
+        stroke: ${({ theme }) => theme.secondaryIcon};
+        stroke-width: 3px;
+      }
+
+      :focus {
+        background-color: ${({ theme }) => theme.iconBg};
+      }
+    `}
    
 `
 

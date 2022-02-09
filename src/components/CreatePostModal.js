@@ -13,7 +13,10 @@ import { GrClose } from 'react-icons/gr'
 import { Button } from '../styles/Button'
 import { BsFileEarmarkImage, BsEmojiLaughing } from 'react-icons/bs'
 import { AiOutlineFileGif } from 'react-icons/ai'
-import { Label } from '../styles/Label'
+import 'emoji-mart/css/emoji-mart.css'
+import { NimblePicker } from 'emoji-mart'
+import { useTheme } from '../contexts/ThemeContext'
+import data from 'emoji-mart/data/twitter.json'
 
 const CreatePostModal = ({
   showModal,
@@ -23,6 +26,8 @@ const CreatePostModal = ({
   setNewPost,
 }) => {
   const [btnDisabled, setBtnDisabled] = useState(true)
+  const [showEmoji, setShowEmoji] = useState(false)
+  const { theme } = useTheme()
   const inputFile = useRef(null)
   function handleCloseModal() {
     setShowModal(false)
@@ -43,6 +48,23 @@ const CreatePostModal = ({
         image: URL.createObjectURL(event.target.files[0]),
       })
     }
+  }
+
+  const removeImage = () => {
+    setNewPost({ ...newPost, image: '#' })
+  }
+
+  const handleFeelingClick = () => {
+    setShowEmoji(!showEmoji)
+  }
+
+  const addEmoji = (e) => {
+    let sym = e.unified.split('-')
+    let codesArray = []
+    sym.forEach((el) => codesArray.push('0x' + el))
+    let emoji = String.fromCodePoint(...codesArray)
+    let newText = newPost.text + emoji
+    setNewPost({ ...newPost, text: newText })
   }
 
   useEffect(() => {
@@ -84,8 +106,10 @@ const CreatePostModal = ({
           value={newPost.text}
           style={
             newPost.image !== '#'
-              ? { fontSize: '0.937rem' }
-              : { fontSize: '1.5rem' }
+              ? newPost.text.replace(/\s/g, '') === ''
+                ? { fontSize: '0.937rem', height: 'auto' }
+                : { fontSize: '0.937rem', height: '100px' }
+              : { fontSize: '1.5rem', height: 'auto' }
           }
         />
         <PostImageContainer
@@ -105,6 +129,9 @@ const CreatePostModal = ({
               newPost.image !== '#' ? { display: 'block' } : { display: 'none' }
             }
           />
+          <IconButton remove onClick={removeImage}>
+            <GrClose />
+          </IconButton>
         </PostImageContainer>
         <HomeWrapper createPost>
           <ListItem photo onClick={onImageUploadButtonClick}>
@@ -118,14 +145,34 @@ const CreatePostModal = ({
               onChange={onImageChange}
             />
           </ListItem>
-          <ListItem feeling>
+          <ListItem feeling onClick={handleFeelingClick}>
             <BsEmojiLaughing />
             Feeling
           </ListItem>
-          <ListItem gif>
+          <NimblePicker
+            data={data}
+            set="twitter"
+            onSelect={addEmoji}
+            showPreview={false}
+            showSkinTones={false}
+            native={false}
+            theme={theme}
+            perLine={8}
+            style={
+              showEmoji
+                ? {
+                    display: 'block',
+                    position: 'absolute',
+                    bottom: '125px',
+                    left: '50px',
+                  }
+                : { display: 'none' }
+            }
+          />
+          {/* <ListItem gif>
             <AiOutlineFileGif />
             GIF
-          </ListItem>
+          </ListItem> */}
         </HomeWrapper>
         <CreatePostWrapper>
           <Button post bold disabled={btnDisabled}>
