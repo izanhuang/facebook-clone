@@ -9,29 +9,26 @@ import { useAuth } from '../contexts/AuthContext'
 import Home from '../pages/Home'
 import UpdateProfile from '../pages/UpdateProfile'
 import ForgotPassword from '../components/ForgotPassword'
-import loadUserDetails from '../utils/loadUserDetails'
-import loadUserPlaceholder from '../utils/loadUserPlaceholder'
 import { useData } from '../contexts/DataContext'
 import { useTheme } from '../contexts/ThemeContext'
-import updateUserDetails from '../utils/updateUserDetails'
+import {
+  loadUserPlaceholder,
+  loadUserDetails,
+  updateUserDetails,
+} from '../utils/firebaseUtils'
 
 export default function AppRouter() {
   const { currentUser } = useAuth()
   const { userDetails, setUserDetails } = useData()
-  const { theme } = useTheme()
+  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
-    // console.log('The user is', currentUser)
     if (currentUser) {
-      loadUserDetails(currentUser, setUserDetails)
+      loadUserDetails(currentUser, setUserDetails, setTheme)
     } else {
       loadUserPlaceholder(setUserDetails)
     }
   }, [currentUser])
-
-  // useEffect(() => {
-  //   console.log('User Details ', userDetails)
-  // }, [userDetails])
 
   useEffect(() => {
     console.log('Current theme ', theme)

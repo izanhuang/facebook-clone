@@ -12,11 +12,13 @@ import handleClickOutside from '../utils/ClickOutsideUtil'
 import { useAuth } from '../contexts/AuthContext'
 import { Avatar } from '../styles/Avatar'
 import { useNavigate } from 'react-router-dom'
+import { useData } from '../contexts/DataContext'
+import { getAllUsers } from '../utils/firebaseUtils'
 
 const Search = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [searchName, setSearchName] = useState('')
-  const { users } = useAuth()
+  const { users, setUsers } = useData()
 
   const wrapperRef = useRef(null)
 
@@ -32,6 +34,10 @@ const Search = () => {
       })
     }
   }, [isOpen])
+
+  useEffect(() => {
+    getAllUsers(setUsers)
+  }, [])
 
   return (
     <Wrapper ref={wrapperRef}>

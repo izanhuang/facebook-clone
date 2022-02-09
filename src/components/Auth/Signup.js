@@ -22,7 +22,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import { Alert } from '../../styles/Alert'
 import useMounted from '../../hooks/useMounted'
 import { SecondaryText } from '../../styles/Text'
-import updateUserDetails from '../../utils/updateUserDetails'
+import { updateUserDetails } from '../../utils/firebaseUtils'
 
 export default function Signup() {
   const firstNameRef = useRef()
