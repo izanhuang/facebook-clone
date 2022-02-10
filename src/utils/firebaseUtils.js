@@ -1,5 +1,12 @@
-import db from './firebase'
-import { onSnapshot, collection, doc, setDoc } from 'firebase/firestore'
+import db, { storage } from './firebase'
+import { onSnapshot, collection, setDoc, addDoc, doc } from 'firebase/firestore'
+import { serverTimestamp } from 'firebase/firestore'
+import {
+  ref,
+  uploadString,
+  getDownloadURL,
+  uploadBytesResumable,
+} from 'firebase/storage'
 
 export function loadUserPlaceholder(setUserDetails) {
   return onSnapshot(collection(db, 'Users'), (snapshot) => {
@@ -34,7 +41,44 @@ export async function updateUserDetails(userDetails) {
   // console.log('User data ', userDetails)
   const payload = userDetails
   await setDoc(docRef, payload)
-  console.log('Updated doc')
+  console.log('Updated users doc')
+}
+
+export async function updateUserPosts(currentUser, userDetails, newPost) {
+  const image = newPost.image
+  addDoc(collection(db, 'posts'), {
+    text: newPost.text,
+    image,
+    uid: currentUser.uid,
+    name: userDetails.firstName + ' ' + userDetails.lastName,
+    email: currentUser.email,
+    profileImg: userDetails.profileImg,
+    timestamp: serverTimestamp(),
+  }).then((docum) => {
+    if (image) {
+      const storageRef = ref(storage, `posts/${docum.id}`)
+      const uploadTask = uploadBytesResumable(storageRef, image, 'data_url')
+
+      uploadTask.on(
+        'state_changed',
+        null,
+        (error) => {
+          console.error(error)
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            console.log('File available at', downloadURL)
+            await setDoc(
+              doc(db, 'posts', docum.id),
+              { image: downloadURL },
+              { merge: true },
+            )
+          })
+        },
+      )
+    }
+  })
+  console.log('Updated posts doc')
 }
 
 export async function getAllUsers(setUsers) {

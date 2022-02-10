@@ -9,6 +9,7 @@ import {
   CenterElement,
 } from '../styles/Wrapper'
 import Contacts from '../components/Contacts'
+import Posts from '../components/Posts'
 
 const Home = () => {
   return (
@@ -20,6 +21,8 @@ const Home = () => {
             <CenterElement>
               <CreateAPost />
             </CenterElement>
+
+            <Posts />
           </HomeCenterWrapper>
           <Contacts />
         </HomeWrapper>

@@ -4,9 +4,11 @@ import { Avatar } from '../styles/Avatar'
 import { CreatePostButton } from '../styles/Button'
 import CreatePostModal from './CreatePostModal'
 import { useData } from '../contexts/DataContext'
+import { useAuth } from '../contexts/AuthContext'
 
 const CreateAPost = () => {
   const { userDetails, newPost, setNewPost } = useData()
+  const { currentUser } = useAuth()
 
   const [showModal, setShowModal] = useState(false)
 

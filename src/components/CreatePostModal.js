@@ -17,6 +17,8 @@ import 'emoji-mart/css/emoji-mart.css'
 import { NimblePicker } from 'emoji-mart'
 import { useTheme } from '../contexts/ThemeContext'
 import data from 'emoji-mart/data/twitter.json'
+import { useAuth } from '../contexts/AuthContext'
+import { updateUserPosts } from '../utils/firebaseUtils'
 
 const CreatePostModal = ({
   showModal,
@@ -28,7 +30,8 @@ const CreatePostModal = ({
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [showEmoji, setShowEmoji] = useState(false)
   const { theme } = useTheme()
-  const inputFile = useRef(null)
+  const { currentUser } = useAuth()
+  const inputFileRef = useRef(null)
   function handleCloseModal() {
     setShowModal(false)
   }
@@ -38,14 +41,19 @@ const CreatePostModal = ({
   }, [])
 
   const onImageUploadButtonClick = () => {
-    inputFile.current.click()
+    inputFileRef.current.click()
   }
 
   const onImageChange = (event) => {
+    const reader = new FileReader()
     if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(event.target.files[0])
+    }
+
+    reader.onload = (readerEvent) => {
       setNewPost({
         ...newPost,
-        image: URL.createObjectURL(event.target.files[0]),
+        image: readerEvent.target.result,
       })
     }
   }
@@ -67,6 +75,12 @@ const CreatePostModal = ({
     setNewPost({ ...newPost, text: newText })
   }
 
+  const sendPost = (e) => {
+    e.preventDefault()
+    updateUserPosts(currentUser, userDetails, newPost)
+    setNewPost({ text: '', image: '#' })
+  }
+
   useEffect(() => {
     if (newPost.text.replace(/\s/g, '') === '' && newPost.image === '#') {
       setBtnDisabled(true)
@@ -76,7 +90,7 @@ const CreatePostModal = ({
   }, [newPost])
 
   return (
-    <div>
+    <form>
       <ReactModal
         isOpen={showModal}
         contentLabel="onRequestClose Example"
@@ -141,7 +155,7 @@ const CreatePostModal = ({
               accept="image/*"
               type="file"
               id="imgInput"
-              ref={inputFile}
+              ref={inputFileRef}
               onChange={onImageChange}
             />
           </ListItem>
@@ -175,12 +189,18 @@ const CreatePostModal = ({
           </ListItem> */}
         </HomeWrapper>
         <CreatePostWrapper>
-          <Button post bold disabled={btnDisabled}>
+          <Button
+            post
+            bold
+            disabled={btnDisabled}
+            type="submit"
+            onClick={sendPost}
+          >
             Post
           </Button>
         </CreatePostWrapper>
       </ReactModal>
-    </div>
+    </form>
   )
 }
 
