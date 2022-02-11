@@ -20,9 +20,8 @@ const Home = () => {
           <HomeCenterWrapper>
             <CenterElement>
               <CreateAPost />
+              <Posts />
             </CenterElement>
-
-            <Posts />
           </HomeCenterWrapper>
           <Contacts />
         </HomeWrapper>

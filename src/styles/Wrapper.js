@@ -18,9 +18,11 @@ export const PagePadding = styled.div`
 
 export const HomeCenterWrapper = styled.div`
   width: 64vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   padding: 0px 20px 0;
   margin-top: 16px;
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
   justifiy-content: space-between;
@@ -101,8 +103,11 @@ export const ContentWrapper = styled.div`
 `
 export const CenterElement = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
+  gap: 16px;
 
   ${(props) =>
     props.padding &&

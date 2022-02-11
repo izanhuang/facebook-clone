@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
-import { CreatePostContainer, Post } from '../styles/Post'
+import { CreatePostContainer, PostCard } from '../styles/PostStyling'
 import { Avatar } from '../styles/Avatar'
 import { CreatePostButton } from '../styles/Button'
 import CreatePostModal from './CreatePostModal'
 import { useData } from '../contexts/DataContext'
-import { useAuth } from '../contexts/AuthContext'
 
 const CreateAPost = () => {
   const { userDetails, newPost, setNewPost } = useData()
-  const { currentUser } = useAuth()
 
   const [showModal, setShowModal] = useState(false)
 
@@ -17,7 +15,7 @@ const CreateAPost = () => {
   }
 
   return (
-    <Post id="create-post">
+    <PostCard id="create-post">
       <CreatePostContainer>
         <Avatar marginRight8 small src={userDetails.profileImg} />
         <CreatePostButton onClick={handleOpenModal}>
@@ -33,7 +31,7 @@ const CreateAPost = () => {
           setNewPost={setNewPost}
         />
       </CreatePostContainer>
-    </Post>
+    </PostCard>
   )
 }
 

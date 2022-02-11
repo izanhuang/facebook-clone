@@ -29,7 +29,7 @@ export function loadUserDetails(currentUser, setUserDetails, setTheme) {
     setTheme(
       ...snapshot.docs
         .map((doc) => ({ ...doc.data(), id: doc.id }))
-        .filter((doc) => doc.id == currentUser.uid)
+        .filter((doc) => doc.id === currentUser.uid)
         .map((doc) => doc.theme),
     )
   })
@@ -53,31 +53,33 @@ export async function updateUserPosts(currentUser, userDetails, newPost) {
     name: userDetails.firstName + ' ' + userDetails.lastName,
     email: currentUser.email,
     profileImg: userDetails.profileImg,
+    userName: userDetails.userName,
     timestamp: serverTimestamp(),
-  }).then((docum) => {
-    if (image) {
-      const storageRef = ref(storage, `posts/${docum.id}`)
-      const uploadTask = uploadBytesResumable(storageRef, image, 'data_url')
-
-      uploadTask.on(
-        'state_changed',
-        null,
-        (error) => {
-          console.error(error)
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            console.log('File available at', downloadURL)
-            await setDoc(
-              doc(db, 'posts', docum.id),
-              { image: downloadURL },
-              { merge: true },
-            )
-          })
-        },
-      )
-    }
   })
+  // .then((docum) => {
+  //   if (image) {
+  //     const storageRef = ref(storage, `posts/${docum.id}`)
+  //     const uploadTask = uploadBytesResumable(storageRef, image, 'data_url')
+
+  // uploadTask.on(
+  //   'state_changed',
+  //   null,
+  //   (error) => {
+  //     console.error(error)
+  //   },
+  //   () => {
+  //     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+  //       console.log('File available at', downloadURL)
+  //       await setDoc(
+  //         doc(db, 'posts', docum.id),
+  //         { image: downloadURL },
+  //         { merge: true },
+  //       )
+  //     })
+  //   },
+  // )
+  //   }
+  // })
   console.log('Updated posts doc')
 }
 

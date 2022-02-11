@@ -6,6 +6,7 @@ export const Avatar = styled.img`
   object-fit: cover;
   border-radius: 50%;
   margin: 12px 12px 12px 0;
+  cursor: pointer;
 
   ${(props) =>
     props.small &&

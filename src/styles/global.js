@@ -39,8 +39,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
-  // -webkit-font-smoothing: antialiased;
-
 }
 
 code {

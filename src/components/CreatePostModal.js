@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import ReactModal from 'react-modal'
-import { DropDownHeader, DropDownList, ListItem } from '../styles/DropDown'
+import { DropDownHeader, ListItem } from '../styles/DropDown'
 import {
   CenterElement,
   CreatePostWrapper,
@@ -8,7 +8,7 @@ import {
 } from '../styles/Wrapper'
 import { IconButton } from '../styles/Button'
 import { Avatar } from '../styles/Avatar'
-import { PostImage, PostImageContainer, TextArea } from '../styles/Post'
+import { PostImage, PostImageContainer, TextArea } from '../styles/PostStyling'
 import { GrClose } from 'react-icons/gr'
 import { Button } from '../styles/Button'
 import { BsFileEarmarkImage, BsEmojiLaughing } from 'react-icons/bs'
