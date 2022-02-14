@@ -18,7 +18,7 @@ import { NimblePicker } from 'emoji-mart'
 import { useTheme } from '../contexts/ThemeContext'
 import data from 'emoji-mart/data/twitter.json'
 import { useAuth } from '../contexts/AuthContext'
-import { updateUserPosts } from '../utils/firebaseUtils'
+import { addUserPost } from '../utils/firebaseUtils'
 
 const CreatePostModal = ({
   showModal,
@@ -77,7 +77,7 @@ const CreatePostModal = ({
 
   const sendPost = (e) => {
     e.preventDefault()
-    updateUserPosts(currentUser, userDetails, newPost)
+    addUserPost(currentUser, userDetails, newPost)
     setNewPost({ text: '', image: '#' })
   }
 

@@ -5,6 +5,7 @@ import {
   setDoc,
   addDoc,
   doc,
+  updateDoc,
   deleteDoc,
 } from 'firebase/firestore'
 import { serverTimestamp } from 'firebase/firestore'
@@ -51,7 +52,7 @@ export async function updateUserDetails(userDetails) {
   console.log('Updated users doc')
 }
 
-export async function updateUserPosts(currentUser, userDetails, newPost) {
+export async function addUserPost(currentUser, userDetails, newPost) {
   const image = newPost.image
   addDoc(collection(db, 'posts'), {
     text: newPost.text,
@@ -62,6 +63,9 @@ export async function updateUserPosts(currentUser, userDetails, newPost) {
     profileImg: userDetails.profileImg,
     userName: userDetails.userName,
     timestamp: serverTimestamp(),
+    likes: [],
+    comments: [],
+    shares: 0,
   })
   // .then((docum) => {
   //   if (image) {
@@ -88,6 +92,61 @@ export async function updateUserPosts(currentUser, userDetails, newPost) {
   //   }
   // })
   console.log('Updated posts doc')
+}
+
+export async function updateUserPostLikes(
+  docId,
+  currentUser,
+  userDetails,
+  likes,
+) {
+  const docRef = doc(db, 'posts', docId)
+  const filteredLikes = likes.filter((like) => like.uid !== currentUser.uid)
+  if (likes.some((like) => like.uid === currentUser.uid)) {
+    var updatedLikes = [...filteredLikes]
+  } else {
+    let newLike = {
+      uid: currentUser.uid,
+      userName: userDetails.userName,
+      name: userDetails.firstName + ' ' + userDetails.lastName,
+      profileImg: userDetails.profileImg,
+    }
+    var updatedLikes = [...filteredLikes, newLike]
+  }
+
+  const updateField = { likes: updatedLikes }
+  await updateDoc(docRef, updateField)
+  console.log('Updated user post')
+}
+
+export async function updateUserPostComments(
+  docId,
+  currentUser,
+  userDetails,
+  comments,
+  comment,
+) {
+  const docRef = doc(db, 'posts', docId)
+  let newComment = {
+    uid: currentUser.uid,
+    userName: userDetails.userName,
+    name: userDetails.firstName + ' ' + userDetails.lastName,
+    profileImg: userDetails.profileImg,
+    comment: comment,
+  }
+
+  const updateField = { comments: [...comments, newComment] }
+  await setDoc(docRef, updateField)
+  console.log('Deleted user post')
+}
+
+export async function updateUserPostShares(
+  docId,
+  currentUser,
+  userDetails,
+  shares,
+) {
+  const docRef = doc(db, 'posts', docId)
 }
 
 export async function deleteUserPost(docId) {

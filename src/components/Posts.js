@@ -38,6 +38,9 @@ const Posts = () => {
             profileImg={post.data().profileImg}
             uid={post.data().uid}
             docId={post.id}
+            likes={post.data().likes}
+            comments={post.data().comments}
+            shares={post.data().shares}
           />
         ))}
     </PostsContainer>

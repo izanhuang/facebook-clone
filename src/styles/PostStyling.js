@@ -208,4 +208,10 @@ export const PostCardActions = styled.div`
     text-align: center;
     margin-left: 7px;
   }
+
+  ${(props) =>
+    props.borderTop &&
+    css`
+      border-top: 1px solid ${({ theme }) => theme.divider};
+    `}
 `
