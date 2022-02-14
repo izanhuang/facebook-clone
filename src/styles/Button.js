@@ -269,6 +269,56 @@ export const IconButton = styled.button`
         background-color: ${({ theme }) => theme.iconBg};
       }
     `}
+
+    ${(props) =>
+      props.bgOnHover &&
+      css`
+        background-color: transparent;
+
+        svg {
+          fill: ${({ theme }) => theme.secondaryColor};
+          width: 24px;
+          height: 24px;
+        }
+
+        :focus {
+          background-color: transparent;
+          svg {
+            fill: ${({ theme }) => theme.secondaryColor};
+          }
+        }
+
+        :hover {
+          background-color: ${({ theme }) => theme.hoverOverlay};
+        }
+      `}
+   
+
+    ${(props) =>
+      props.noBg &&
+      css`
+        background-color: transparent;
+
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+
+        :focus {
+          background-color: transparent;
+        }
+
+        :hover {
+          background-color: transparent;
+        }
+      `}
+
+    ${(props) =>
+      props.noPadding &&
+      css`
+        padding: 0;
+        margin: 0 6px 0 0;
+      `}
    
 `
 

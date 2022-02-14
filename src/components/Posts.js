@@ -36,6 +36,8 @@ const Posts = () => {
             image={post.data().image}
             userName={post.data().userName}
             profileImg={post.data().profileImg}
+            uid={post.data().uid}
+            docId={post.id}
           />
         ))}
     </PostsContainer>

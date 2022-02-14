@@ -16,8 +16,11 @@ import { AiOutlineLike, AiFillLike } from 'react-icons/ai'
 import { FaRegCommentAlt } from 'react-icons/fa'
 import { BiShare } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
+import PostOptionsDropdown from './Dropdown/PostOptionsDropdown'
+import { useAuth } from '../contexts/AuthContext'
 
 const Post = ({
+  docId,
   name,
   text,
   email,
@@ -25,8 +28,10 @@ const Post = ({
   profileImg,
   userName,
   timestamp,
+  uid,
 }) => {
   const navigate = useNavigate()
+  const { currentUser } = useAuth()
   return (
     <PostCard post>
       <PostCardHeaderContainer>
@@ -52,6 +57,7 @@ const Post = ({
             {new Date(timestamp?.toDate()).toLocaleString()}
           </SecondaryText>
         </PostCardHeaderLabel>
+        {currentUser.uid === uid && <PostOptionsDropdown docId={docId} />}
       </PostCardHeaderContainer>
       {text !== '' && <PostCardText>{text}</PostCardText>}
       {image !== '#' && <PostImage post src={image} alt="post image" />}
@@ -64,7 +70,7 @@ const Post = ({
 
           <SecondaryText className="likes">16</SecondaryText>
           <SecondaryText>22 Comments</SecondaryText>
-          <SecondaryText>3 Shared</SecondaryText>
+          <SecondaryText>3 Shares</SecondaryText>
         </PostCardStats>
 
         <PostCardActions>

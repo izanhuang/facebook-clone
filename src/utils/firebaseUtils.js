@@ -1,5 +1,12 @@
 import db, { storage } from './firebase'
-import { onSnapshot, collection, setDoc, addDoc, doc } from 'firebase/firestore'
+import {
+  onSnapshot,
+  collection,
+  setDoc,
+  addDoc,
+  doc,
+  deleteDoc,
+} from 'firebase/firestore'
 import { serverTimestamp } from 'firebase/firestore'
 import {
   ref,
@@ -81,6 +88,11 @@ export async function updateUserPosts(currentUser, userDetails, newPost) {
   //   }
   // })
   console.log('Updated posts doc')
+}
+
+export async function deleteUserPost(docId) {
+  await deleteDoc(doc(db, 'posts', docId))
+  console.log('Deleted user post')
 }
 
 export async function getAllUsers(setUsers) {

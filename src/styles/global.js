@@ -17,6 +17,7 @@ export const GlobalStyles = createGlobalStyle`
   --lime: #45BD62;
   --lemon: #F7B928;
   --purple: #8564df;
+  --red: #e41e3f;
   color-scheme: ${({ theme }) => theme.colorScheme};
 } 
 html {

@@ -113,7 +113,8 @@ export const PostCardHeaderLabel = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  // height: 44px;
+  height: auto;
+  width: 85%;
 
   > p {
     margin: 0;

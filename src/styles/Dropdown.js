@@ -4,7 +4,7 @@ export const DropDownContainer = styled.div`
   width: auto;
   margin: 0 auto;
   position: relative;
-  z-index: 2;
+  z-index: 0;
 `
 
 export const DropDownHeader = styled.div`
@@ -118,6 +118,13 @@ export const DropDownList = styled.ul`
     css`
       width: 360px;
     `}
+
+  ${(props) =>
+    props.postOptions &&
+    css`
+      width: 175px;
+    `}
+  
 `
 
 export const ListItem = styled.li`
@@ -212,6 +219,15 @@ export const ListItem = styled.li`
           fill: var(--purple);
           width: 25.5px !important;
           height: 25.5px !important;
+        }
+      `}
+
+    ${(props) =>
+      props.danger &&
+      css`
+        color: var(--red);
+        svg {
+          fill: var(--red);
         }
       `}
 `
