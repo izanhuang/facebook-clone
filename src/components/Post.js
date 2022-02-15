@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Avatar } from '../styles/Avatar'
 import {
   PostCard,
@@ -19,7 +19,17 @@ import { useNavigate } from 'react-router-dom'
 import PostOptionsDropdown from './Dropdown/PostOptionsDropdown'
 import { useAuth } from '../contexts/AuthContext'
 import { useData } from '../contexts/DataContext'
-import { updateUserPostLikes } from '../utils/firebaseUtils'
+import {
+  updateUserPostLikes,
+  updateUserPostComments,
+} from '../utils/firebaseUtils'
+import {
+  CreateComment,
+  CommentContainer,
+  CommentFlex,
+  CommentBubble,
+  PostComments,
+} from '../styles/Comment'
 
 const Post = ({
   docId,
@@ -38,8 +48,41 @@ const Post = ({
   const navigate = useNavigate()
   const { currentUser } = useAuth()
   const { userDetails } = useData()
+  const [showCreateComment, setShowCreateComment] = useState(false)
+  const [comment, setComment] = useState('')
+  const [showComments, setShowComments] = useState(false)
 
   const hasPostStats = likes.length > 0 || comments.length > 0 || shares > 0
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      if (comment.replace(/\s/g, '') !== '') {
+        console.log(comment)
+        updateUserPostComments(
+          docId,
+          currentUser,
+          userDetails,
+          comments,
+          comment,
+        )
+        setComment('')
+        var textarea = document.getElementById('comment')
+        textarea.style.height = '36px'
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (comment.replace(/\s/g, '') !== '') {
+      var textarea = document.getElementById('comment')
+      textarea.style.height = '36px'
+      textarea.style.height = textarea.scrollHeight + 'px'
+    } else if (showCreateComment && comment.replace(/\s/g, '') === '') {
+      var textarea = document.getElementById('comment')
+      textarea.style.height = '36px'
+      setComment('')
+    }
+  }, [comment])
 
   return (
     <PostCard post>
@@ -55,7 +98,7 @@ const Post = ({
         />
         <PostCardHeaderLabel>
           <p
-            className="name"
+            className="name link"
             onClick={() => {
               navigate(`/${userName}`)
             }}
@@ -68,8 +111,10 @@ const Post = ({
         </PostCardHeaderLabel>
         {currentUser.uid === uid && <PostOptionsDropdown docId={docId} />}
       </PostCardHeaderContainer>
+
       {text !== '' && <PostCardText>{text}</PostCardText>}
       {image !== '#' && <PostImage post src={image} alt="post image" />}
+
       <div>
         {hasPostStats && (
           <PostCardStats>
@@ -84,7 +129,19 @@ const Post = ({
             )}
 
             {comments.length > 0 && (
-              <SecondaryText>{comments.length + ' '}Comments</SecondaryText>
+              <SecondaryText
+                className="link"
+                onClick={() => {
+                  if (showComments === false) {
+                    setShowCreateComment(true)
+                  } else {
+                    setShowCreateComment(!showCreateComment)
+                  }
+                  setShowComments(!showComments)
+                }}
+              >
+                {comments.length + ' '}Comments
+              </SecondaryText>
             )}
             {shares > 0 && <SecondaryText>{shares + ' '} Shares</SecondaryText>}
           </PostCardStats>
@@ -97,6 +154,7 @@ const Post = ({
             comments.length === 0 &&
             shares === 0
           }
+          borderBottom={showCreateComment === true}
         >
           <ListItem
             onClick={() => {
@@ -115,15 +173,85 @@ const Post = ({
               </>
             )}
           </ListItem>
-          <ListItem>
+          <ListItem
+            onClick={() => {
+              setShowCreateComment(true)
+            }}
+          >
             <FaRegCommentAlt className="comment" />
             <SecondaryText>Comment</SecondaryText>
           </ListItem>
-          <ListItem>
-            <BiShare className="share" />
-            <SecondaryText>Share</SecondaryText>
-          </ListItem>
+          {currentUser.uid !== uid && (
+            <ListItem>
+              <BiShare className="share" />
+              <SecondaryText>Share</SecondaryText>
+            </ListItem>
+          )}
         </PostCardActions>
+
+        {showCreateComment && (
+          <CreateComment>
+            <Avatar
+              tiny
+              lessMargin
+              src={profileImg}
+              onClick={() => {
+                navigate(`/${userName}`)
+              }}
+            />
+            <textarea
+              id="comment"
+              placeholder="Write a comment..."
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              onKeyDown={handleKeyDown}
+              style={{ height: '36px' }}
+            />
+          </CreateComment>
+        )}
+
+        {showCreateComment && showComments === false && comments.length > 0 && (
+          <SecondaryText
+            viewComments
+            className="link"
+            onClick={() => {
+              setShowComments(true)
+            }}
+          >
+            View comments
+          </SecondaryText>
+        )}
+
+        {showComments && (
+          <PostComments>
+            {comments.map((comment) => (
+              <CommentContainer>
+                <CommentFlex>
+                  <Avatar
+                    tiny
+                    lessMargin
+                    onClick={() => {
+                      navigate(`/${comment.userName}`)
+                    }}
+                    src={comment.profileImg}
+                  />
+                  <CommentBubble>
+                    <p
+                      className="link name"
+                      style={{ fontSize: '13px' }}
+                      onClick={() => {
+                        navigate(`/${comment.userName}`)
+                      }}
+                    >
+                      {comment.name}
+                    </p>
+                    <p style={{ fontSize: '15px' }}>{comment.comment}</p>
+                  </CommentBubble>
+                </CommentFlex>
+              </CommentContainer>
+            ))}
+          </PostComments>
+        )}
       </div>
     </PostCard>
   )

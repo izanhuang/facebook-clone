@@ -121,3 +121,16 @@ a:hover {
     z-index: 0;
   }
 }
+
+.name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

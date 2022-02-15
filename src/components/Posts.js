@@ -11,20 +11,8 @@ const Posts = () => {
   const [realtimePosts, loading, error] = useCollection(q, {
     snapshotListenOptions: { includeMetadataChanges: true },
   })
-
-  //   onSnapshot(q, (querySnapshot) => {
-  //     const posts = []
-  //     querySnapshot.forEach((doc) => {
-  //       posts.push(doc.data())
-  //     })
-  //   }),
   return (
     <PostsContainer>
-      {/* {console.log(
-        realtimePosts &&
-          realtimePosts.docs.map((post) => console.log(post.data())),
-      )} */}
-      {/* {realtimePosts.docs.map((post) => console.log(post.data().email))} */}
       {realtimePosts &&
         realtimePosts.docs.map((post) => (
           <Post

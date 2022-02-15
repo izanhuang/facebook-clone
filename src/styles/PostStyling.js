@@ -119,16 +119,6 @@ export const PostCardHeaderLabel = styled.div`
   > p {
     margin: 0;
   }
-
-  .name {
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .name:hover {
-    text-decoration: underline;
-  }
 `
 export const PostCardText = styled.div`
   padding: 4px 16px 16px;
@@ -169,7 +159,7 @@ export const PostCardActions = styled.div`
   width: auto;
 
   > li {
-    width: 33%;
+    width: 100%;
     min-height: 32px;
     justify-content: center;
     margin: 5px 0;
@@ -213,5 +203,11 @@ export const PostCardActions = styled.div`
     props.borderTop &&
     css`
       border-top: 1px solid ${({ theme }) => theme.divider};
+    `}
+
+  ${(props) =>
+    props.borderBottom &&
+    css`
+      border-bottom: 1px solid ${({ theme }) => theme.divider};
     `}
 `

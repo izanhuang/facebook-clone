@@ -116,7 +116,7 @@ export async function updateUserPostLikes(
 
   const updateField = { likes: updatedLikes }
   await updateDoc(docRef, updateField)
-  console.log('Updated user post')
+  console.log('Updated user post likes')
 }
 
 export async function updateUserPostComments(
@@ -136,8 +136,8 @@ export async function updateUserPostComments(
   }
 
   const updateField = { comments: [...comments, newComment] }
-  await setDoc(docRef, updateField)
-  console.log('Deleted user post')
+  await updateDoc(docRef, updateField)
+  console.log('Updated user post comments')
 }
 
 export async function updateUserPostShares(

@@ -36,4 +36,13 @@ export const SecondaryText = styled.p`
         padding-left: 16px;
         text-align: left;
       `}
+
+    ${(props) =>
+      props.viewComments &&
+      css`
+        font-weight: 600;
+        font-size: 15px;
+        padding: 4px 16px 12px;
+        margin: 0;
+      `}
 `
