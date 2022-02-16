@@ -120,6 +120,18 @@ export const PostCardHeaderLabel = styled.div`
     margin: 0;
   }
 `
+
+export const PostCardHeaderName = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  > p {
+    margin: 0;
+  }
+`
+
 export const PostCardText = styled.div`
   padding: 4px 16px 16px;
 `
@@ -143,6 +155,10 @@ export const PostCardStats = styled.div`
     flex-shrink: 0;
     margin: 0;
     padding-left: 6px;
+  }
+
+  > #comments {
+    margin-left: 0px;
   }
 
   > img {

@@ -52,7 +52,12 @@ export async function updateUserDetails(userDetails) {
   console.log('Updated users doc')
 }
 
-export async function addUserPost(currentUser, userDetails, newPost) {
+export async function addUserPost(
+  currentUser,
+  userDetails,
+  newPost,
+  sharedFrom = {},
+) {
   const image = newPost.image
   addDoc(collection(db, 'posts'), {
     text: newPost.text,
@@ -66,6 +71,7 @@ export async function addUserPost(currentUser, userDetails, newPost) {
     likes: [],
     comments: [],
     shares: 0,
+    sharedFrom,
   })
   // .then((docum) => {
   //   if (image) {
@@ -134,19 +140,15 @@ export async function updateUserPostComments(
     profileImg: userDetails.profileImg,
     comment: comment,
   }
-
   const updateField = { comments: [...comments, newComment] }
   await updateDoc(docRef, updateField)
   console.log('Updated user post comments')
 }
 
-export async function updateUserPostShares(
-  docId,
-  currentUser,
-  userDetails,
-  shares,
-) {
+export async function updateUserPostShares(docId, shares) {
   const docRef = doc(db, 'posts', docId)
+  const updateField = { shares: shares + 1 }
+  await updateDoc(docRef, updateField)
 }
 
 export async function deleteUserPost(docId) {

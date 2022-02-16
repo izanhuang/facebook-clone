@@ -5,7 +5,7 @@ export const PostComments = styled.div`
     padding-top: 0;
   }
   > div:last-child {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 `
 

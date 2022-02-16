@@ -8,6 +8,7 @@ import {
   PostCardText,
   PostCardStats,
   PostCardActions,
+  PostCardHeaderName,
 } from '../styles/PostStyling'
 import styled from 'styled-components'
 import { SecondaryText } from '../styles/Text'
@@ -20,8 +21,10 @@ import PostOptionsDropdown from './Dropdown/PostOptionsDropdown'
 import { useAuth } from '../contexts/AuthContext'
 import { useData } from '../contexts/DataContext'
 import {
+  addUserPost,
   updateUserPostLikes,
   updateUserPostComments,
+  updateUserPostShares,
 } from '../utils/firebaseUtils'
 import {
   CreateComment,
@@ -44,6 +47,7 @@ const Post = ({
   likes,
   comments,
   shares,
+  sharedFrom,
 }) => {
   const navigate = useNavigate()
   const { currentUser } = useAuth()
@@ -72,6 +76,17 @@ const Post = ({
     }
   }
 
+  const sharePost = () => {
+    const newPost = { text, image }
+    const sharedFrom = {
+      originalPostFullName: name,
+      originalPostUserName: userName,
+    }
+    addUserPost(currentUser, userDetails, newPost, sharedFrom)
+    updateUserPostShares(docId, shares)
+    console.log('Shared post')
+  }
+
   useEffect(() => {
     if (comment.replace(/\s/g, '') !== '') {
       var textarea = document.getElementById('comment')
@@ -97,14 +112,31 @@ const Post = ({
           }}
         />
         <PostCardHeaderLabel>
-          <p
-            className="name link"
-            onClick={() => {
-              navigate(`/${userName}`)
-            }}
-          >
-            {name}
-          </p>
+          <PostCardHeaderName>
+            <p
+              className="name link"
+              onClick={() => {
+                navigate(`/${userName}`)
+              }}
+            >
+              {name}
+            </p>
+
+            {sharedFrom.originalPostFullName !== undefined && (
+              <p style={{ fontSize: '15px' }}>
+                &nbsp;shared{' '}
+                <span
+                  className="name link"
+                  onClick={() => {
+                    navigate(`/${sharedFrom.originalPostUserName}`)
+                  }}
+                >
+                  {sharedFrom.originalPostFullName}
+                </span>
+                's post
+              </p>
+            )}
+          </PostCardHeaderName>
           <SecondaryText>
             {new Date(timestamp?.toDate()).toLocaleString()}
           </SecondaryText>
@@ -130,6 +162,7 @@ const Post = ({
 
             {comments.length > 0 && (
               <SecondaryText
+                id="comments"
                 className="link"
                 onClick={() => {
                   if (showComments === false) {
@@ -140,10 +173,16 @@ const Post = ({
                   setShowComments(!showComments)
                 }}
               >
-                {comments.length + ' '}Comments
+                {comments.length > 1
+                  ? comments.length + ' Comments'
+                  : comments.length + ' Comment'}
               </SecondaryText>
             )}
-            {shares > 0 && <SecondaryText>{shares + ' '} Shares</SecondaryText>}
+            {shares > 0 && (
+              <SecondaryText>
+                {shares > 1 ? shares + ' Shares' : shares + ' Share'}
+              </SecondaryText>
+            )}
           </PostCardStats>
         )}
 
@@ -182,7 +221,7 @@ const Post = ({
             <SecondaryText>Comment</SecondaryText>
           </ListItem>
           {currentUser.uid !== uid && (
-            <ListItem>
+            <ListItem onClick={sharePost}>
               <BiShare className="share" />
               <SecondaryText>Share</SecondaryText>
             </ListItem>
@@ -195,6 +234,7 @@ const Post = ({
               tiny
               lessMargin
               src={profileImg}
+              alt="current profile image"
               onClick={() => {
                 navigate(`/${userName}`)
               }}
@@ -234,6 +274,7 @@ const Post = ({
                       navigate(`/${comment.userName}`)
                     }}
                     src={comment.profileImg}
+                    alt="current profile image"
                   />
                   <CommentBubble>
                     <p

@@ -29,6 +29,7 @@ const Posts = () => {
             likes={post.data().likes}
             comments={post.data().comments}
             shares={post.data().shares}
+            sharedFrom={post.data().sharedFrom}
           />
         ))}
     </PostsContainer>
