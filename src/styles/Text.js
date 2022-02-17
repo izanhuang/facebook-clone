@@ -46,3 +46,9 @@ export const SecondaryText = styled.p`
         margin: 0;
       `}
 `
+
+export const ErrorMessage = styled.p`
+  margin-top: 0;
+  color: var(--red);
+  font-size: 14px;
+`

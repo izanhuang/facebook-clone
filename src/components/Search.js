@@ -77,7 +77,9 @@ const Search = () => {
                       onClick={() => {
                         toggling()
                         setSearchName('')
-                        navigate(`/${filteredUser.userName}`)
+                        navigate(`/${filteredUser.userName}`, {
+                          state: { uid: filteredUser.uid },
+                        })
                       }}
                     >
                       <Avatar small src={filteredUser.profileImg} />

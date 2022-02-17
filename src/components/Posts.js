@@ -11,6 +11,7 @@ const Posts = () => {
   const [realtimePosts, loading, error] = useCollection(q, {
     snapshotListenOptions: { includeMetadataChanges: true },
   })
+
   return (
     <PostsContainer>
       {realtimePosts &&

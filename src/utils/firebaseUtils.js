@@ -4,9 +4,14 @@ import {
   collection,
   setDoc,
   addDoc,
+  getDoc,
+  getDocs,
   doc,
   updateDoc,
   deleteDoc,
+  query,
+  where,
+  orderBy,
 } from 'firebase/firestore'
 import { serverTimestamp } from 'firebase/firestore'
 import {
@@ -59,7 +64,7 @@ export async function addUserPost(
   sharedFrom = {},
 ) {
   const image = newPost.image
-  addDoc(collection(db, 'posts'), {
+  const isSuccessful = await addDoc(collection(db, 'posts'), {
     text: newPost.text,
     image,
     uid: currentUser.uid,
@@ -72,7 +77,15 @@ export async function addUserPost(
     comments: [],
     shares: 0,
     sharedFrom,
+  }).catch((e) => {
+    return false
   })
+  if (isSuccessful === false) {
+    return isSuccessful
+  } else {
+    console.log('Updated posts doc')
+    return true
+  }
   // .then((docum) => {
   //   if (image) {
   //     const storageRef = ref(storage, `posts/${docum.id}`)
@@ -97,7 +110,6 @@ export async function addUserPost(
   // )
   //   }
   // })
-  console.log('Updated posts doc')
 }
 
 export async function updateUserPostLikes(
@@ -161,4 +173,25 @@ export async function getAllUsers(setUsers) {
     setUsers([...snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))])
     console.log('Retrieved users')
   })
+}
+
+export async function getUserProfile(uid) {
+  const docRef = doc(db, 'Users', uid)
+  const docSnap = await getDoc(docRef)
+
+  if (docSnap.exists()) {
+    return docSnap.data()
+  } else {
+    return false
+  }
+}
+
+export async function getUserPosts(uid) {
+  const postsRef = collection(db, 'posts')
+  const q = query(
+    postsRef,
+    where('uid', '==', uid),
+    orderBy('timestamp', 'desc'),
+  )
+  return await getDocs(q)
 }

@@ -69,7 +69,9 @@ const Dropdown = () => {
               viewProfile
               onClick={() => {
                 toggling()
-                navigate(`/${userDetails.userName}`)
+                navigate(`/${userDetails.userName}`, {
+                  state: { uid: userDetails.uid },
+                })
               }}
             >
               <Avatar

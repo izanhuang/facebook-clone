@@ -46,7 +46,7 @@ export default function AppRouter() {
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/settings" element={<UpdateProfile />}></Route>
-        <Route path="/{username}" element={<Profile />}></Route>
+        <Route path=":userName" element={<Profile />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </Router>

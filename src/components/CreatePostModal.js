@@ -19,6 +19,7 @@ import { useTheme } from '../contexts/ThemeContext'
 import data from 'emoji-mart/data/twitter.json'
 import { useAuth } from '../contexts/AuthContext'
 import { addUserPost } from '../utils/firebaseUtils'
+import { ErrorMessage } from '../styles/Text'
 
 const CreatePostModal = ({
   showModal,
@@ -29,6 +30,7 @@ const CreatePostModal = ({
 }) => {
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [showEmoji, setShowEmoji] = useState(false)
+  const [error, setError] = useState(false)
   const { theme } = useTheme()
   const { currentUser } = useAuth()
   const inputFileRef = useRef(null)
@@ -48,6 +50,7 @@ const CreatePostModal = ({
     const reader = new FileReader()
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(event.target.files[0])
+      setError(false)
     }
 
     reader.onload = (readerEvent) => {
@@ -75,10 +78,16 @@ const CreatePostModal = ({
     setNewPost({ ...newPost, text: newText })
   }
 
-  const sendPost = (e) => {
+  const sendPost = async (e) => {
     e.preventDefault()
-    addUserPost(currentUser, userDetails, newPost)
-    setNewPost({ text: '', image: '#' })
+    const isSuccessful = await addUserPost(currentUser, userDetails, newPost)
+    console.log(isSuccessful)
+    if (isSuccessful === false) {
+      setError(true)
+    } else {
+      setNewPost({ text: '', image: '#' })
+      setError(false)
+    }
   }
 
   useEffect(() => {
@@ -189,6 +198,7 @@ const CreatePostModal = ({
           </ListItem> */}
         </HomeWrapper>
         <CreatePostWrapper>
+          {error && <ErrorMessage>* Image file size too large</ErrorMessage>}
           <Button
             post
             bold

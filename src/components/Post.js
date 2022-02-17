@@ -70,6 +70,7 @@ const Post = ({
           comment,
         )
         setComment('')
+        setShowComments(true)
         var textarea = document.getElementById('comment')
         textarea.style.height = '36px'
       }
@@ -81,6 +82,7 @@ const Post = ({
     const sharedFrom = {
       originalPostFullName: name,
       originalPostUserName: userName,
+      originalPostUid: uid,
     }
     addUserPost(currentUser, userDetails, newPost, sharedFrom)
     updateUserPostShares(docId, shares)
@@ -108,7 +110,7 @@ const Post = ({
           src={profileImg}
           alt="current profile image"
           onClick={() => {
-            navigate(`/${userName}`)
+            navigate(`/${userName}`, { state: { uid } })
           }}
         />
         <PostCardHeaderLabel>
@@ -116,7 +118,7 @@ const Post = ({
             <p
               className="name link"
               onClick={() => {
-                navigate(`/${userName}`)
+                navigate(`/${userName}`, { state: { uid } })
               }}
             >
               {name}
@@ -128,7 +130,9 @@ const Post = ({
                 <span
                   className="name link"
                   onClick={() => {
-                    navigate(`/${sharedFrom.originalPostUserName}`)
+                    navigate(`/${sharedFrom.originalPostUserName}`, {
+                      state: { uid: sharedFrom.originalPostUid },
+                    })
                   }}
                 >
                   {sharedFrom.originalPostFullName}
@@ -236,7 +240,7 @@ const Post = ({
               src={profileImg}
               alt="current profile image"
               onClick={() => {
-                navigate(`/${userName}`)
+                navigate(`/${userName}`, { state: { uid } })
               }}
             />
             <textarea
@@ -258,7 +262,7 @@ const Post = ({
               setShowComments(true)
             }}
           >
-            View comments
+            {comments.length > 1 ? 'View comments' : 'View comment'}
           </SecondaryText>
         )}
 
@@ -271,7 +275,9 @@ const Post = ({
                     tiny
                     lessMargin
                     onClick={() => {
-                      navigate(`/${comment.userName}`)
+                      navigate(`/${comment.userName}`, {
+                        state: { uid: comment.uid },
+                      })
                     }}
                     src={comment.profileImg}
                     alt="current profile image"
@@ -281,7 +287,9 @@ const Post = ({
                       className="link name"
                       style={{ fontSize: '13px' }}
                       onClick={() => {
-                        navigate(`/${comment.userName}`)
+                        navigate(`/${comment.userName}`, {
+                          state: { uid: comment.uid },
+                        })
                       }}
                     >
                       {comment.name}
