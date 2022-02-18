@@ -16,6 +16,7 @@ export const lightTheme = {
   overlayAlpha: 'rgba(244, 244, 244, 0.8)',
   secondaryIcon: '#6b717a',
   disabled: '-webkit-linear-gradient(rgba(0, 0, 0, 0.1) 0 0);',
+  invert: 'invert(0%)',
 }
 
 export const darkTheme = {
@@ -37,4 +38,5 @@ export const darkTheme = {
   overlayAlpha: 'rgba(11,11,11,0.8)',
   secondaryIcon: '#a8abaf',
   disabled: '-webkit-linear-gradient(rgba(255, 255, 255, 0.1) 0 0);',
+  invert: 'invert(100%);',
 }

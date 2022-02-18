@@ -110,7 +110,7 @@ const Post = ({
           src={profileImg}
           alt="current profile image"
           onClick={() => {
-            navigate(`/${userName}`, { state: { uid } })
+            navigate(`/${userName}`)
           }}
         />
         <PostCardHeaderLabel>
@@ -118,7 +118,7 @@ const Post = ({
             <p
               className="name link"
               onClick={() => {
-                navigate(`/${userName}`, { state: { uid } })
+                navigate(`/${userName}`)
               }}
             >
               {name}
@@ -130,9 +130,7 @@ const Post = ({
                 <span
                   className="name link"
                   onClick={() => {
-                    navigate(`/${sharedFrom.originalPostUserName}`, {
-                      state: { uid: sharedFrom.originalPostUid },
-                    })
+                    navigate(`/${sharedFrom.originalPostUserName}`)
                   }}
                 >
                   {sharedFrom.originalPostFullName}
@@ -240,7 +238,7 @@ const Post = ({
               src={profileImg}
               alt="current profile image"
               onClick={() => {
-                navigate(`/${userName}`, { state: { uid } })
+                navigate(`/${userName}`)
               }}
             />
             <textarea
@@ -275,9 +273,7 @@ const Post = ({
                     tiny
                     lessMargin
                     onClick={() => {
-                      navigate(`/${comment.userName}`, {
-                        state: { uid: comment.uid },
-                      })
+                      navigate(`/${comment.userName}`)
                     }}
                     src={comment.profileImg}
                     alt="current profile image"
@@ -287,9 +283,7 @@ const Post = ({
                       className="link name"
                       style={{ fontSize: '13px' }}
                       onClick={() => {
-                        navigate(`/${comment.userName}`, {
-                          state: { uid: comment.uid },
-                        })
+                        navigate(`/${comment.userName}`)
                       }}
                     >
                       {comment.name}

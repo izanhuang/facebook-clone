@@ -17,9 +17,7 @@ const LeftNav = () => {
         <List>
           <ListItem
             onClick={() => {
-              navigate(`/${userDetails.userName}`, {
-                state: { uid: userDetails.uid },
-              })
+              navigate(`/${userDetails.userName}`)
             }}
           >
             <Avatar

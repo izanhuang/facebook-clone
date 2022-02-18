@@ -123,6 +123,14 @@ export const CenterElement = styled.div`
       height: 60px;
       border-bottom: 1px solid ${({ theme }) => theme.divider};
     `}
+
+  ${(props) =>
+    props.profileHeader &&
+    css`
+      background-color: #fff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      background-color: ${({ theme }) => theme.bgSecondary};
+    `}
 `
 
 export const FlexRightAlign = styled.div`

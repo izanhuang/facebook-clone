@@ -20,6 +20,7 @@ import data from 'emoji-mart/data/twitter.json'
 import { useAuth } from '../contexts/AuthContext'
 import { addUserPost } from '../utils/firebaseUtils'
 import { ErrorMessage } from '../styles/Text'
+import { useNavigate } from 'react-router-dom'
 
 const CreatePostModal = ({
   showModal,
@@ -33,6 +34,7 @@ const CreatePostModal = ({
   const [error, setError] = useState(false)
   const { theme } = useTheme()
   const { currentUser } = useAuth()
+  const navigate = useNavigate()
   const inputFileRef = useRef(null)
   function handleCloseModal() {
     setShowModal(false)
@@ -118,6 +120,9 @@ const CreatePostModal = ({
             small
             src={userDetails.profileImg}
             alt="current profile image"
+            onClick={() => {
+              navigate(`/${userDetails.userName}`)
+            }}
           />
           {userDetails.firstName + ' ' + userDetails.lastName}
         </ListItem>

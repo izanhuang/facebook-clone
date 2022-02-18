@@ -45,4 +45,11 @@ export const Divider = styled.div`
     css`
       margin: 8px 0;
     `}
+
+  ${(props) =>
+    props.profileDivider &&
+    css`
+      width: 92%;
+      margin: 0;
+    `}
 `

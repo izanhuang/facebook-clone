@@ -175,12 +175,13 @@ export async function getAllUsers(setUsers) {
   })
 }
 
-export async function getUserProfile(uid) {
-  const docRef = doc(db, 'Users', uid)
-  const docSnap = await getDoc(docRef)
+export async function getUserProfile(userName) {
+  const postsRef = collection(db, 'Users')
+  const q = query(postsRef, where('userName', '==', userName))
+  const docSnap = await getDocs(q)
 
-  if (docSnap.exists()) {
-    return docSnap.data()
+  if (docSnap.docs[0]) {
+    return docSnap.docs[0].data()
   } else {
     return false
   }
