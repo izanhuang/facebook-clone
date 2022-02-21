@@ -18,6 +18,7 @@ export const GlobalStyles = createGlobalStyle`
   --lemon: #F7B928;
   --purple: #8564df;
   --red: #e41e3f;
+  --placeholder-icon: invert(59%) sepia(11%) saturate(200%) saturate(135%) hue-rotate(176deg) brightness(96%) contrast(94%);
   color-scheme: ${({ theme }) => theme.colorScheme};
 } 
 html {

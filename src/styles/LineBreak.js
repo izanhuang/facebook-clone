@@ -49,7 +49,8 @@ export const Divider = styled.div`
   ${(props) =>
     props.profileDivider &&
     css`
-      width: 92%;
+      max-width: 908px;
       margin: 0;
+      box-sizing: border-box;
     `}
 `

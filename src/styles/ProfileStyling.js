@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ProfileHeader = styled.div`
   padding-top: 50px;
@@ -42,6 +42,14 @@ export const ProfileNav = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+
+  :last-child button {
+    margin-right: 0px;
+  }
+
+  > button:hover {
+    background-image: ${({ theme }) => theme.buttonHover};
   }
 
   > button img {
@@ -92,7 +100,7 @@ export const ProfileContentContainer = styled.div`
 `
 export const LeftContainer = styled.div`
   > div {
-    width: 360px;
+    width: 360px !important;
     box-sizing: border-box;
     margin: 0 8px 16px;
     width: auto;
@@ -108,6 +116,26 @@ export const LeftContainer = styled.div`
     > div {
       width: auto;
     }
+  }
+`
+
+export const IconTextBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 16px;
+
+  p {
+    margin: 0;
+    padding: 6px;
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+    padding: 6px;
+    -webkit-filter: var(--placeholder-icon);
   }
 `
 

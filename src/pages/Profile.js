@@ -5,7 +5,7 @@ import { getUserProfile } from '../utils/firebaseUtils'
 import { Avatar, AvatarOutline } from '../styles/Avatar'
 import { useAuth } from '../contexts/AuthContext'
 import Post from '../components/Post'
-import { PostCard, PostsContainer } from '../styles/PostStyling'
+import { PostCard } from '../styles/PostStyling'
 import { Divider } from '../styles/LineBreak'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { query, collection, where, orderBy } from 'firebase/firestore'
@@ -18,7 +18,10 @@ import {
   ProfileContentContainer,
   LeftContainer,
   RightContainer,
+  IconTextBox,
 } from '../styles/ProfileStyling'
+import EditProfileModal from '../components/EditProfileModal'
+import { DropDownHeader } from '../styles/DropDown'
 
 const Profile = () => {
   const { userName } = useParams()
@@ -52,7 +55,7 @@ const Profile = () => {
       }
     }
     fetchData()
-  }, [])
+  }, [userName])
 
   const postsRef = collection(db, 'posts')
   const q = query(
@@ -79,8 +82,9 @@ const Profile = () => {
                   <h1>
                     {profileDetails.firstName + ' ' + profileDetails.lastName}
                   </h1>
-                  <Divider profileDivider />
+
                   <ProfileNavContainer>
+                    <Divider profileDivider />
                     <ProfileNav>
                       {currentUser.uid !== uid && (
                         <button className="actionButton">
@@ -101,15 +105,7 @@ const Profile = () => {
                           <span>Message</span>
                         </button>
                       )}
-                      {currentUser.uid === uid && (
-                        <button className="secondaryButton">
-                          <img
-                            src="https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/OR6SzrfoMFg.png"
-                            alt="edit profile icon"
-                          />
-                          <span>Edit Profile</span>
-                        </button>
-                      )}
+                      {currentUser.uid === uid && <EditProfileModal />}
                     </ProfileNav>
                   </ProfileNavContainer>
                 </ProfileHeader>
@@ -117,28 +113,58 @@ const Profile = () => {
               <ProfileContentContainer>
                 <LeftContainer>
                   <PostCard>
-                    <div>About</div>
-                    <p>Gender {profileDetails.genderCode}</p>
-                    <p>Born {profileDetails.birthDate}</p>
-                    <p>
-                      Joined{' '}
-                      {
-                        monthNames[
+                    <DropDownHeader noPadding>About</DropDownHeader>
+                    <IconTextBox>
+                      <img
+                        src={
+                          profileDetails.genderCode === 'Male'
+                            ? 'https://static.xx.fbcdn.net/rsrc.php/v3/yi/r/rodGQv9jZg5.png'
+                            : profileDetails.genderCode === 'Female'
+                            ? 'https://static.xx.fbcdn.net/rsrc.php/v3/yo/r/wfYa2HPiNGU.png'
+                            : 'https://static.xx.fbcdn.net/rsrc.php/v3/yS/r/rS6cU_2DjwE.png'
+                        }
+                        alt="gender code icon"
+                      />
+                      <p>Gender {profileDetails.genderCode}</p>
+                    </IconTextBox>
+
+                    <IconTextBox>
+                      <img
+                        src="https://static.xx.fbcdn.net/rsrc.php/v3/yB/r/ODICuZSjkMe.png"
+                        alt="birthday cake icon"
+                      />
+                      <p>Born {profileDetails.birthDate}</p>
+                    </IconTextBox>
+                    <IconTextBox>
+                      <img
+                        src="https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/CZzXbYX7tI2.png"
+                        alt="date joined icon"
+                      />
+                      <p>
+                        Joined{' '}
+                        {
+                          monthNames[
+                            new Date(
+                              profileDetails.createdDate?.toDate(),
+                            ).getMonth()
+                          ]
+                        }
+                        {' ' +
                           new Date(
                             profileDetails.createdDate?.toDate(),
-                          ).getMonth()
-                        ]
-                      }
-                      {' ' +
-                        new Date(
-                          profileDetails.createdDate?.toDate(),
-                        ).getFullYear()}
-                    </p>
+                          ).getFullYear()}
+                      </p>
+                    </IconTextBox>
+                  </PostCard>
+                  <PostCard>
+                    <DropDownHeader noPadding>Friends</DropDownHeader>
                   </PostCard>
                 </LeftContainer>
                 {timeline && (
                   <RightContainer>
-                    <PostCard>Posts</PostCard>
+                    <PostCard>
+                      <DropDownHeader noPadding>Posts</DropDownHeader>
+                    </PostCard>
                     {timeline &&
                       timeline.docs.map((post) => (
                         <Post

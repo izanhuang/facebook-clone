@@ -31,6 +31,12 @@ export const DropDownHeader = styled.div`
     css`
       padding: 16px 0 4px 8px;
     `}
+
+  ${(props) =>
+    props.noPadding &&
+    css`
+      padding: 0;
+    `}
 `
 
 export const DropDownListContainer = styled.div`

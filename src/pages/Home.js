@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import LeftNav from '../components/LeftNav'
 import CreateAPost from '../components/CreateAPost'
 import {
@@ -10,8 +10,15 @@ import {
 } from '../styles/Wrapper'
 import Contacts from '../components/Contacts'
 import Posts from '../components/Posts'
+import { useLocation } from 'react-router-dom'
 
 const Home = () => {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   return (
     <Wrapper>
       <PagePadding>

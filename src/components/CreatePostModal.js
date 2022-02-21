@@ -83,10 +83,10 @@ const CreatePostModal = ({
   const sendPost = async (e) => {
     e.preventDefault()
     const isSuccessful = await addUserPost(currentUser, userDetails, newPost)
-    console.log(isSuccessful)
     if (isSuccessful === false) {
       setError(true)
     } else {
+      handleCloseModal()
       setNewPost({ text: '', image: '#' })
       setError(false)
     }
