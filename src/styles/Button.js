@@ -404,3 +404,39 @@ export const CreatePostButton = styled.button`
     width: 100%;
   }
 `
+
+export const SecondaryButton = styled.button`
+  margin: 0;
+  width: auto;
+  height: 36px;
+  padding: 0 12px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: ${({ theme }) => theme.text};
+  background-color: ${({ theme }) => theme.iconBg};
+`
+
+export const ActiveButton = styled.button`
+  margin: 0;
+  width: auto;
+  height: 36px;
+  padding: 0 16px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #fff;
+  background-color: #1b74e4;
+`

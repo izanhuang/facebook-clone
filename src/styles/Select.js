@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Select = styled.select`
   border-radius: 4px;
@@ -29,4 +29,15 @@ export const Select = styled.select`
   @media (max-width: 415px) {
     width: 100px;
   }
+
+  ${(props) =>
+    props.editGender &&
+    css`
+      background-color: ${({ theme }) => theme.iconBg};
+      cursor: pointer;
+
+      option:selected {
+        border: 1px solid blue;
+      }
+    `}
 `

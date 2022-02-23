@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const ProfileHeader = styled.div`
   padding-top: 50px;
@@ -100,13 +100,18 @@ export const ProfileContentContainer = styled.div`
 `
 export const LeftContainer = styled.div`
   > div {
-    width: 360px !important;
+    width: 360px;
     box-sizing: border-box;
     margin: 0 8px 16px;
-    width: auto;
   }
 
   @media (max-width: 925px) {
+    > div {
+      width: 500px;
+    }
+  }
+
+  @media (max-width: 535px) {
     > div {
       width: 451px;
     }
@@ -145,7 +150,14 @@ export const RightContainer = styled.div`
     box-sizing: border-box;
     margin: 0 8px 16px;
   }
+
   @media (max-width: 925px) {
+    > div {
+      width: 500px;
+    }
+  }
+
+  @media (max-width: 535px) {
     > div {
       width: 451px;
     }
@@ -156,4 +168,32 @@ export const RightContainer = styled.div`
       width: auto;
     }
   }
+`
+
+export const EditProfileContent = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  .center {
+    align-self: center;
+    padding: 16px 16px 0 16px;
+  }
+`
+
+export const EditProfileHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 16px 4px;
+
+  a {
+    cursor: pointer;
+  }
+`
+
+export const EditProfileFooter = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 4px 16px 16px 0;
 `

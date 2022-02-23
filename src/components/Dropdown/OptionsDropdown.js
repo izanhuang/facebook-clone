@@ -36,6 +36,7 @@ const Dropdown = () => {
     try {
       await logout()
       navigate('/')
+      window.location.reload()
     } catch (error) {
       setError('Failed to log out')
     }
