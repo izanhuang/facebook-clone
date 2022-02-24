@@ -53,9 +53,31 @@ export async function updateUserDetails(userDetails) {
   const docRef = doc(db, 'Users', userDetails.uid)
   // console.log('User data ', userDetails)
   const payload = userDetails
-  await setDoc(docRef, payload)
-  console.log('Updated users doc')
+  const isSuccessful = await setDoc(docRef, payload).catch((e) => {
+    return false
+  })
+  if (isSuccessful === false) {
+    return isSuccessful
+  } else {
+    console.log('Updated users doc')
+    return true
+  }
 }
+
+// export async function updateUserDetailsOnAllPosts(uid, profileImg, userName, name) {
+//   const postsRef = collection(db, 'posts')
+//   const q = query(
+//     postsRef,
+//     where('uid', '==', uid)
+//   )
+//   await getDocs(q)
+
+//   const docRef = doc(db, 'posts', userDetails.uid)
+//   // console.log('User data ', userDetails)
+//   const payload = userDetails
+//   await setDoc(docRef, payload)
+//   console.log('Updated users doc')
+// }
 
 export async function addUserPost(
   currentUser,

@@ -40,6 +40,12 @@ export const Avatar = styled.img`
     css`
       margin: 2px 6px 0 0;
     `}
+
+    ${(props) =>
+      props.noPointer &&
+      css`
+        cursor: auto;
+      `}
 `
 
 export const AvatarOutline = styled.div`

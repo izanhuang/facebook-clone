@@ -51,4 +51,23 @@ export const ErrorMessage = styled.p`
   margin-top: 0;
   color: var(--red);
   font-size: 14px;
+
+  ${(props) =>
+    props.paddingLeft &&
+    css`
+      padding-left: 16px;
+      margin: 0;
+    `}
+`
+export const SuccessMessage = styled.p`
+  margin-top: 0;
+  color: var(--green);
+  font-size: 14px;
+
+  ${(props) =>
+    props.paddingLeft &&
+    css`
+      padding-left: 16px;
+      margin: 0;
+    `}
 `

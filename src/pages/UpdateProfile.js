@@ -11,8 +11,12 @@ import { Label } from '../styles/Label'
 import { DropDownHeader } from '../styles/DropDown'
 import Tabs, { TabPane } from 'rc-tabs'
 import { useData } from '../contexts/DataContext'
+import { updateUserDetails } from '../utils/firebaseUtils'
+import { ErrorMessage, SuccessMessage } from '../styles/Text'
 
 const UpdateProfile = () => {
+  const firstNameRef = useRef()
+  const lastNameRef = useRef()
   const userNameRef = useRef()
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -24,6 +28,51 @@ const UpdateProfile = () => {
   const navigate = useNavigate()
 
   const mounted = useMounted()
+
+  async function handleNameChange(e) {
+    e.preventDefault()
+    if (
+      e.target.id === 'firstName' &&
+      firstNameRef.current.value !== userDetails.firstName
+    ) {
+      var isSuccessful = await updateUserDetails({
+        ...userDetails,
+        firstName: firstNameRef.current.value,
+      })
+    } else if (
+      e.target.id === 'lastName' &&
+      lastNameRef.current.value !== userDetails.lastName
+    ) {
+      var isSuccessful = await updateUserDetails({
+        ...userDetails,
+        lastName: lastNameRef.current.value,
+      })
+    } else if (
+      e.target.id === 'userName' &&
+      userNameRef.current.value !== userDetails.userName &&
+      userNameRef.current.value.replace(/\s/g, '') !== '' &&
+      /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?\s]+/.test(
+        userNameRef.current.value,
+      ) === false &&
+      userNameRef.current.value !== 'friends' &&
+      userNameRef.current.value !== 'marketplace' &&
+      userNameRef.current.value !== 'group' &&
+      userNameRef.current.value !== 'news'
+    ) {
+      var isSuccessful = await updateUserDetails({
+        ...userDetails,
+        userName: userNameRef.current.value,
+      })
+    } else {
+      var isSuccessful = false
+    }
+
+    if (isSuccessful === false) {
+      setError('* Error updating field - try a different value')
+    } else {
+      setError('Successfully updated!')
+    }
+  }
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -64,6 +113,59 @@ const UpdateProfile = () => {
               <DropDownHeader noPaddingLeft>Settings</DropDownHeader>
               <Tabs defaultActiveKey="1">
                 <TabPane tab="General" key="1">
+                  {error ===
+                    '* Error updating field - try a different value' && (
+                    <ErrorMessage>{error}</ErrorMessage>
+                  )}
+                  {error === 'Successfully updated!' && (
+                    <SuccessMessage>{error}</SuccessMessage>
+                  )}
+                  <Label bold marginTop>
+                    First name
+                  </Label>
+                  <Input
+                    toggle
+                    ref={firstNameRef}
+                    type="text"
+                    defaultValue={userDetails.firstName}
+                    autoComplete="new-password"
+                    required
+                  />
+                  <Button
+                    auto
+                    update
+                    id="firstName"
+                    disabled={loading}
+                    type="button"
+                    onClick={(e) => {
+                      handleNameChange(e)
+                    }}
+                  >
+                    Save
+                  </Button>
+                  <Label bold marginTop>
+                    Last name
+                  </Label>
+                  <Input
+                    toggle
+                    ref={lastNameRef}
+                    type="text"
+                    defaultValue={userDetails.lastName}
+                    autoComplete="new-password"
+                    required
+                  />
+                  <Button
+                    auto
+                    update
+                    id="lastName"
+                    disabled={loading}
+                    type="button"
+                    onClick={(e) => {
+                      handleNameChange(e)
+                    }}
+                  >
+                    Save
+                  </Button>
                   <Label bold marginTop>
                     Username
                   </Label>
@@ -75,8 +177,17 @@ const UpdateProfile = () => {
                     autoComplete="new-password"
                     required
                   />
-                  <Button auto update disabled={loading} type="submit">
-                    Save changes
+                  <Button
+                    auto
+                    update
+                    id="userName"
+                    disabled={loading}
+                    type="button"
+                    onClick={(e) => {
+                      handleNameChange(e)
+                    }}
+                  >
+                    Save
                   </Button>
                 </TabPane>
                 <TabPane tab="Login" key="2">

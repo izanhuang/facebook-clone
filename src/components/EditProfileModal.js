@@ -97,7 +97,6 @@ const EditProfileModal = ({ showEditProfileModal }) => {
         isOpen={showModal}
         contentLabel="onRequestClose Example"
         onRequestClose={handleCloseModal}
-        // style={customStyles}
         className="Modal"
         overlayClassName="Overlay"
       >
@@ -123,10 +122,13 @@ const EditProfileModal = ({ showEditProfileModal }) => {
           <Avatar
             className="center"
             large
+            noPointer
             src={newProfileImg}
             alt="profile image"
           />
-          {error && <ErrorMessage>* Image file size too large</ErrorMessage>}
+          {error && (
+            <ErrorMessage paddingLeft>* Image file size too large</ErrorMessage>
+          )}
           <EditProfileHeader>
             <DropDownHeader noPadding>Gender</DropDownHeader>
           </EditProfileHeader>
