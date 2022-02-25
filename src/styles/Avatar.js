@@ -54,21 +54,23 @@ export const Avatar = styled.img`
         width: 100%;
         height: auto;
         margin: 0;
+        min-width: 101.98px;
+        min-height: 101.98px;
 
-        // @media (max-width: 925px) {
-        //   width: 148.66px;
-        //   height: 148.66px;
-        // }
+        @media (max-width: 925px) {
+          min-width: 148.66px;
+          min-height: 148.66px;
+        }
 
-        // @media (max-width: 535px) {
-        //   width: 132.33px;
-        //   height: 132.33px;
-        // }
+        @media (max-width: 535px) {
+          min-width: 132.33px;
+          min-height: 132.33px;
+        }
 
-        // @media (max-width: 375px) {
-        //   width: 96.33px;
-        //   height: 96.33px;
-        // }
+        @media (max-width: 375px) {
+          min-width: 96.33px;
+          min-height: 96.33px;
+        }
       `}
 `
 

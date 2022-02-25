@@ -244,7 +244,7 @@ const Profile = () => {
                               className="link name"
                               style={{ fontSize: '13px' }}
                             >
-                              FirstName LastName
+                              Firstname Lastname
                             </p>
                           </FriendsCard> */}
                         </FriendsWrapper>
