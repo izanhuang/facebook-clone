@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Wrapper, PagePadding, CenterElement } from '../styles/Wrapper'
-import { useParams } from 'react-router-dom'
-import { getUserProfile } from '../utils/firebaseUtils'
+import { useNavigate, useParams } from 'react-router-dom'
+import {
+  getUserProfile,
+  getUserFriendsList,
+  addUserFriend,
+  liveUserFriendsList,
+  getFriendsInfo,
+} from '../utils/firebaseUtils'
 import { Avatar, AvatarOutline } from '../styles/Avatar'
 import { useAuth } from '../contexts/AuthContext'
 import Post from '../components/Post'
@@ -19,16 +25,24 @@ import {
   LeftContainer,
   RightContainer,
   IconTextBox,
+  FriendsWrapper,
+  FriendsCard,
+  FriendsContainer,
 } from '../styles/ProfileStyling'
 import EditProfileModal from '../components/EditProfileModal'
 import { DropDownHeader } from '../styles/DropDown'
+import { SecondaryText } from '../styles/Text'
 
 const Profile = () => {
   const { userName } = useParams()
   const [profileFound, setProfileFound] = useState(true)
   const [profileDetails, setProfileDetails] = useState(false)
   const [uid, setUid] = useState('')
+  const [userFriendsList, setUserFriendsList] = useState([])
+  const [profileFriendsList, setProfileFriendsList] = useState([])
+  const [friendsInfo, setFriendsInfo] = useState([])
   const { currentUser } = useAuth()
+  const navigate = useNavigate()
   const monthNames = [
     'January',
     'February',
@@ -53,9 +67,18 @@ const Profile = () => {
       } else {
         setProfileFound(false)
       }
+      const currentUserFriendsList = await getUserFriendsList(currentUser.uid)
+      const profileUserFriendsList = await getUserFriendsList(userProfile.uid)
+      setUserFriendsList(currentUserFriendsList)
+      setProfileFriendsList(profileUserFriendsList)
+      getFriendsInfo(profileUserFriendsList, setFriendsInfo)
     }
     fetchData()
   }, [userName])
+
+  // useEffect(() => {
+  //   getFriendsInfo(profileFriendsList, setFriendsInfo)
+  // }, [userFriendsList])
 
   const postsRef = collection(db, 'posts')
   const q = query(
@@ -87,13 +110,30 @@ const Profile = () => {
                     <Divider profileDivider />
                     <ProfileNav>
                       {currentUser.uid !== uid && (
-                        <button className="actionButton">
+                        <button
+                          className="actionButton"
+                          onClick={() => {
+                            addUserFriend(
+                              currentUser.uid,
+                              profileDetails.uid,
+                              setUserFriendsList,
+                              setProfileFriendsList,
+                            )
+                          }}
+                        >
                           <img
-                            src="https://static.xx.fbcdn.net/rsrc.php/v3/yz/r/JonZjQBHWuh.png"
-                            // https://static.xx.fbcdn.net/rsrc.php/v3/yF/r/5nzjDogBZbf.png
+                            src={
+                              userFriendsList.includes(profileDetails.uid)
+                                ? 'https://static.xx.fbcdn.net/rsrc.php/v3/yF/r/5nzjDogBZbf.png'
+                                : 'https://static.xx.fbcdn.net/rsrc.php/v3/yz/r/JonZjQBHWuh.png'
+                            }
                             alt="add friend icon"
                           />
-                          <span>Add Friend</span>
+                          <span>
+                            {userFriendsList.includes(profileDetails.uid)
+                              ? 'Friends'
+                              : 'Add Friend'}
+                          </span>
                         </button>
                       )}
                       {currentUser.uid !== uid && (
@@ -158,6 +198,58 @@ const Profile = () => {
                   </PostCard>
                   <PostCard>
                     <DropDownHeader noPadding>Friends</DropDownHeader>
+                    <SecondaryText
+                      style={{
+                        fontSize: '17px',
+                        margin: '0',
+                      }}
+                    >
+                      {profileFriendsList.length === 1
+                        ? profileFriendsList.length + ' friend'
+                        : profileFriendsList.length + ' friends'}
+                    </SecondaryText>
+                    {friendsInfo && profileFriendsList.length > 0 && (
+                      <FriendsContainer>
+                        <FriendsWrapper
+                          numOfFriends={profileFriendsList.length}
+                        >
+                          {friendsInfo.map((friend) => (
+                            <FriendsCard key={friend.id}>
+                              <Avatar
+                                boxed
+                                src={friend.profileImg}
+                                alt="friend profile image"
+                                onClick={() => {
+                                  navigate(`/${friend.userName}`)
+                                }}
+                              />
+                              <p
+                                className="link name"
+                                style={{ fontSize: '13px' }}
+                                onClick={() => {
+                                  navigate(`/${friend.userName}`)
+                                }}
+                              >
+                                {friend.firstName + ' ' + friend.lastName}
+                              </p>
+                            </FriendsCard>
+                          ))}
+                          {/* <FriendsCard key={1}>
+                            <Avatar
+                              boxed
+                              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                              alt="friend profile image"
+                            />
+                            <p
+                              className="link name"
+                              style={{ fontSize: '13px' }}
+                            >
+                              FirstName LastName
+                            </p>
+                          </FriendsCard> */}
+                        </FriendsWrapper>
+                      </FriendsContainer>
+                    )}
                   </PostCard>
                 </LeftContainer>
                 {timeline && (

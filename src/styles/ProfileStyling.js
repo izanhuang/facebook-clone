@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ProfileHeader = styled.div`
   padding-top: 50px;
@@ -44,7 +44,7 @@ export const ProfileNav = styled.div`
     align-items: center;
   }
 
-  :last-child button {
+  :last-column button {
     margin-right: 0px;
   }
 
@@ -196,4 +196,38 @@ export const EditProfileFooter = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   padding: 4px 16px 16px 0;
+`
+
+export const FriendsContainer = styled.div``
+
+export const FriendsWrapper = styled.div`
+  padding: 6px 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: auto;
+  align-items: flex-start;
+  justify-content: flex-start;
+  column-gap: 12px;
+
+  > div {
+    flex-shrink: 0;
+    flex-grow: 1;
+    width: 30%;
+  }
+
+  ${(props) =>
+    props.numOfFriends < 3 &&
+    css`
+      > div {
+        flex-grow: 0;
+      }
+    `}
+`
+
+export const FriendsCard = styled.div`
+  display: inline-block;
+  margin-bottom: 12px;
+  > p {
+    margin: 0;
+  }
 `

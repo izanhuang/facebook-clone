@@ -22,7 +22,10 @@ import { useAuth } from '../../contexts/AuthContext'
 import { Alert } from '../../styles/Alert'
 import useMounted from '../../hooks/useMounted'
 import { SecondaryText } from '../../styles/Text'
-import { updateUserDetails } from '../../utils/firebaseUtils'
+import {
+  createUserFriendDoc,
+  updateUserDetails,
+} from '../../utils/firebaseUtils'
 
 export default function Signup() {
   const firstNameRef = useRef()
@@ -91,6 +94,7 @@ export default function Signup() {
       theme,
     }
     updateUserDetails(userDetails)
+    createUserFriendDoc(currentUser.uid)
   }
 
   async function handleSubmit(e) {

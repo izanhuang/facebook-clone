@@ -218,3 +218,74 @@ export async function getUserPosts(uid) {
   )
   return await getDocs(q)
 }
+
+export async function createUserFriendDoc(uid) {
+  await addDoc(doc(db, 'Friends', uid), {
+    friendsList: [],
+  })
+  console.log('Created friend doc')
+}
+
+export async function getUserFriendsList(uid) {
+  const docRef = doc(db, 'Friends', uid)
+  const docSnap = await getDoc(docRef)
+
+  if (docSnap.exists()) {
+    return docSnap.data().friendsList
+  }
+}
+
+export async function getUserFriendsListProfiles(userFriendsList) {
+  // const usersRef = collection(db, "Users");
+  // const q = query(usersRef, where('uid', 'in', userFriendsList));
+
+  const q = query(collection(db, 'Users'), where('uid', 'in', userFriendsList))
+
+  const querySnapshot = await getDocs(q)
+  return querySnapshot
+}
+
+export async function addUserFriend(
+  uid,
+  friendUid,
+  setUserFriendsList,
+  setProfileFriendsList,
+) {
+  var friendsList = await getUserFriendsList(uid)
+  var newFriendFriendsList = await getUserFriendsList(friendUid)
+
+  if (!friendsList.includes(friendUid)) {
+    friendsList = [...friendsList, friendUid]
+    newFriendFriendsList = [...newFriendFriendsList, uid]
+    console.log('Added friend')
+  } else {
+    const uidIndex = friendsList.indexOf(friendUid)
+    friendsList.splice(uidIndex, 1)
+    const friendUidIndex = newFriendFriendsList.indexOf(uid)
+    newFriendFriendsList.splice(friendUidIndex, 1)
+    console.log('Removed friend')
+  }
+  await setDoc(doc(db, 'Friends', uid), {
+    friendsList: friendsList,
+  })
+  await setDoc(doc(db, 'Friends', friendUid), {
+    friendsList: newFriendFriendsList,
+  })
+
+  setUserFriendsList(await getUserFriendsList(uid))
+  setProfileFriendsList(await getUserFriendsList(friendUid))
+}
+
+export async function getFriendsInfo(friendsList, setFriendsInfo) {
+  var friendsInfo = []
+  if (friendsList.length !== 0) {
+    const q = query(collection(db, 'Users'), where('uid', 'in', friendsList))
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc) => {
+      friendsInfo = [...friendsInfo, doc.data()]
+    })
+    setFriendsInfo(friendsInfo)
+  } else {
+    setFriendsInfo(friendsInfo)
+  }
+}

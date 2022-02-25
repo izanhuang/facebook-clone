@@ -46,6 +46,30 @@ export const Avatar = styled.img`
       css`
         cursor: auto;
       `}
+
+    ${(props) =>
+      props.boxed &&
+      css`
+        border-radius: 8px;
+        width: 100%;
+        height: auto;
+        margin: 0;
+
+        // @media (max-width: 925px) {
+        //   width: 148.66px;
+        //   height: 148.66px;
+        // }
+
+        // @media (max-width: 535px) {
+        //   width: 132.33px;
+        //   height: 132.33px;
+        // }
+
+        // @media (max-width: 375px) {
+        //   width: 96.33px;
+        //   height: 96.33px;
+        // }
+      `}
 `
 
 export const AvatarOutline = styled.div`
