@@ -32,6 +32,7 @@ import {
 import EditProfileModal from '../components/EditProfileModal'
 import { DropDownHeader } from '../styles/DropDown'
 import { SecondaryText } from '../styles/Text'
+import { useData } from '../contexts/DataContext'
 
 const Profile = () => {
   const { userName } = useParams()
@@ -42,6 +43,7 @@ const Profile = () => {
   const [profileFriendsList, setProfileFriendsList] = useState([])
   const [friendsInfo, setFriendsInfo] = useState([])
   const { currentUser } = useAuth()
+  const { userDetails } = useData()
   const navigate = useNavigate()
   const monthNames = [
     'January',
@@ -76,9 +78,12 @@ const Profile = () => {
     fetchData()
   }, [userName])
 
-  // useEffect(() => {
-  //   getFriendsInfo(profileFriendsList, setFriendsInfo)
-  // }, [userFriendsList])
+  useEffect(() => {
+    async function updateFriendsInfo() {
+      await getFriendsInfo(profileFriendsList, setFriendsInfo)
+    }
+    updateFriendsInfo()
+  }, [profileFriendsList])
 
   const postsRef = collection(db, 'posts')
   const q = query(
@@ -100,7 +105,14 @@ const Profile = () => {
               <CenterElement profileHeader>
                 <ProfileHeader>
                   <AvatarOutline>
-                    <Avatar large src={profileDetails.profileImg} />
+                    <Avatar
+                      large
+                      src={
+                        currentUser.uid !== uid
+                          ? profileDetails.profileImg
+                          : userDetails.profileImg
+                      }
+                    />
                   </AvatarOutline>
                   <h1>
                     {profileDetails.firstName + ' ' + profileDetails.lastName}
@@ -157,15 +169,26 @@ const Profile = () => {
                     <IconTextBox>
                       <img
                         src={
-                          profileDetails.genderCode === 'Male'
+                          currentUser.uid !== uid
+                            ? profileDetails.genderCode === 'Male'
+                              ? 'https://static.xx.fbcdn.net/rsrc.php/v3/yi/r/rodGQv9jZg5.png'
+                              : profileDetails.genderCode === 'Female'
+                              ? 'https://static.xx.fbcdn.net/rsrc.php/v3/yo/r/wfYa2HPiNGU.png'
+                              : 'https://static.xx.fbcdn.net/rsrc.php/v3/yS/r/rS6cU_2DjwE.png'
+                            : userDetails.genderCode === 'Male'
                             ? 'https://static.xx.fbcdn.net/rsrc.php/v3/yi/r/rodGQv9jZg5.png'
-                            : profileDetails.genderCode === 'Female'
+                            : userDetails.genderCode === 'Female'
                             ? 'https://static.xx.fbcdn.net/rsrc.php/v3/yo/r/wfYa2HPiNGU.png'
                             : 'https://static.xx.fbcdn.net/rsrc.php/v3/yS/r/rS6cU_2DjwE.png'
                         }
                         alt="gender code icon"
                       />
-                      <p>Gender {profileDetails.genderCode}</p>
+                      <p>
+                        Gender{' '}
+                        {currentUser.uid !== uid
+                          ? profileDetails.genderCode
+                          : userDetails.genderCode}
+                      </p>
                     </IconTextBox>
 
                     <IconTextBox>

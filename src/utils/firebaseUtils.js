@@ -50,12 +50,29 @@ export function loadUserDetails(currentUser, setUserDetails, setTheme) {
 }
 
 export async function updateUserDetails(userDetails) {
-  const docRef = doc(db, 'Users', userDetails.uid)
-  // console.log('User data ', userDetails)
+  const usersRef = doc(db, 'Users', userDetails.uid)
   const payload = userDetails
-  const isSuccessful = await setDoc(docRef, payload).catch((e) => {
-    return false
-  })
+  const postsRef = collection(db, 'posts')
+  const q = query(postsRef, where('uid', '==', userDetails.uid))
+  const postDataToUpdate = {
+    profileImg: userDetails.profileImg,
+    userName: userDetails.userName,
+    name: userDetails.firstName + ' ' + userDetails.lastName,
+  }
+  const isSuccessful = await setDoc(usersRef, payload)
+    .then(async () => {
+      const querySnapshot = await getDocs(q)
+      querySnapshot.forEach((document) => {
+        async function updatePostDoc() {
+          const postRef = doc(db, 'posts', document.id)
+          await updateDoc(postRef, postDataToUpdate)
+        }
+        updatePostDoc()
+      })
+    })
+    .catch((e) => {
+      return false
+    })
   if (isSuccessful === false) {
     return isSuccessful
   } else {
@@ -233,16 +250,6 @@ export async function getUserFriendsList(uid) {
   if (docSnap.exists()) {
     return docSnap.data().friendsList
   }
-}
-
-export async function getUserFriendsListProfiles(userFriendsList) {
-  // const usersRef = collection(db, "Users");
-  // const q = query(usersRef, where('uid', 'in', userFriendsList));
-
-  const q = query(collection(db, 'Users'), where('uid', 'in', userFriendsList))
-
-  const querySnapshot = await getDocs(q)
-  return querySnapshot
 }
 
 export async function addUserFriend(

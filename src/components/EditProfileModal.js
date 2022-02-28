@@ -16,12 +16,11 @@ import { Select } from '../styles/Select'
 import { ErrorMessage } from '../styles/Text'
 import { updateUserDetails } from '../utils/firebaseUtils'
 
-const EditProfileModal = ({ showEditProfileModal }) => {
-  const [showModal, setShowModal] = useState(showEditProfileModal)
+const EditProfileModal = () => {
+  const [showModal, setShowModal] = useState(false)
   const { userDetails } = useData()
   const [newProfileImg, setNewProfileImg] = useState(userDetails.profileImg)
   const [error, setError] = useState(false)
-  const { currentUser } = useAuth()
   const newProfileImgRef = useRef(null)
   const editGenderRef = useRef()
 
@@ -41,7 +40,6 @@ const EditProfileModal = ({ showEditProfileModal }) => {
   }
 
   function handleCloseModal() {
-    console.log(editGenderRef.current.value)
     setShowModal(false)
     removeImage()
   }
@@ -77,10 +75,9 @@ const EditProfileModal = ({ showEditProfileModal }) => {
     if (isSuccessful === false) {
       setError(true)
     } else {
-      handleCloseModal()
-      setNewProfileImg(userDetails.profileImg)
+      // setNewProfileImg(userDetails.profileImg)
       setError(false)
-      window.location.reload()
+      setShowModal(false)
     }
   }
 
