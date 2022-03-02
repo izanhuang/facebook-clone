@@ -34,7 +34,7 @@ const ForgotPassword = () => {
       await resetPassword(emailRef.current.value)
       setMessage('Check your inbox for further instructions')
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       setError('Failed to reset password')
     }
     setLoading(false)

@@ -61,7 +61,6 @@ const Post = ({
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       if (comment.replace(/\s/g, '') !== '') {
-        console.log(comment)
         updateUserPostComments(
           docId,
           currentUser,

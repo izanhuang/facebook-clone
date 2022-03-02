@@ -11,7 +11,7 @@ import { Label } from '../styles/Label'
 import { DropDownHeader } from '../styles/DropDown'
 import Tabs, { TabPane } from 'rc-tabs'
 import { useData } from '../contexts/DataContext'
-import { updateUserDetails } from '../utils/firebaseUtils'
+import { isUserNameAvaliable, updateUserDetails } from '../utils/firebaseUtils'
 import { ErrorMessage, SuccessMessage } from '../styles/Text'
 
 const UpdateProfile = () => {
@@ -59,16 +59,22 @@ const UpdateProfile = () => {
       userNameRef.current.value !== 'group' &&
       userNameRef.current.value !== 'news'
     ) {
-      var isSuccessful = await updateUserDetails({
-        ...userDetails,
-        userName: userNameRef.current.value,
-      })
+      if (await isUserNameAvaliable(userNameRef.current.value)) {
+        var isSuccessful = await updateUserDetails({
+          ...userDetails,
+          userName: userNameRef.current.value,
+        })
+      } else {
+        var isSuccessful = '* Username taken.'
+      }
     } else {
       var isSuccessful = false
     }
 
     if (isSuccessful === false) {
       setError('* Error updating field - try a different value')
+    } else if (isSuccessful == '* Username taken.') {
+      setError('* Username taken.')
     } else {
       setError('Successfully updated!')
     }
@@ -77,7 +83,7 @@ const UpdateProfile = () => {
   function handleSubmit(e) {
     e.preventDefault()
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError('Passwords do not match')
+      return setError('* Passwords do not match')
     }
 
     const promises = []
@@ -94,10 +100,10 @@ const UpdateProfile = () => {
 
     Promise.all(promises)
       .then(() => {
-        navigate('/')
+        setError('Successfully updated!')
       })
       .catch(() => {
-        setError('Failed to update account')
+        setError('* Failed to update account.')
       })
       .finally(() => {
         mounted.current && setLoading(false)
@@ -115,6 +121,9 @@ const UpdateProfile = () => {
                 <TabPane tab="General" key="1">
                   {error ===
                     '* Error updating field - try a different value' && (
+                    <ErrorMessage>{error}</ErrorMessage>
+                  )}
+                  {error === '* Username taken.' && (
                     <ErrorMessage>{error}</ErrorMessage>
                   )}
                   {error === 'Successfully updated!' && (
@@ -191,6 +200,11 @@ const UpdateProfile = () => {
                   </Button>
                 </TabPane>
                 <TabPane tab="Login" key="2">
+                  {error === 'Successfully updated!' ? (
+                    <SuccessMessage>{error}</SuccessMessage>
+                  ) : (
+                    <ErrorMessage>{error}</ErrorMessage>
+                  )}
                   <Label bold marginTop>
                     Email
                   </Label>
@@ -208,7 +222,6 @@ const UpdateProfile = () => {
                   <Label bold marginTop>
                     Password
                   </Label>
-                  {/* <Label>Current</Label> */}
                   <Input
                     toggle
                     ref={passwordRef}

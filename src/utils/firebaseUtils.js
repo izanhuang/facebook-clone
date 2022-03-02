@@ -28,7 +28,7 @@ export function loadUserPlaceholder(setUserDetails) {
         .map((doc) => ({ ...doc.data(), id: doc.id }))
         .filter((doc) => doc.id === 'Placeholder'),
     )
-    console.log('Loaded placeholder')
+    // console.log('Loaded placeholder')
   })
 }
 
@@ -46,12 +46,22 @@ export function loadUserDetails(currentUser, setUserDetails, setTheme) {
         .map((doc) => doc.theme),
     )
   })
-  console.log('Loaded user details')
+  // console.log('Loaded user details')
 }
 
 async function updatePostDocData(docId, postDataToUpdate) {
   const postRef = doc(db, 'posts', docId)
   await updateDoc(postRef, postDataToUpdate)
+}
+
+export async function isUserNameAvaliable(userName) {
+  const q = query(collection(db, 'Users'), where('userName', '==', userName))
+  const querySnapshot = await getDocs(q)
+  if (querySnapshot.empty) {
+    return true
+  } else {
+    return false
+  }
 }
 
 export async function updateUserDetails(userDetails) {
@@ -80,7 +90,7 @@ export async function updateUserDetails(userDetails) {
   if (isSuccessful === false) {
     return isSuccessful
   } else {
-    console.log('Updated users doc')
+    // console.log('Updated users doc')
     return true
   }
 }
@@ -89,7 +99,7 @@ export async function createUserFriendDoc(uid) {
   await setDoc(doc(db, 'Friends', uid), {
     friendsList: [],
   })
-  console.log('Created friend doc')
+  // console.log('Created friend doc')
 }
 
 export async function updateUserDetailsOnLikesAndComments(userDetails) {
@@ -157,7 +167,7 @@ export async function addUserPost(
   if (isSuccessful === false) {
     return isSuccessful
   } else {
-    console.log('Updated posts doc')
+    // console.log('Updated posts doc')
     return true
   }
   // .then((docum) => {
@@ -208,7 +218,7 @@ export async function updateUserPostLikes(
 
   const updateField = { likes: updatedLikes }
   await updateDoc(docRef, updateField)
-  console.log('Updated user post likes')
+  // console.log('Updated user post likes')
 }
 
 export async function updateUserPostComments(
@@ -228,7 +238,6 @@ export async function updateUserPostComments(
   }
   const updateField = { comments: [...comments, newComment] }
   await updateDoc(docRef, updateField)
-  console.log('Updated user post comments')
 }
 
 export async function updateUserPostShares(docId, shares) {
@@ -239,13 +248,12 @@ export async function updateUserPostShares(docId, shares) {
 
 export async function deleteUserPost(docId) {
   await deleteDoc(doc(db, 'posts', docId))
-  console.log('Deleted user post')
 }
 
 export async function getAllUsers(setUsers) {
   onSnapshot(collection(db, 'Users'), (snapshot) => {
     setUsers([...snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))])
-    console.log('Retrieved users')
+    // console.log('Retrieved users')
   })
 }
 
@@ -292,13 +300,13 @@ export async function addUserFriend(
   if (!friendsList.includes(friendUid)) {
     friendsList = [...friendsList, friendUid]
     newFriendFriendsList = [...newFriendFriendsList, uid]
-    console.log('Added friend')
+    // console.log('Added friend')
   } else {
     const uidIndex = friendsList.indexOf(friendUid)
     friendsList.splice(uidIndex, 1)
     const friendUidIndex = newFriendFriendsList.indexOf(uid)
     newFriendFriendsList.splice(friendUidIndex, 1)
-    console.log('Removed friend')
+    // console.log('Removed friend')
   }
   await setDoc(doc(db, 'Friends', uid), {
     friendsList: friendsList,

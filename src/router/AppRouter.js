@@ -31,7 +31,7 @@ export default function AppRouter() {
   }, [currentUser])
 
   useEffect(() => {
-    console.log('Current theme ', theme)
+    // console.log('Current theme ', theme)
     updateUserDetails({ ...userDetails, theme: theme })
   }, [theme])
 

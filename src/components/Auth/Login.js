@@ -36,7 +36,7 @@ export default function Login() {
       await login(emailRef.current.value, passwordRef.current.value)
       navigate('/')
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       setError('Failed to log in')
     }
     mounted.current && setLoading(false)

@@ -24,6 +24,7 @@ import useMounted from '../../hooks/useMounted'
 import { SecondaryText } from '../../styles/Text'
 import {
   createUserFriendDoc,
+  isUserNameAvaliable,
   updateUserDetails,
 } from '../../utils/firebaseUtils'
 
@@ -61,6 +62,11 @@ export default function Signup() {
 
     let userName =
       first_name.toString() + last_name.toString() + random_number.toString()
+
+    var avaliableUsername = false
+    while (avaliableUsername === false) {
+      avaliableUsername = isUserNameAvaliable(userName)
+    }
     return userName
   }
 
