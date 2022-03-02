@@ -18,7 +18,7 @@ export const PagePadding = styled.div`
 
 export const HomeCenterWrapper = styled.div`
   width: 64vw;
-  min-height: 100vh;
+  // min-height: 100vh;
   height: auto;
   padding: 0px 20px 0;
   margin-top: 16px;

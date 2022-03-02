@@ -93,8 +93,8 @@ export default function Signup() {
       createdDate,
       theme,
     }
-    updateUserDetails(userDetails)
     createUserFriendDoc(currentUser.uid)
+    updateUserDetails(userDetails)
   }
 
   async function handleSubmit(e) {
@@ -110,8 +110,15 @@ export default function Signup() {
       await signup(emailRef.current.value, passwordRef.current.value)
       navigate('/')
     } catch (error) {
-      console.log(error)
-      setError('Failed to create an account')
+      const errorMessage = error.message
+        .slice(10)
+        .replace('auth/', '')
+        .replaceAll('-', ' ')
+      if (errorMessage) {
+        setError(errorMessage)
+      } else {
+        setError('Failed to create an account')
+      }
     }
     mounted.current && setLoading(false)
   }

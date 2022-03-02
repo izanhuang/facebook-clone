@@ -49,6 +49,11 @@ export function loadUserDetails(currentUser, setUserDetails, setTheme) {
   console.log('Loaded user details')
 }
 
+async function updatePostDocData(docId, postDataToUpdate) {
+  const postRef = doc(db, 'posts', docId)
+  await updateDoc(postRef, postDataToUpdate)
+}
+
 export async function updateUserDetails(userDetails) {
   const usersRef = doc(db, 'Users', userDetails.uid)
   const payload = userDetails
@@ -63,12 +68,11 @@ export async function updateUserDetails(userDetails) {
     .then(async () => {
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach((document) => {
-        async function updatePostDoc() {
-          const postRef = doc(db, 'posts', document.id)
-          await updateDoc(postRef, postDataToUpdate)
-        }
-        updatePostDoc()
+        updatePostDocData(document.id, postDataToUpdate)
       })
+    })
+    .then(() => {
+      updateUserDetailsOnLikesAndComments(userDetails)
     })
     .catch((e) => {
       return false
@@ -81,20 +85,51 @@ export async function updateUserDetails(userDetails) {
   }
 }
 
-// export async function updateUserDetailsOnAllPosts(uid, profileImg, userName, name) {
-//   const postsRef = collection(db, 'posts')
-//   const q = query(
-//     postsRef,
-//     where('uid', '==', uid)
-//   )
-//   await getDocs(q)
+export async function createUserFriendDoc(uid) {
+  await setDoc(doc(db, 'Friends', uid), {
+    friendsList: [],
+  })
+  console.log('Created friend doc')
+}
 
-//   const docRef = doc(db, 'posts', userDetails.uid)
-//   // console.log('User data ', userDetails)
-//   const payload = userDetails
-//   await setDoc(docRef, payload)
-//   console.log('Updated users doc')
-// }
+export async function updateUserDetailsOnLikesAndComments(userDetails) {
+  const querySnapshot = await getDocs(collection(db, 'posts'))
+  querySnapshot.forEach((document) => {
+    if (document.data().likes.length > 0) {
+      const likes = document.data().likes
+      const postLikedByUserIndex = likes.findIndex(
+        (like) => like.uid === userDetails.uid,
+      )
+      if (postLikedByUserIndex !== -1) {
+        const updatedLikeWithUserDetails = {
+          name: userDetails.firstName + ' ' + userDetails.lastName,
+          profileImg: userDetails.profileImg,
+          uid: userDetails.uid,
+          userName: userDetails.userName,
+        }
+        likes[postLikedByUserIndex] = updatedLikeWithUserDetails
+        const postDataToUpdate = { likes }
+        updatePostDocData(document.id, postDataToUpdate)
+      }
+    }
+    if (document.data().comments.length > 0) {
+      const comments = document.data().comments
+      comments.map((comment, index) => {
+        if (comment.uid === userDetails.uid) {
+          const updatedCommentWithUserDetails = {
+            ...comment,
+            name: userDetails.firstName + ' ' + userDetails.lastName,
+            profileImg: userDetails.profileImg,
+            userName: userDetails.userName,
+          }
+          comments[index] = updatedCommentWithUserDetails
+          const postDataToUpdate = { comments }
+          updatePostDocData(document.id, postDataToUpdate)
+        }
+      })
+    }
+  })
+}
 
 export async function addUserPost(
   currentUser,
@@ -234,13 +269,6 @@ export async function getUserPosts(uid) {
     orderBy('timestamp', 'desc'),
   )
   return await getDocs(q)
-}
-
-export async function createUserFriendDoc(uid) {
-  await addDoc(doc(db, 'Friends', uid), {
-    friendsList: [],
-  })
-  console.log('Created friend doc')
 }
 
 export async function getUserFriendsList(uid) {

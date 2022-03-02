@@ -37,6 +37,22 @@ export const Nav = styled.nav`
     css`
       :hover {
         overflow-y: auto;
+
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: #888;
+          border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+          background: #888;
+        }
       }
     `}
 `
@@ -60,7 +76,7 @@ export const List = styled.ul`
         padding-top: 0.8em;
       }
       > li {
-        padding: 0 !important;
+        padding: 0 8px;
       }
     `}
 `

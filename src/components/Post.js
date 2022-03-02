@@ -266,8 +266,8 @@ const Post = ({
 
         {showComments && (
           <PostComments>
-            {comments.map((comment) => (
-              <CommentContainer>
+            {comments.map((comment, index) => (
+              <CommentContainer key={index}>
                 <CommentFlex>
                   <Avatar
                     tiny
