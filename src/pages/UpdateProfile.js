@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react'
 import { AuthWrapper, Wrapper, PagePadding } from '../styles/Wrapper'
 import { Card } from '../styles/Card'
 import { useAuth } from '../contexts/AuthContext'
-import { useNavigate } from 'react-router-dom'
 import useMounted from '../hooks/useMounted.js'
 import { Form } from '../styles/Form'
 import { Input } from '../styles/Input'
@@ -11,7 +10,12 @@ import { Label } from '../styles/Label'
 import { DropDownHeader } from '../styles/DropDown'
 import Tabs, { TabPane } from 'rc-tabs'
 import { useData } from '../contexts/DataContext'
-import { isUserNameAvaliable, updateUserDetails } from '../utils/firebaseUtils'
+import {
+  isUserNameAvaliable,
+  updateUserDetails,
+  updateUserDetailsOnLikesAndComments,
+  updateUserDetailsOnUserPosts,
+} from '../utils/firebaseUtils'
 import { ErrorMessage, SuccessMessage } from '../styles/Text'
 
 const UpdateProfile = () => {
@@ -25,28 +29,31 @@ const UpdateProfile = () => {
   const { userDetails } = useData()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
 
   const mounted = useMounted()
 
   async function handleNameChange(e) {
     e.preventDefault()
+    var editedProfile = null
+    var isSuccessful = null
     if (
       e.target.id === 'firstName' &&
       firstNameRef.current.value !== userDetails.firstName
     ) {
-      var isSuccessful = await updateUserDetails({
+      editedProfile = {
         ...userDetails,
         firstName: firstNameRef.current.value,
-      })
+      }
+      isSuccessful = await updateUserDetails(editedProfile)
     } else if (
       e.target.id === 'lastName' &&
       lastNameRef.current.value !== userDetails.lastName
     ) {
-      var isSuccessful = await updateUserDetails({
+      editedProfile = {
         ...userDetails,
         lastName: lastNameRef.current.value,
-      })
+      }
+      isSuccessful = await updateUserDetails(editedProfile)
     } else if (
       e.target.id === 'userName' &&
       userNameRef.current.value !== userDetails.userName &&
@@ -60,22 +67,25 @@ const UpdateProfile = () => {
       userNameRef.current.value !== 'news'
     ) {
       if (await isUserNameAvaliable(userNameRef.current.value)) {
-        var isSuccessful = await updateUserDetails({
+        editedProfile = {
           ...userDetails,
           userName: userNameRef.current.value,
-        })
+        }
+        isSuccessful = await updateUserDetails(editedProfile)
       } else {
-        var isSuccessful = '* Username taken.'
+        isSuccessful = '* Username taken.'
       }
     } else {
-      var isSuccessful = false
+      isSuccessful = false
     }
 
     if (isSuccessful === false) {
       setError('* Error updating field - try a different value')
-    } else if (isSuccessful == '* Username taken.') {
+    } else if (isSuccessful === '* Username taken.') {
       setError('* Username taken.')
-    } else {
+    } else if (isSuccessful) {
+      await updateUserDetailsOnUserPosts(editedProfile)
+      await updateUserDetailsOnLikesAndComments(editedProfile)
       setError('Successfully updated!')
     }
   }

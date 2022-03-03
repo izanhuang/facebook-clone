@@ -65,33 +65,19 @@ export async function isUserNameAvaliable(userName) {
 }
 
 export async function updateUserDetails(userDetails) {
-  const usersRef = doc(db, 'Users', userDetails.uid)
-  const payload = userDetails
-  const postsRef = collection(db, 'posts')
-  const q = query(postsRef, where('uid', '==', userDetails.uid))
-  const postDataToUpdate = {
-    profileImg: userDetails.profileImg,
-    userName: userDetails.userName,
-    name: userDetails.firstName + ' ' + userDetails.lastName,
-  }
-  const isSuccessful = await setDoc(usersRef, payload)
-    .then(async () => {
-      const querySnapshot = await getDocs(q)
-      querySnapshot.forEach((document) => {
-        updatePostDocData(document.id, postDataToUpdate)
-      })
-    })
-    .then(() => {
-      updateUserDetailsOnLikesAndComments(userDetails)
-    })
-    .catch((e) => {
+  if (!userDetails) {
+    const usersRef = doc(db, 'Users', userDetails.uid)
+    console.log('here')
+    const payload = userDetails
+    const isSuccessful = await setDoc(usersRef, payload).catch((e) => {
       return false
     })
-  if (isSuccessful === false) {
-    return isSuccessful
-  } else {
-    // console.log('Updated users doc')
-    return true
+    if (isSuccessful === false) {
+      return isSuccessful
+    } else {
+      // console.log('Updated users doc')
+      return true
+    }
   }
 }
 
@@ -100,6 +86,20 @@ export async function createUserFriendDoc(uid) {
     friendsList: [],
   })
   // console.log('Created friend doc')
+}
+
+export async function updateUserDetailsOnUserPosts(userDetails) {
+  const postsRef = collection(db, 'posts')
+  const q = query(postsRef, where('uid', '==', userDetails.uid))
+  const postDataToUpdate = {
+    profileImg: userDetails.profileImg,
+    userName: userDetails.userName,
+    name: userDetails.firstName + ' ' + userDetails.lastName,
+  }
+  const querySnapshot = await getDocs(q)
+  querySnapshot.forEach((document) => {
+    updatePostDocData(document.id, postDataToUpdate)
+  })
 }
 
 export async function updateUserDetailsOnLikesAndComments(userDetails) {
@@ -262,7 +262,7 @@ export async function getUserProfile(userName) {
   const q = query(postsRef, where('userName', '==', userName))
   const docSnap = await getDocs(q)
 
-  if (docSnap.docs[0]) {
+  if (docSnap.docs.length > 0 && docSnap.docs[0]) {
     return docSnap.docs[0].data()
   } else {
     return false
@@ -285,6 +285,8 @@ export async function getUserFriendsList(uid) {
 
   if (docSnap.exists()) {
     return docSnap.data().friendsList
+  } else {
+    return []
   }
 }
 

@@ -5,7 +5,6 @@ import {
   getUserProfile,
   getUserFriendsList,
   addUserFriend,
-  liveUserFriendsList,
   getFriendsInfo,
 } from '../utils/firebaseUtils'
 import { Avatar, AvatarOutline } from '../styles/Avatar'
@@ -65,15 +64,17 @@ const Profile = () => {
       const userProfile = await getUserProfile(userName)
       setProfileDetails(userProfile)
       if (userProfile) {
+        setProfileFound(true)
         setUid(userProfile.uid)
+        const currentUserFriendsList = await getUserFriendsList(currentUser.uid)
+        console.log(userProfile.uid)
+        const profileUserFriendsList = await getUserFriendsList(userProfile.uid)
+        setUserFriendsList(currentUserFriendsList)
+        setProfileFriendsList(profileUserFriendsList)
+        getFriendsInfo(profileUserFriendsList, setFriendsInfo)
       } else {
         setProfileFound(false)
       }
-      const currentUserFriendsList = await getUserFriendsList(currentUser.uid)
-      const profileUserFriendsList = await getUserFriendsList(userProfile.uid)
-      setUserFriendsList(currentUserFriendsList)
-      setProfileFriendsList(profileUserFriendsList)
-      getFriendsInfo(profileUserFriendsList, setFriendsInfo)
     }
     fetchData()
   }, [userName])
@@ -91,7 +92,7 @@ const Profile = () => {
     where('uid', '==', uid),
     orderBy('timestamp', 'desc'),
   )
-  const [timeline, loading, error] = useCollection(q, {
+  const [timeline] = useCollection(q, {
     snapshotListenOptions: { includeMetadataChanges: true },
   })
 

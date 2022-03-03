@@ -54,12 +54,7 @@ const ForgotPassword = () => {
             </FormHeader>
             <Form onSubmit={handleSubmit}>
               {error && <Alert variant="danger">{error}</Alert>}
-              <Input
-                ref={emailRef}
-                type="email"
-                placeholder="Email or phone number"
-                required
-              />
+              <Input ref={emailRef} type="email" placeholder="Email" required />
               <FlexRightAlign>
                 <Link to="/">
                   <Button auto standard gray bold>

@@ -9,7 +9,6 @@ import {
 import { BiArrowBack } from 'react-icons/bi'
 import { Wrapper, Label, Input, ArrowButton } from '../styles/SearchBar'
 import handleClickOutside from '../utils/ClickOutsideUtil'
-import { useAuth } from '../contexts/AuthContext'
 import { Avatar } from '../styles/Avatar'
 import { useNavigate } from 'react-router-dom'
 import { useData } from '../contexts/DataContext'
@@ -44,7 +43,7 @@ const Search = () => {
       <DropDownContainer>
         <Label searchBar onClick={responsiveToggle}>
           <GoSearch onClick={toggling} />
-          <Input placeholder="Search Facebook" value={searchName} />
+          <Input placeholder="Search Facebook" value={searchName} readOnly />
         </Label>
 
         {isOpen && (
@@ -71,8 +70,9 @@ const Search = () => {
                       .toLowerCase()
                       .includes(searchName),
                   )
-                  .map((filteredUser) => (
+                  .map((filteredUser, index) => (
                     <ListItem
+                      key={index}
                       filtered
                       onClick={() => {
                         toggling()

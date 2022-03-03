@@ -13,7 +13,7 @@ const Posts = () => {
     currentUser.uid,
   ])
 
-  useEffect(async () => {
+  useEffect(() => {
     async function getFriendsList() {
       const friendsList = await getUserFriendsList(currentUser.uid)
       setCurrentUserFriendsList(currentUserFriendsList.concat(friendsList))
@@ -27,7 +27,7 @@ const Posts = () => {
     where('uid', 'in', currentUserFriendsList),
     orderBy('timestamp', 'desc'),
   )
-  const [realtimePosts, loading, error] = useCollection(q, {
+  const [realtimePosts] = useCollection(q, {
     snapshotListenOptions: { includeMetadataChanges: true },
   })
 

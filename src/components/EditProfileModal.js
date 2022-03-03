@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import ReactModal from 'react-modal'
 import { CenterElement } from '../styles/Wrapper'
 import { DropDownHeader } from '../styles/DropDown'
-import { ActiveButton, IconButton, SecondaryButton } from '../styles/Button'
+import { ActiveButton, IconButton } from '../styles/Button'
 import { GrClose } from 'react-icons/gr'
-import { useAuth } from '../contexts/AuthContext'
 import { useData } from '../contexts/DataContext'
 import { Avatar } from '../styles/Avatar'
 import {
@@ -14,7 +13,11 @@ import {
 } from '../styles/ProfileStyling'
 import { Select } from '../styles/Select'
 import { ErrorMessage } from '../styles/Text'
-import { updateUserDetails } from '../utils/firebaseUtils'
+import {
+  updateUserDetails,
+  updateUserDetailsOnLikesAndComments,
+  updateUserDetailsOnUserPosts,
+} from '../utils/firebaseUtils'
 
 const EditProfileModal = () => {
   const [showModal, setShowModal] = useState(false)
@@ -23,17 +26,6 @@ const EditProfileModal = () => {
   const [error, setError] = useState(false)
   const newProfileImgRef = useRef(null)
   const editGenderRef = useRef()
-
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  }
 
   function handleOpenModal() {
     setShowModal(true)
@@ -76,6 +68,8 @@ const EditProfileModal = () => {
       setError(true)
     } else {
       // setNewProfileImg(userDetails.profileImg)
+      await updateUserDetailsOnUserPosts(editedProfile)
+      await updateUserDetailsOnLikesAndComments(editedProfile)
       setError(false)
       setShowModal(false)
     }
@@ -106,7 +100,9 @@ const EditProfileModal = () => {
         <EditProfileContent>
           <EditProfileHeader>
             <DropDownHeader noPadding>Profile Picture</DropDownHeader>
-            <a onClick={onImageUploadButtonClick}>Upload Photo</a>
+            <p className="blue-link" onClick={onImageUploadButtonClick}>
+              Upload Photo
+            </p>
             <input
               accept="image/*"
               type="file"

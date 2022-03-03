@@ -131,6 +131,27 @@ export const CenterElement = styled.div`
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
       background-color: ${({ theme }) => theme.bgSecondary};
     `}
+
+    ${(props) =>
+      props.fullWindowHeight &&
+      css`
+        height: 100vh;
+      `}
+
+    ${(props) =>
+      props.notFoundPage &&
+      css`
+        width: auto;
+        height: auto;
+        padding: 24px;
+        gap: 0px;
+
+        > div button {
+          padding: 0 14px;
+          font-size: 17px;
+          font-weight: 600;
+        }
+      `}
 `
 
 export const FlexRightAlign = styled.div`

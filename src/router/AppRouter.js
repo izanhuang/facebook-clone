@@ -16,6 +16,7 @@ import {
   loadUserDetails,
   updateUserDetails,
 } from '../utils/firebaseUtils'
+import PrivateRoute from '../components/PrivateRoute'
 
 export default function AppRouter() {
   const { currentUser } = useAuth()
@@ -45,8 +46,22 @@ export default function AppRouter() {
         ></Route>
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
-        <Route path="/settings" element={<UpdateProfile />}></Route>
-        <Route path=":userName" element={<Profile />}></Route>
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoute>
+              <UpdateProfile />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path=":userName"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        ></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </Router>

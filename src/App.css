@@ -8,6 +8,18 @@ a:hover {
   text-decoration: underline;
 }
 
+.blue-link {
+  color: #1877f2;
+  font-size: 15px;
+  text-decoration: none;
+  margin: 0;
+  cursor: pointer;
+}
+
+.blue-link:hover {
+  text-decoration: underline;
+}
+
 .logo {
   margin: -44px 0 -4px 0;
   width: 240px;
