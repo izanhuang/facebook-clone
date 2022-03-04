@@ -26,9 +26,10 @@ export default function AppRouter() {
   useEffect(() => {
     if (currentUser) {
       loadUserDetails(currentUser, setUserDetails, setTheme)
-    } else {
-      loadUserPlaceholder(setUserDetails)
     }
+    // else {
+    //   loadUserPlaceholder(setUserDetails)
+    // }
   }, [currentUser])
 
   useEffect(() => {

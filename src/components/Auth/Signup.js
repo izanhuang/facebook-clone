@@ -149,7 +149,8 @@ export default function Signup() {
               <h2>Create a new account</h2>
               <p>It&#39;s quick and easy.</p>
             </FormHeader>
-            <Form autoComplete="off" onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
+              {/* <Form autoComplete="off" onSubmit={handleSubmit}> */}
               {error && <Alert variant="danger">{error}</Alert>}
               <SelectWrapper>
                 <Input
@@ -158,7 +159,7 @@ export default function Signup() {
                   ref={firstNameRef}
                   type="text"
                   placeholder="First name"
-                  autoComplete="new-password"
+                  // autoComplete="new-password"
                   required
                 />
                 <Input
@@ -167,7 +168,7 @@ export default function Signup() {
                   ref={lastNameRef}
                   type="text"
                   placeholder="Last name"
-                  autoComplete="new-password"
+                  // autoComplete="new-password"
                   required
                 />
               </SelectWrapper>
@@ -176,7 +177,7 @@ export default function Signup() {
                 ref={emailRef}
                 type="email"
                 placeholder="Email"
-                autoComplete="new-password"
+                // autoComplete="new-password"
                 required
               />
               <Input

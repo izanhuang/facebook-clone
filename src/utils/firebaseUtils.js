@@ -23,7 +23,7 @@ export function loadUserPlaceholder(setUserDetails) {
         .map((doc) => ({ ...doc.data(), id: doc.id }))
         .filter((doc) => doc.id === 'Placeholder'),
     )
-    // console.log('Loaded placeholder')
+    console.log('Loaded placeholder')
   })
 }
 
@@ -41,7 +41,7 @@ export function loadUserDetails(currentUser, setUserDetails, setTheme) {
         .map((doc) => doc.theme),
     )
   })
-  // console.log('Loaded user details')
+  console.log('Loaded user details')
 }
 
 async function updatePostDocData(docId, postDataToUpdate) {
@@ -207,8 +207,9 @@ export async function updateUserPostLikes(
 ) {
   const docRef = doc(db, 'posts', docId)
   const filteredLikes = likes.filter((like) => like.uid !== currentUser.uid)
+  var updatedLikes = []
   if (likes.some((like) => like.uid === currentUser.uid)) {
-    var updatedLikes = [...filteredLikes]
+    updatedLikes = [...filteredLikes]
   } else {
     let newLike = {
       uid: currentUser.uid,
@@ -216,7 +217,7 @@ export async function updateUserPostLikes(
       name: userDetails.firstName + ' ' + userDetails.lastName,
       profileImg: userDetails.profileImg,
     }
-    var updatedLikes = [...filteredLikes, newLike]
+    updatedLikes = [...filteredLikes, newLike]
   }
 
   const updateField = { likes: updatedLikes }

@@ -1,0 +1,48 @@
+[debug] [2022-03-04T21:28:32.723Z] ----------------------------------------------------------------------
+[debug] [2022-03-04T21:28:32.724Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\izan8\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2022-03-04T21:28:32.724Z] CLI Version:   10.2.2
+[debug] [2022-03-04T21:28:32.725Z] Platform:      win32
+[debug] [2022-03-04T21:28:32.725Z] Node Version:  v14.17.0
+[debug] [2022-03-04T21:28:32.725Z] Time:          Fri Mar 04 2022 16:28:32 GMT-0500 (Eastern Standard Time)
+[debug] [2022-03-04T21:28:32.725Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-04T21:28:32.776Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-04T21:28:32.777Z] > authorizing via signed-in user (izan8259@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\izan8\Desktop\facebook-clone
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2022-03-04T21:28:53.423Z] Using project from CLI flag: facebook-clone-53d9e
+[debug] [2022-03-04T21:28:53.424Z] > refreshing access token with scopes: []
+[debug] [2022-03-04T21:28:53.424Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-03-04T21:28:53.562Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","date":"Fri, 04 Mar 2022 21:28:55 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-03-04T21:28:53.662Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/facebook-clone-53d9e [none]
+[debug] [2022-03-04T21:28:53.946Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/facebook-clone-53d9e 200
+[debug] [2022-03-04T21:28:53.947Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/facebook-clone-53d9e {"projectId":"facebook-clone-53d9e","projectNumber":"1062388010097","displayName":"facebook-clone","name":"projects/facebook-clone-53d9e","resources":{"hostingSite":"facebook-clone-53d9e","storageBucket":"facebook-clone-53d9e.appspot.com","locationId":"us-central"},"state":"ACTIVE"}
+[info] i  Using project facebook-clone-53d9e (facebook-clone) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 

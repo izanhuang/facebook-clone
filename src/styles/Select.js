@@ -34,6 +34,7 @@ export const Select = styled.select`
     props.editGender &&
     css`
       background-color: ${({ theme }) => theme.iconBg};
+      color: ${({ theme }) => theme.text};
       cursor: pointer;
 
       option:selected {
