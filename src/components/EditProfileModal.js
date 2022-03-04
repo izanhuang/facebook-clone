@@ -68,7 +68,7 @@ const EditProfileModal = () => {
     }
     var isSuccessful = false
     isSuccessful = await updateUserDetails(editedProfile)
-    if (isSuccessful) {
+    if (isSuccessful && newProfileImg !== userDetails.profileImg) {
       const profileImgURL = await updateUserProfileImg(
         userDetails.uid,
         newProfileImg,
@@ -141,6 +141,11 @@ const EditProfileModal = () => {
             ref={editGenderRef}
             defaultValue={userDetails.genderCode}
             style={{ width: 'auto', margin: '16px 16px' }}
+            onChange={() => {
+              editGenderRef.current.value !== userDetails.genderCode
+                ? setBtnDisabled(false)
+                : setBtnDisabled(true)
+            }}
           >
             <option value="Female">Female</option>
             <option value="Male">Male</option>

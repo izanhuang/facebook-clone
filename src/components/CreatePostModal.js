@@ -82,7 +82,14 @@ const CreatePostModal = ({
 
   const sendPost = async (e) => {
     e.preventDefault()
-    const isSuccessful = await addUserPost(currentUser, userDetails, newPost)
+    const isSuccessful = await addUserPost(
+      currentUser,
+      userDetails,
+      newPost,
+    ).catch((e) => {
+      return false
+    })
+
     if (isSuccessful === false) {
       setError(true)
     } else {

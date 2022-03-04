@@ -32,8 +32,10 @@ export default function AppRouter() {
   }, [currentUser])
 
   useEffect(() => {
-    console.log('Current theme', theme)
-    updateUserDetails({ ...userDetails, theme })
+    // console.log('Current theme', theme)
+    if (userDetails.uid !== undefined) {
+      updateUserDetails({ ...userDetails, theme })
+    }
   }, [theme])
 
   return (

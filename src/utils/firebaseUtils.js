@@ -14,12 +14,7 @@ import {
   orderBy,
 } from 'firebase/firestore'
 import { serverTimestamp } from 'firebase/firestore'
-import {
-  ref,
-  uploadString,
-  getDownloadURL,
-  uploadBytesResumable,
-} from 'firebase/storage'
+import { ref, uploadString, getDownloadURL } from 'firebase/storage'
 
 export function loadUserPlaceholder(setUserDetails) {
   return onSnapshot(collection(db, 'Users'), (snapshot) => {
@@ -28,7 +23,7 @@ export function loadUserPlaceholder(setUserDetails) {
         .map((doc) => ({ ...doc.data(), id: doc.id }))
         .filter((doc) => doc.id === 'Placeholder'),
     )
-    console.log('Loaded placeholder')
+    // console.log('Loaded placeholder')
   })
 }
 
@@ -46,7 +41,7 @@ export function loadUserDetails(currentUser, setUserDetails, setTheme) {
         .map((doc) => doc.theme),
     )
   })
-  console.log('Loaded user details')
+  // console.log('Loaded user details')
 }
 
 async function updatePostDocData(docId, postDataToUpdate) {
@@ -73,7 +68,7 @@ export async function updateUserDetails(userDetails) {
   if (isSuccessful === false) {
     return isSuccessful
   } else {
-    console.log('Updated users doc')
+    // console.log('Updated users doc')
     return true
   }
 }
@@ -82,7 +77,7 @@ export async function createUserFriendDoc(uid) {
   await setDoc(doc(db, 'Friends', uid), {
     friendsList: [],
   })
-  console.log('Created friend doc')
+  // console.log('Created friend doc')
 }
 
 export async function updateUserProfileImg(uid, profileImg) {
@@ -165,7 +160,7 @@ export async function addUserPost(
   sharedFrom = {},
 ) {
   const image = newPost.image
-  const isSuccessful = await addDoc(collection(db, 'posts'), {
+  var isSuccessful = await addDoc(collection(db, 'posts'), {
     text: newPost.text,
     image,
     uid: currentUser.uid,
@@ -178,20 +173,21 @@ export async function addUserPost(
     comments: [],
     shares: 0,
     sharedFrom,
-  }).then((docum) => {
+  }).then(async (docum) => {
     if (image) {
       const storageRef = ref(storage, `posts/${docum.id}`)
-      uploadString(storageRef, image, 'data_url')
+      return await uploadString(storageRef, image, 'data_url')
         // .then((snapshot) => {
         //   console.log('Uploaded a data_url string!')
         // })
-        .then(() => {
-          getDownloadURL(storageRef).then(async (downloadURL) => {
+        .then(async () => {
+          return getDownloadURL(storageRef).then(async (downloadURL) => {
             await setDoc(
               doc(db, 'posts', docum.id),
               { image: downloadURL },
               { merge: true },
             )
+            return true
           })
         })
         .catch((error) => {
@@ -200,12 +196,7 @@ export async function addUserPost(
     }
   })
 
-  if (isSuccessful === false) {
-    return isSuccessful
-  } else {
-    // console.log('Updated posts doc')
-    return true
-  }
+  return isSuccessful
 }
 
 export async function updateUserPostLikes(
@@ -230,7 +221,7 @@ export async function updateUserPostLikes(
 
   const updateField = { likes: updatedLikes }
   await updateDoc(docRef, updateField)
-  console.log('Updated user post likes')
+  // console.log('Updated user post likes')
 }
 
 export async function updateUserPostComments(
@@ -265,7 +256,7 @@ export async function deleteUserPost(docId) {
 export async function getAllUsers(setUsers) {
   onSnapshot(collection(db, 'Users'), (snapshot) => {
     setUsers([...snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))])
-    console.log('Retrieved users')
+    // console.log('Retrieved users')
 
     // snapshot.docChanges().forEach((change) => {
     //   if (change.type === 'added') {
