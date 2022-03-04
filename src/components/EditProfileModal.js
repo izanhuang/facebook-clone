@@ -17,10 +17,12 @@ import {
   updateUserDetails,
   updateUserDetailsOnLikesAndComments,
   updateUserDetailsOnUserPosts,
+  updateUserProfileImg,
 } from '../utils/firebaseUtils'
 
 const EditProfileModal = () => {
   const [showModal, setShowModal] = useState(false)
+  const [btnDisabled, setBtnDisabled] = useState(true)
   const { userDetails } = useData()
   const [newProfileImg, setNewProfileImg] = useState(userDetails.profileImg)
   const [error, setError] = useState(false)
@@ -34,6 +36,7 @@ const EditProfileModal = () => {
   function handleCloseModal() {
     setShowModal(false)
     removeImage()
+    setBtnDisabled(true)
   }
 
   const onImageUploadButtonClick = () => {
@@ -45,6 +48,7 @@ const EditProfileModal = () => {
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(event.target.files[0])
       setError(false)
+      setBtnDisabled(false)
     }
 
     reader.onload = (readerEvent) => {
@@ -58,20 +62,27 @@ const EditProfileModal = () => {
 
   const saveProfile = async (e) => {
     e.preventDefault()
-    const editedProfile = {
+    var editedProfile = {
       ...userDetails,
-      profileImg: newProfileImg,
       genderCode: editGenderRef.current.value,
     }
-    const isSuccessful = await updateUserDetails(editedProfile)
-    if (isSuccessful === false) {
-      setError(true)
-    } else {
-      // setNewProfileImg(userDetails.profileImg)
+    var isSuccessful = false
+    isSuccessful = await updateUserDetails(editedProfile)
+    if (isSuccessful) {
+      const profileImgURL = await updateUserProfileImg(
+        userDetails.uid,
+        newProfileImg,
+      )
+      editedProfile = {
+        ...userDetails,
+        profileImg: profileImgURL,
+      }
       await updateUserDetailsOnUserPosts(editedProfile)
       await updateUserDetailsOnLikesAndComments(editedProfile)
       setError(false)
       setShowModal(false)
+    } else {
+      setError(true)
     }
   }
 
@@ -137,7 +148,9 @@ const EditProfileModal = () => {
           </Select>
         </EditProfileContent>
         <EditProfileFooter>
-          <ActiveButton onClick={saveProfile}>Save</ActiveButton>
+          <ActiveButton disabled={btnDisabled} onClick={saveProfile}>
+            Save
+          </ActiveButton>
         </EditProfileFooter>
       </ReactModal>
     </>

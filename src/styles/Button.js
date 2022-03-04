@@ -439,4 +439,17 @@ export const ActiveButton = styled.button`
   align-items: center;
   color: #fff;
   background-color: #1b74e4;
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      background: ${({ theme }) => theme.iconBg};
+      color: ${({ theme }) => theme.secondaryIcon};
+      background: ${({ theme }) => theme.disabled};
+
+      :hover {
+        background: ${({ theme }) => theme.disabled};
+        cursor: not-allowed;
+      }
+    `}
 `

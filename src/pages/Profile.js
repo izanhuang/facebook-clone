@@ -67,7 +67,6 @@ const Profile = () => {
         setProfileFound(true)
         setUid(userProfile.uid)
         const currentUserFriendsList = await getUserFriendsList(currentUser.uid)
-        console.log(userProfile.uid)
         const profileUserFriendsList = await getUserFriendsList(userProfile.uid)
         setUserFriendsList(currentUserFriendsList)
         setProfileFriendsList(profileUserFriendsList)

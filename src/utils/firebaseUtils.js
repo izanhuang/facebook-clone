@@ -28,7 +28,7 @@ export function loadUserPlaceholder(setUserDetails) {
         .map((doc) => ({ ...doc.data(), id: doc.id }))
         .filter((doc) => doc.id === 'Placeholder'),
     )
-    // console.log('Loaded placeholder')
+    console.log('Loaded placeholder')
   })
 }
 
@@ -46,7 +46,7 @@ export function loadUserDetails(currentUser, setUserDetails, setTheme) {
         .map((doc) => doc.theme),
     )
   })
-  // console.log('Loaded user details')
+  console.log('Loaded user details')
 }
 
 async function updatePostDocData(docId, postDataToUpdate) {
@@ -65,19 +65,16 @@ export async function isUserNameAvaliable(userName) {
 }
 
 export async function updateUserDetails(userDetails) {
-  if (!userDetails) {
-    const usersRef = doc(db, 'Users', userDetails.uid)
-    console.log('here')
-    const payload = userDetails
-    const isSuccessful = await setDoc(usersRef, payload).catch((e) => {
-      return false
-    })
-    if (isSuccessful === false) {
-      return isSuccessful
-    } else {
-      // console.log('Updated users doc')
-      return true
-    }
+  const usersRef = doc(db, 'Users', userDetails.uid)
+  const payload = userDetails
+  const isSuccessful = await setDoc(usersRef, payload).catch((e) => {
+    return false
+  })
+  if (isSuccessful === false) {
+    return isSuccessful
+  } else {
+    console.log('Updated users doc')
+    return true
   }
 }
 
@@ -85,7 +82,27 @@ export async function createUserFriendDoc(uid) {
   await setDoc(doc(db, 'Friends', uid), {
     friendsList: [],
   })
-  // console.log('Created friend doc')
+  console.log('Created friend doc')
+}
+
+export async function updateUserProfileImg(uid, profileImg) {
+  if (profileImg) {
+    const storageRef = ref(storage, `Users/${uid}`)
+    return uploadString(storageRef, profileImg, 'data_url')
+      .then(async () => {
+        return getDownloadURL(storageRef).then(async (downloadURL) => {
+          await setDoc(
+            doc(db, 'Users', uid),
+            { profileImg: downloadURL },
+            { merge: true },
+          )
+          return downloadURL
+        })
+      })
+      .catch((error) => {
+        return false
+      })
+  }
 }
 
 export async function updateUserDetailsOnUserPosts(userDetails) {
@@ -161,39 +178,34 @@ export async function addUserPost(
     comments: [],
     shares: 0,
     sharedFrom,
-  }).catch((e) => {
-    return false
+  }).then((docum) => {
+    if (image) {
+      const storageRef = ref(storage, `posts/${docum.id}`)
+      uploadString(storageRef, image, 'data_url')
+        // .then((snapshot) => {
+        //   console.log('Uploaded a data_url string!')
+        // })
+        .then(() => {
+          getDownloadURL(storageRef).then(async (downloadURL) => {
+            await setDoc(
+              doc(db, 'posts', docum.id),
+              { image: downloadURL },
+              { merge: true },
+            )
+          })
+        })
+        .catch((error) => {
+          return false
+        })
+    }
   })
+
   if (isSuccessful === false) {
     return isSuccessful
   } else {
     // console.log('Updated posts doc')
     return true
   }
-  // .then((docum) => {
-  //   if (image) {
-  //     const storageRef = ref(storage, `posts/${docum.id}`)
-  //     const uploadTask = uploadBytesResumable(storageRef, image, 'data_url')
-
-  // uploadTask.on(
-  //   'state_changed',
-  //   null,
-  //   (error) => {
-  //     console.error(error)
-  //   },
-  //   () => {
-  //     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-  //       console.log('File available at', downloadURL)
-  //       await setDoc(
-  //         doc(db, 'posts', docum.id),
-  //         { image: downloadURL },
-  //         { merge: true },
-  //       )
-  //     })
-  //   },
-  // )
-  //   }
-  // })
 }
 
 export async function updateUserPostLikes(
@@ -218,7 +230,7 @@ export async function updateUserPostLikes(
 
   const updateField = { likes: updatedLikes }
   await updateDoc(docRef, updateField)
-  // console.log('Updated user post likes')
+  console.log('Updated user post likes')
 }
 
 export async function updateUserPostComments(
@@ -253,7 +265,16 @@ export async function deleteUserPost(docId) {
 export async function getAllUsers(setUsers) {
   onSnapshot(collection(db, 'Users'), (snapshot) => {
     setUsers([...snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))])
-    // console.log('Retrieved users')
+    console.log('Retrieved users')
+
+    // snapshot.docChanges().forEach((change) => {
+    //   if (change.type === 'added') {
+    //     setUsers([
+    //       ...snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
+    //     ])
+    //     console.log('Retrieved users')
+    //   }
+    // })
   })
 }
 
