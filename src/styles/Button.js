@@ -61,6 +61,7 @@ export const Button = styled.button`
     css`
       background-color: #4267b2;
       line-height: 35px;
+      padding: 0 20px;
     `}
 
   ${(props) =>

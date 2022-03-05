@@ -37,9 +37,13 @@ a:hover {
   background-image: none;
 }
 
-@media only screen and (max-width: 415px) {
+@media only screen and (max-width: 430px) {
   .rc-tabs {
     flex-direction: column !important;
+  }
+  .rc-tabs-tab {
+    min-width: 96%;
+    text-align: center;
   }
   .rc-tabs-nav-list {
     margin-bottom: 10px;
