@@ -1,6 +1,6 @@
 # Facebook Clone
 
-[Facebook clone](https://facebook-clone-53d9e.firebaseapp.com/) built with React and Firebase.
+> [Facebook clone](https://facebook-clone-53d9e.firebaseapp.com/) built with React and Firebase.
 
 ## 📚 Core Packages
 
@@ -37,37 +37,34 @@ npm start
 
 ## 🖥️ Web Preview
 
-<figcaption align = "center"><b>Home, Like, and Comment</b></figcaption>
-![Home](/screenshots/home.png)
+<p align="center"><b>Home</b></p>
 
-<figcaption align = "center"><b>New Post</b></figcaption>
+![Home](screenshots/home.png)
+
+<p align="center"><b>New Post</b></p>
+
 ![New Post](/screenshots/new_post.png)
 
-<figcaption align = "center"><b>Edit Profile</b></figcaption>
+<p align="center"><b>Edit Profile</b></p>
+
 ![Edit Profile](/screenshots/edit_profile.png)
 
-<figcaption align = "center"><b>View Profile</b></figcaption>
+<p align="center"><b>View Profile</b></p>
+
 ![View Profile](/screenshots/view_profile.png)
 
-<figcaption align = "center"><b>Edit Profile Name</b></figcaption>
+<p align="center"><b>Settings</b></p>
+
 ![Edit Profile Name](/screenshots/edit_profile_name.png)
-
-<figcaption align = "center"><b>Home mobile view</b></figcaption>
-![Mobile Home](/screenshots/mobile_home.png)
-
-<figcaption align = "center"><b>Search on mobile</b></figcaption>
-![Mobile Search](/screenshots/mobile_search.png)
-
-<figcaption align = "center"><b>Add friend on mobile</b></figcaption>
-![Mobile Search](/screenshots/mobile_add_friend.png)
 
 ## 📱 Mobile Preview
 
-<figcaption align = "center"><b>Mobile Home, Search, and Add Friend</b></figcaption>
+<p align="center"><b>Mobile Home, Search, and Add Friend</b></p>
+
 <p float="left">
-  <img src="/screenshots/mobile_home.png" alt="mobile home" width="100" />
-  <img src="/screenshots/mobile_search.png" alt="search on mobile" width="100" /> 
-  <img src="/screenshots/mobile_add_friend.png" alt="add friend on mobile" width="100" /> 
+  <img src="/screenshots/mobile_home.png" alt="mobile home" width="300" />
+  <img src="/screenshots/mobile_search.png" alt="search on mobile" width="300" /> 
+  <img src="/screenshots/mobile_add_friend.png" alt="add friend on mobile" width="300" /> 
 </p>
 
 ## 📧 Contact
