@@ -62,9 +62,9 @@ npm start
 <p align="center"><b>Mobile Home, Search, and Add Friend</b></p>
 
 <p float="left">
-  <img src="/screenshots/mobile_home.png" alt="mobile home" width="300" />
-  <img src="/screenshots/mobile_search.png" alt="search on mobile" width="300" /> 
-  <img src="/screenshots/mobile_add_friend.png" alt="add friend on mobile" width="300" /> 
+  <img src="/screenshots/mobile_home.png" alt="mobile home" width="275" />
+  <img src="/screenshots/mobile_search.png" alt="search on mobile" width="275" /> 
+  <img src="/screenshots/mobile_add_friend.png" alt="add friend on mobile" width="275" /> 
 </p>
 
 ## 📧 Contact
