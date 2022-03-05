@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Facebook Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Facebook clone](https://facebook-clone-53d9e.firebaseapp.com/) built with React and Firebase.
 
-## Available Scripts
+## 📚 Core Packages
 
-In the project directory, you can run:
+1. firebase - authentication, store and query data, image uploading, hosting
+2. styled-components - styling
+3. react-router-dom - routing
 
-### `npm start`
+## 🔧 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Login / Signup
+- New Post
+- Like
+- Comment
+- Share
+- Edit Profile
+- View Profile
+- Search & Add Users
+- Dark / Light Theme
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 Setup
 
-### `npm test`
+- To run this project, clone it using git and install it locally using npm:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+git clone https://github.com/izanhuang/facebook-clone.git
+cd facebook-clone
+npm install
+npm start
+```
 
-### `npm run build`
+- Create a `.env` file similar to `.env.example` with the appropriate keys.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Your site is now running at http://localhost:3000!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🖥️ Web Preview
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<figcaption align = "center"><b>Home, Like, and Comment</b></figcaption>
+![Home](/screenshots/home.png)
 
-### `npm run eject`
+<figcaption align = "center"><b>New Post</b></figcaption>
+![New Post](/screenshots/new_post.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<figcaption align = "center"><b>Edit Profile</b></figcaption>
+![Edit Profile](/screenshots/edit_profile.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<figcaption align = "center"><b>View Profile</b></figcaption>
+![View Profile](/screenshots/view_profile.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<figcaption align = "center"><b>Edit Profile Name</b></figcaption>
+![Edit Profile Name](/screenshots/edit_profile_name.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<figcaption align = "center"><b>Home mobile view</b></figcaption>
+![Mobile Home](/screenshots/mobile_home.png)
 
-## Learn More
+<figcaption align = "center"><b>Search on mobile</b></figcaption>
+![Mobile Search](/screenshots/mobile_search.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<figcaption align = "center"><b>Add friend on mobile</b></figcaption>
+![Mobile Search](/screenshots/mobile_add_friend.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📱 Mobile Preview
 
-### Code Splitting
+<figcaption align = "center"><b>Mobile Home, Search, and Add Friend</b></figcaption>
+<p float="left">
+  <img src="/screenshots/mobile_home.png" alt="mobile home" width="100" />
+  <img src="/screenshots/mobile_search.png" alt="search on mobile" width="100" /> 
+  <img src="/screenshots/mobile_add_friend.png" alt="add friend on mobile" width="100" /> 
+</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📧 Contact
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Created by [@izanhuang](https://www.linkedin.com/in/izanhuang/) - feel free to contact me!
+Happy coding 🎉🙌

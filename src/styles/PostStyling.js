@@ -5,6 +5,11 @@ export const PostsContainer = styled.div`
   flex-direction: column;
   gap: 16px;
   flex-wrap: nowrap;
+  width: auto;
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `
 
 export const PostCard = styled.div`

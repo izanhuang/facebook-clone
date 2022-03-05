@@ -32,6 +32,10 @@ export const Nav = styled.nav`
   margin-top: 16px;
   overflow: hidden;
 
+  @media (max-height: 768px) {
+    height: 91vh;
+  }
+
   ${(props) =>
     props.contacts &&
     css`
