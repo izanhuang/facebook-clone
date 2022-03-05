@@ -68,7 +68,7 @@ const Search = () => {
                     userDetails.firstName
                       .concat('', userDetails.lastName)
                       .toLowerCase()
-                      .includes(searchName),
+                      .includes(searchName.toLowerCase()),
                   )
                   .map((filteredUser, index) => (
                     <ListItem

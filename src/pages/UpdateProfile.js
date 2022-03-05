@@ -15,6 +15,7 @@ import {
   updateUserDetails,
   updateUserDetailsOnLikesAndComments,
   updateUserDetailsOnUserPosts,
+  updateUserDetailsWhereUserPostWasShared,
 } from '../utils/firebaseUtils'
 import { ErrorMessage, SuccessMessage } from '../styles/Text'
 
@@ -85,6 +86,7 @@ const UpdateProfile = () => {
       setError('* Username taken.')
     } else if (isSuccessful) {
       await updateUserDetailsOnUserPosts(editedProfile)
+      await updateUserDetailsWhereUserPostWasShared(editedProfile)
       await updateUserDetailsOnLikesAndComments(editedProfile)
       setError('Successfully updated!')
     }

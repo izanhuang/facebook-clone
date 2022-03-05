@@ -89,7 +89,6 @@ const CreatePostModal = ({
     ).catch((e) => {
       return false
     })
-
     if (isSuccessful === false) {
       setError(true)
     } else {

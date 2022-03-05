@@ -23,7 +23,7 @@ export function loadUserPlaceholder(setUserDetails) {
         .map((doc) => ({ ...doc.data(), id: doc.id }))
         .filter((doc) => doc.id === 'Placeholder'),
     )
-    console.log('Loaded placeholder')
+    // console.log('Loaded placeholder')
   })
 }
 
@@ -41,7 +41,7 @@ export function loadUserDetails(currentUser, setUserDetails, setTheme) {
         .map((doc) => doc.theme),
     )
   })
-  console.log('Loaded user details')
+  // console.log('Loaded user details')
 }
 
 async function updatePostDocData(docId, postDataToUpdate) {
@@ -114,6 +114,24 @@ export async function updateUserDetailsOnUserPosts(userDetails) {
   })
 }
 
+export async function updateUserDetailsWhereUserPostWasShared(userDetails) {
+  const postsRef = collection(db, 'posts')
+  const q = query(postsRef, where('sharedFrom', '!=', {}))
+  const postDataToUpdate = {
+    sharedFrom: {
+      originalPostFullName: userDetails.firstName + ' ' + userDetails.lastName,
+      originalPostUid: userDetails.uid,
+      originalPostUserName: userDetails.userName,
+    },
+  }
+  const querySnapshot = await getDocs(q)
+  querySnapshot.forEach((document) => {
+    if (document.data().sharedFrom.originalPostUid === userDetails.uid) {
+      updatePostDocData(document.id, postDataToUpdate)
+    }
+  })
+}
+
 export async function updateUserDetailsOnLikesAndComments(userDetails) {
   const querySnapshot = await getDocs(collection(db, 'posts'))
   querySnapshot.forEach((document) => {
@@ -174,7 +192,7 @@ export async function addUserPost(
     shares: 0,
     sharedFrom,
   }).then(async (docum) => {
-    if (image) {
+    if (image !== '#') {
       const storageRef = ref(storage, `posts/${docum.id}`)
       return await uploadString(storageRef, image, 'data_url')
         // .then((snapshot) => {
@@ -193,6 +211,8 @@ export async function addUserPost(
         .catch((error) => {
           return false
         })
+    } else {
+      return true
     }
   })
 
