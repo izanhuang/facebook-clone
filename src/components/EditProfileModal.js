@@ -81,6 +81,9 @@ const EditProfileModal = () => {
       await updateUserDetailsOnLikesAndComments(editedProfile)
       setError(false)
       setShowModal(false)
+    } else if (isSuccessful) {
+      setError(false)
+      setShowModal(false)
     } else {
       setError(true)
     }

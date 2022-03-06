@@ -85,7 +85,7 @@ const Post = ({
     }
     addUserPost(currentUser, userDetails, newPost, sharedFrom)
     updateUserPostShares(docId, shares)
-    console.log('Shared post')
+    // console.log('Shared post')
   }
 
   useEffect(() => {
