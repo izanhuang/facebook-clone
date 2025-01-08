@@ -1,6 +1,8 @@
 # Facebook Clone
 
-> [Facebook clone](https://facebook-clone-53d9e.firebaseapp.com/) built with React and Firebase.
+This [web application](https://facebook-clone-53d9e.firebaseapp.com/) is dedicated to utilizing Firebase’s authentication, NoSQL database, and cloud storage products.
+
+In this project, I wanted to learn and experiment more with the features Firebase offered and thus, I developed functionalities like a feed that works in real time, post create/like/share/comment/deletion, and image uploads to the cloud. For the project's visuals, I implemented styled components like modals and dropdowns in comprehension with Facebook’s designs  in a minimalistic manner.
 
 ## 📚 Core Packages
 
